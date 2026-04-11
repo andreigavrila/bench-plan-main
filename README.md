@@ -16,4 +16,4 @@ To achieve this, I leverage the [planning_benchmark](https://github.com/bladnman
 
 I integrate directly with the `planning_benchmark` repository to execute standardized tests. Each model under consideration is subjected to a tiered series of operational tasks designed to stress-test its long-horizon planning, context retention, and execution accuracy.
 
-Scores and analytical data generated from these runs are tracked systematically to provide transparent, easily comparable results across the AI ecosystem.
+Scores and analytical data generated from these runs are tracked systematically in [**scores.txt**](./scores.txt) to provide transparent, easily comparable results across the AI ecosystem.
