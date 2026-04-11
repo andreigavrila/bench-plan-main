@@ -1,0 +1,7 @@
+| Model                    | Score  | Size | Cost  |
+| ------------------------ | ------ | ---- | ----- |
+| codex-gpt5.4             | 89.9%  | 23kB |       |
+| kilo-qwen3.6pro          | 85.9%  | 19kB | 0.11$ |
+| antigravity-gemini3.1pro | 45.45% | 7kB  |       |
+| kilo-glm5.1              | 83.33% | 49kB | 0.08$ |
+| kilo-opus4.6-xhigh       |        |      |       |
