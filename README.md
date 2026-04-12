@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project is dedicated to rigorously evaluating and benchmarking state-of-the-art (SOTA) Large Language Models (LLMs) to determine their planning, reasoning, and problem-solving capabilities. 
+This project is dedicated to evaluating and benchmarking state-of-the-art (SOTA) Large Language Models (LLMs) to determine their planning, reasoning, and problem-solving capabilities. 
 
 To achieve this, I leverage the [planning_benchmark](https://github.com/bladnman/planning_benchmark) framework. My core roadmap involves running these models through multiple independent test harnesses, ensuring a comprehensive and robust assessment across a diverse set of tasks.
 
