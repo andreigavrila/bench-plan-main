@@ -35,3 +35,43 @@ I plan to extend both the evaluation and the benchmark itself to make it more co
 | opencode-minimax2.5-free |        59.6%        |   8kB  |  0.00$  |
 | antigravity-gemini3.1pro |        45.5%        |   7kB  |         |
 | antigravity-gemini3flash |        40.4%        |   7kB  |         |
+
+*(Note: The table above contains raw, unaltered stats and missing cost data for some models.)*
+
+### Smart ROI Analysis (Using Inferred Costs)
+
+To accurately calculate Return on Investment (ROI), I have inferred the cost-per-run for models missing price data by using the known `1.54$` Opus measure and mapping it to the current cost ratio (Opus: $10, Sonnet: $6, GPT-5.4: $5.63, Gemini 3.1 Pro: $4.5, Gemini Flash: $1.13). The calculated ratio multiplier is `1.54 / 10 = 0.154`.
+
+**Inferred Costs:**
+*   **antigravity-sonnet4.6**: `~$0.92` (6 * 0.154)
+*   **codex-gpt5.4-xhigh**: `~$0.87` (5.63 * 0.154)
+*   **antigravity-gemini3.1pro**: `~$0.69` (4.5 * 0.154)
+*   **antigravity-gemini3flash**: `~$0.17` (1.13 * 0.154)
+
+#### Smart ROI Index Formula
+A naive `Score / Cost` formula is heavily flawed because LLM performance does not scale linearly (a 5% jump from 90%->95% is drastically harder than 60%->65%). To fix this, the following formula calculates a **Smart Value Index**:
+
+```text
+Smart Value Index = ( (Score_percentage)^4 / (Cost_in_USD + $0.05) ) * 100
+```
+**Why this formula?**
+1. **Score ^ 4**: Exponentiating to the fourth power heavily compounds high test scores, correctly rewarding SOTA capability even if it comes at a higher cost. 
+2. **+$0.05 Base Cost**: We add a fixed infrastructure/latency proxy overhead to the denominator, avoiding a division by zero that would otherwise grant "free" models an infinite ROI loop. 
+
+#### Value Rankings
+
+| Model                     | Score     | Inferred Cost | Smart Value Index |
+| ------------------------- | --------- | ------------- | ----------------- |
+| **opencode-glm5.1**       | **88.9%** |     $0.08     |    **480.5**      |
+| **opencode-qwen3.6pro**   | **87.4%** |     $0.08     |    **448.7**      |
+| opencode-mistralsmall4    | 75.8%     |     $0.03     |    **412.9**      |
+| kilo-glm5.1               | 83.3%     |     $0.08     |    **370.2**      |
+| opencode-minimax2.7       | 72.7%     |     $0.03     |    **349.5**      |
+| **kilo-qwen3.6pro**       | **85.9%** |     $0.11     |    **340.3**      |
+| opencode-minimax2.5-free  | 59.6%     |     $0.00     |    **252.4**      |
+| opencode-kimik2.5         | 70.7%     |     $0.15     |    **124.9**      |
+| **codex-gpt5.4-xhigh**    | **89.9%** |     $0.87     |     **71.0**      |
+| **antigravity-sonnet4.6** | **90.4%** |     $0.92     |     **68.8**      |
+| **kilo-opus4.6-xhigh**    | **93.9%** |     $1.54     |     **48.9**      |
+| antigravity-gemini3flash  | 40.4%     |     $0.17     |     **12.1**      |
+| antigravity-gemini3.1pro  | 45.5%     |     $0.69     |     **5.8**       |
