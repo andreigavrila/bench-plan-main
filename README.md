@@ -22,6 +22,7 @@ I plan to extend both the evaluation and the benchmark itself to make it more co
 
 | Model                    | codex-gpt5.4-xhigh  |  Size  |  Cost   | 
 | ------------------------ | ------------------- | ------ | ------- |
+| opencode-gpt5.4-xhigh    |        97.0%        |  24kB  |  0.79$  |
 | kilo-opus4.6-xhigh       |        93.9%        |  41kB  |  1.54$  |
 | antigravity-sonnet4.6    |        90.4%        |  26kB  |         |
 | codex-gpt5.4-xhigh       |        89.9%        |  23kB  |         |
@@ -70,6 +71,7 @@ Smart Value Index = ( (Score_percentage)^4 / (Cost_in_USD + $0.05) ) * 100
 | **kilo-qwen3.6pro**       | **85.9%** |     $0.11     |     340.3         |
 | opencode-minimax2.5-free  | 59.6%     |     $0.00     |     252.4         |
 | opencode-kimik2.5         | 70.7%     |     $0.15     |     124.9         |
+| **opencode-gpt5.4-xhigh** | **97.0%** |     $0.79     |     105.3         |
 | **codex-gpt5.4-xhigh**    | **89.9%** |     $0.87     |     71.0          |
 | **antigravity-sonnet4.6** | **90.4%** |     $0.92     |     68.8          |
 | **kilo-opus4.6-xhigh**    | **93.9%** |     $1.54     |     48.9          |
