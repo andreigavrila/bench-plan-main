@@ -14,6 +14,8 @@
 | opencode-minimax2.5-free |        59.60%       |  8kB |       |
 | antigravity-gemini3.1pro |        45.45%       |  7kB |       |
 | antigravity-gemini3flash |        40.40%       |  7kB |       |
+| coda-glm4.6              |        51.0%        | 23kB | 0.26$ |
+
 
 
 
@@ -21,7 +23,7 @@
 
 
 SELF EVAL
-| Model                    | Score  | codex-gpt5.4-xhigh |
-| antigravity-gemini3flash | 72.22% | 40.40%             |
-| opencode-gpt5.4-xhigh    | 97.47% | 96.97%             |
+| Model                    | Score  | codex-gpt5.4-xhigh | Gap  | Cost  |
+| antigravity-gemini3flash | 72.22% | 40.40%             | 32%  |       |
+| opencode-gpt5.4-xhigh    | 97.47% | 96.97%             | 0.5% | 0.79$ |
 
