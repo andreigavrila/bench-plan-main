@@ -24,6 +24,7 @@ I plan to extend both the evaluation and the benchmark itself to make it more co
 | ------------------------ | ------------------- | ------ | ------- |
 | opencode-gpt5.4-xhigh    |        97.0%        |  24kB  |  0.79$  |
 | kilo-opus4.6-xhigh       |        93.9%        |  41kB  |  1.54$  |
+| claudecode-opus4.6-max   |        90.9%        |  35kB  |         |
 | antigravity-sonnet4.6    |        90.4%        |  26kB  |         |
 | codex-gpt5.4-xhigh       |        89.9%        |  23kB  |         |
 | opencode-glm5.1          |        88.9%        |  19kB  |  0.08$  |
@@ -31,10 +32,12 @@ I plan to extend both the evaluation and the benchmark itself to make it more co
 | kilo-qwen3.6pro          |        85.9%        |  19kB  |  0.11$  |
 | kilo-glm5.1              |        83.3%        |  49kB  |  0.08$  |
 | opencode-mistralsmall4   |        75.8%        |  16kB  |  0.03$  |
+| coda-kimik2.5            |        75.8%        |  23kB  |  0.40$  |
 | opencode-minimax2.7      |        72.7%        |  12kB  |  0.03$  |
 | opencode-kimik2.5        |        70.7%        |  58kB  |  0.15$  |
 | opencode-minimax2.5-free |        59.6%        |   8kB  |  0.00$  |
-| antigravity-gemini3.1pro |        45.5%        |   7kB  |         |
+| coda-glm4.6              |        51.0%        |  23kB  |  0.26$  |
+| antigravity-gemini3.1pro |        45.6%        |   7kB  |         |
 | antigravity-gemini3flash |        40.4%        |   7kB  |         |
 
 *(Note: The table above contains raw, unaltered stats and therefore missing cost data for some models.)*
@@ -44,6 +47,7 @@ I plan to extend both the evaluation and the benchmark itself to make it more co
 To accurately calculate Return on Investment (ROI), I have inferred the cost-per-run for models missing price data by using the known `1.54$` Opus measure and mapping it to the current cost ratio (Opus: $10, Sonnet: $6, GPT-5.4: $5.63, Gemini 3.1 Pro: $4.5, Gemini Flash: $1.13). The calculated ratio multiplier is `1.54 / 10 = 0.154`.
 
 **Inferred Costs:**
+*   **claudecode-opus4.6-max**: `~$1.54` (10 * 0.154)
 *   **antigravity-sonnet4.6**: `~$0.92` (6 * 0.154)
 *   **codex-gpt5.4-xhigh**: `~$0.87` (5.63 * 0.154)
 *   **antigravity-gemini3.1pro**: `~$0.69` (4.5 * 0.154)
@@ -72,11 +76,14 @@ Smart Value Index = ( (Score_percentage)^4 / (Cost_in_USD + $0.05) ) * 100
 | opencode-minimax2.5-free  | 59.6%     |     $0.00     |     252.4         |
 | opencode-kimik2.5         | 70.7%     |     $0.15     |     124.9         |
 | **opencode-gpt5.4-xhigh** | **97.0%** |     $0.79     |     105.3         |
+| coda-kimik2.5              | 75.8%     |     $0.40     |     73.4          |
 | **codex-gpt5.4-xhigh**    | **89.9%** |     $0.87     |     71.0          |
 | **antigravity-sonnet4.6** | **90.4%** |     $0.92     |     68.8          |
 | **kilo-opus4.6-xhigh**    | **93.9%** |     $1.54     |     48.9          |
+| **claudecode-opus4.6-max** | **90.9%** |     $1.54     |     42.9          |
+| coda-glm4.6               | 51.0%     |     $0.26     |     21.8          |
 | antigravity-gemini3flash  | 40.4%     |     $0.17     |     12.1          |
-| antigravity-gemini3.1pro  | 45.5%     |     $0.69     |     5.8           |
+| antigravity-gemini3.1pro  | 45.6%     |     $0.69     |     5.8           |
 
 *(Note: The items in bold above are the models scoring above 85%.)*
 
