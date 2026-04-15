@@ -2,13 +2,14 @@
 | ------------------------ | ------------------- | ---- | ----- | ------- |
 | opencode-gpt5.4-xhigh    |        97.0%        | 24kB | 0.79$ |  73,472 |
 | kilo-opus4.6-xhigh       |        93.9%        | 41kB | 1.54$ |  55,896 |
+| kilo-geai-gpt5.4-xhigh   |        92.9%        | 26kB |       |  62,613 |
 | claudecode-opus4.6-max   |        90.9%        | 35kB |       |         |
 | antigravity-sonnet4.6    |        90.4%        | 26kB |       |         |
 | codex-gpt5.4-xhigh       |        89.9%        | 23kB |       |         |
 | opencode-glm5.1          |        88.9%        | 19kB | 0.08$ |  51,019 |
 | opencode-qwen3.6pro      |        87.4%        | 22kB | 0.08$ |  39,716 |
-| kilo-qwen3.6pro          |        85.9%        | 19kB | 0.11$ |         |
-| kilo-glm5.1              |        83.3%        | 49kB | 0.08$ |         |
+| kilo-qwen3.6pro          |        85.9%        | 19kB | 0.11$ |  59,594 |
+| kilo-glm5.1              |        83.3%        | 49kB | 0.08$ |  46,328 |
 | opencode-mistralsmall4   |        75.8%        | 16kB | 0.03$ |  38,078 |
 | coda-kimik2.5            |        75.8%        | 23kB | 0.40$ | 528,000 |
 | opencode-minimax2.7      |        72.7%        | 12kB | 0.03$ |  33,705 |
@@ -25,11 +26,14 @@
 
 
 
+
+
 SELF EVAL
 | Model                    | Self-Score  | codex-gpt5.4-xhigh | Gap  |
 | antigravity-gemini3flash | 72.22%      | 40.40%             | 32%  |       
 | opencode-gpt5.4-xhigh    | 97.47%      | 96.97%             | 0.5% | 
 | claudecode-opus4.6-max   | 97.0%       | 90.9%              | 6.1% | 
+| kilo-geai-gpt5.4-xhigh   | 91.9%       | 92.9%              | -1%  | 
 
 
 
