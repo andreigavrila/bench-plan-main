@@ -7,6 +7,7 @@
 | antigravity-sonnet4.6    |        90.4%        | 26kB |       |         |
 | codex-gpt5.4-xhigh       |        89.9%        | 23kB |       |         |
 | opencode-glm5.1          |        88.9%        | 19kB | 0.08$ |  51,019 |
+| claudecode-glm5.1        |        86.9%        | 30kB |       |         |
 | opencode-qwen3.6pro      |        87.4%        | 22kB | 0.08$ |  39,716 |
 | kilo-qwen3.6pro          |        85.9%        | 19kB | 0.11$ |  59,594 |
 | kilo-glm5.1              |        83.3%        | 49kB | 0.08$ |  46,328 |
@@ -25,21 +26,17 @@
 
 
 
-
-
-
 SELF EVAL
 | Model                    | Self-Score  | codex-gpt5.4-xhigh | Gap  |
 | antigravity-gemini3flash | 72.22%      | 40.40%             | 32%  |       
 | opencode-gpt5.4-xhigh    | 97.47%      | 96.97%             | 0.5% | 
 | claudecode-opus4.6-max   | 97.0%       | 90.9%              | 6.1% | 
 | kilo-geai-gpt5.4-xhigh   | 91.9%       | 92.9%              | -1%  | 
+| claudecode-glm5.1        | 90.4%       | 86.9%              | 3.5% | 
+
 
 
 
 
 
 OPENCODE-GPT5.4-xhigh EVAL  COST ~$0.8
-
-
-
