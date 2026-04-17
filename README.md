@@ -23,7 +23,7 @@ I plan to extend both the evaluation and the benchmark itself to make it more co
 | Model                    | codex-gpt5.4-xhigh  |  Size  |  Cost   | 
 | ------------------------ | ------------------- | ------ | ------- |
 | opencode-gpt5.4-xhigh    |        97.0%        |  24kB  |  0.79$  |
-| claude-opus4.7           |        94.4%        |  35kB  |         |
+| claude-opus4.7-max       |        94.4%        |  35kB  |         |
 | kilo-opus4.6-xhigh       |        93.9%        |  41kB  |  1.54$  |
 | kilo-geai-gpt5.4-xhigh   |        92.9%        |  26kB  |         |
 | claudecode-opus4.6-max   |        90.9%        |  35kB  |         |
