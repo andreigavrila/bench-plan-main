@@ -10,6 +10,7 @@
 | opencode-glm5.1          |        88.9%        | 19kB | 0.08$ |  51,019 |
 | claudecode-glm5.1        |        86.9%        | 30kB |       |         |
 | opencode-qwen3.6pro      |        87.4%        | 22kB | 0.08$ |  39,716 |
+| kilo-deepseek3.2         |        86.6%        | 25kB | 0.11$ |  45,249 |
 | kilo-qwen3.6pro          |        85.9%        | 19kB | 0.11$ |  59,594 |
 | kilo-glm5.1              |        83.3%        | 49kB | 0.08$ |  46,328 |
 | opencode-mistralsmall4   |        75.8%        | 16kB | 0.03$ |  38,078 |
