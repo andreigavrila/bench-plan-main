@@ -28,10 +28,12 @@ I plan to extend both the evaluation and the benchmark itself to make it more co
 | kilo-geai-gpt5.4-xhigh   |        92.9%        |  26kB  |         |
 | claudecode-opus4.6-max   |        90.9%        |  35kB  |         |
 | antigravity-sonnet4.6    |        90.4%        |  26kB  |         |
+| opencode-kimik2.6        |        89.9%        |  25kB  |  0.08$  |
 | codex-gpt5.4-xhigh       |        89.9%        |  23kB  |         |
 | opencode-glm5.1          |        88.9%        |  19kB  |  0.08$  |
 | opencode-qwen3.6pro      |        87.4%        |  22kB  |  0.08$  |
 | claudecode-glm5.1        |        86.9%        |  30kB  |         |
+| kilo-deepseek3.2         |        86.6%        |  25kB  |  0.11$  |
 | kilo-qwen3.6pro          |        85.9%        |  19kB  |  0.11$  |
 | kilo-glm5.1              |        83.3%        |  49kB  |  0.08$  |
 | opencode-mistralsmall4   |        75.8%        |  16kB  |  0.03$  |
@@ -70,10 +72,12 @@ Smart Value Index = ( (Score_percentage)^4 / (Cost_in_USD + $0.05) ) * 100
 
 | Model                     | Score     | Inferred Cost | Smart Value Index |
 | ------------------------- | --------- | ------------- | ----------------- |
+| **opencode-kimik2.6**     | **89.9%** |     $0.08     |     502.5         |
 | **opencode-glm5.1**       | **88.9%** |     $0.08     |     480.5         |
 | **opencode-qwen3.6pro**   | **87.4%** |     $0.08     |     448.7         |
 | opencode-mistralsmall4    | 75.8%     |     $0.03     |     412.9         |
 | kilo-glm5.1               | 83.3%     |     $0.08     |     370.2         |
+| **kilo-deepseek3.2**      | **86.6%** |     $0.11     |     351.5         |
 | opencode-minimax2.7       | 72.7%     |     $0.03     |     349.5         |
 | **kilo-qwen3.6pro**       | **85.9%** |     $0.11     |     340.3         |
 | opencode-minimax2.5-free  | 59.6%     |     $0.00     |     252.4         |
