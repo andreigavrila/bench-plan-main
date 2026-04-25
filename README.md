@@ -20,30 +20,33 @@ I plan to extend both the evaluation and the benchmark itself to make it more co
 
 ### Performance Rankings (by Score)
 
-| Model                    | codex-gpt5.4-xhigh  |  Size  |  Cost   | 
-| ------------------------ | ------------------- | ------ | ------- |
-| opencode-gpt5.4-xhigh    |        97.0%        |  24kB  |  0.79$  |
-| claude-opus4.7-max       |        94.4%        |  35kB  |         |
-| kilo-opus4.6-xhigh       |        93.9%        |  41kB  |  1.54$  |
-| kilo-geai-gpt5.4-xhigh   |        92.9%        |  26kB  |         |
-| claudecode-opus4.6-max   |        90.9%        |  35kB  |         |
-| antigravity-sonnet4.6    |        90.4%        |  26kB  |         |
-| opencode-kimik2.6        |        89.9%        |  25kB  |  0.08$  |
-| codex-gpt5.4-xhigh       |        89.9%        |  23kB  |         |
-| opencode-glm5.1          |        88.9%        |  19kB  |  0.08$  |
-| opencode-qwen3.6pro      |        87.4%        |  22kB  |  0.08$  |
-| claudecode-glm5.1        |        86.9%        |  30kB  |         |
-| kilo-deepseek3.2         |        86.6%        |  25kB  |  0.11$  |
-| kilo-qwen3.6pro          |        85.9%        |  19kB  |  0.11$  |
-| kilo-glm5.1              |        83.3%        |  49kB  |  0.08$  |
-| opencode-mistralsmall4   |        75.8%        |  16kB  |  0.03$  |
-| coda-kimik2.5            |        75.8%        |  23kB  |  0.40$  |
-| opencode-minimax2.7      |        72.7%        |  12kB  |  0.03$  |
-| opencode-kimik2.5        |        70.7%        |  58kB  |  0.15$  |
-| opencode-minimax2.5-free |        59.6%        |   8kB  |  0.00$  |
-| coda-glm4.6              |        51.0%        |  23kB  |  0.26$  |
-| antigravity-gemini3.1pro |        45.6%        |   7kB  |         |
-| antigravity-gemini3flash |        40.4%        |   7kB  |         |
+| Model                    | codex-gpt5.4-xhigh  | Size | Cost  | Tokens  |
+| ------------------------ | ------------------- | ---- | ----- | ------- |
+| opencode-gpt5.4-xhigh    |        97.0%        | 24kB | 0.79$ |  73,472 |
+| claude-opus4.7-max       |        94.4%        | 35kB |       |         |
+| codex-gpt5.5-high        |        94.4%        | 30kB |       |         |
+| kilo-opus4.6-xhigh       |        93.9%        | 41kB | 1.54$ |  55,896 |
+| kilo-geai-gpt5.4-xhigh   |        92.9%        | 26kB |       |  62,613 |
+| codex-gpt5.5-xhigh       |        91.9%        | 27kB |       |         |
+| claudecode-opus4.6-max   |        90.9%        | 35kB |       |         |
+| antigravity-sonnet4.6    |        90.4%        | 26kB |       |         |
+| opencode-kimik2.6        |        89.9%        | 25kB | 0.08$ |  40,833 |
+| codex-gpt5.4-xhigh       |        89.9%        | 23kB |       |         |
+| codex-gpt5.5-medium      |        89.9%        | 21kB |       |         |
+| opencode-glm5.1          |        88.9%        | 19kB | 0.08$ |  51,019 |
+| opencode-qwen3.6pro      |        87.4%        | 22kB | 0.08$ |  39,716 |
+| claudecode-glm5.1        |        86.9%        | 30kB |       |         |
+| kilo-deepseek3.2         |        86.6%        | 25kB | 0.11$ |  45,249 |
+| kilo-qwen3.6pro          |        85.9%        | 19kB | 0.11$ |  59,594 |
+| kilo-glm5.1              |        83.3%        | 49kB | 0.08$ |  46,328 |
+| opencode-mistralsmall4   |        75.8%        | 16kB | 0.03$ |  38,078 |
+| coda-kimik2.5            |        75.8%        | 23kB | 0.40$ | 528,000 |
+| opencode-minimax2.7      |        72.7%        | 12kB | 0.03$ |  33,705 |
+| opencode-kimik2.5        |        70.7%        | 58kB | 0.15$ |  47,796 |
+| opencode-minimax2.5-free |        59.6%        |  8kB |       |  32,668 |
+| coda-glm4.6              |        51.0%        | 23kB | 0.26$ | 436,477 |
+| antigravity-gemini3.1pro |        45.6%        |  7kB |       |         |
+| antigravity-gemini3flash |        40.4%        |  7kB |       |         |
 
 *(Note: The table above contains raw, unaltered stats and therefore missing cost data for some models.)*
 
@@ -52,11 +55,15 @@ I plan to extend both the evaluation and the benchmark itself to make it more co
 To accurately calculate Return on Investment (ROI), I have inferred the cost-per-run for models missing price data by using the known `1.54$` Opus measure and mapping it to the current cost ratio (Opus: $10, Sonnet: $6, GPT-5.4: $5.63, Gemini 3.1 Pro: $4.5, Gemini Flash: $1.13). The calculated ratio multiplier is `1.54 / 10 = 0.154`.
 
 **Inferred Costs:**
+*   **claude-opus4.7-max**: `~$1.54` (10 * 0.154)
 *   **claudecode-opus4.6-max**: `~$1.54` (10 * 0.154)
 *   **antigravity-sonnet4.6**: `~$0.92` (6 * 0.154)
 *   **codex-gpt5.4-xhigh**: `~$0.87` (5.63 * 0.154)
+*   **kilo-geai-gpt5.4-xhigh**: `~$0.87` (5.63 * 0.154)
 *   **antigravity-gemini3.1pro**: `~$0.69` (4.5 * 0.154)
 *   **antigravity-gemini3flash**: `~$0.17` (1.13 * 0.154)
+
+Models without known or inferred cost data, including `codex-gpt5.5-*` and `claudecode-glm5.1`, are omitted from the value rankings until a cost basis is available.
 
 #### Smart ROI Index Formula
 A naive `Score / Cost` formula is heavily flawed because LLM performance does not scale linearly (a 5% jump from 90%->95% is drastically harder than 60%->65%). To fix this, the following formula calculates a **Smart Value Index**:
@@ -74,18 +81,20 @@ Smart Value Index = ( (Score_percentage)^4 / (Cost_in_USD + $0.05) ) * 100
 | ------------------------- | --------- | ------------- | ----------------- |
 | **opencode-kimik2.6**     | **89.9%** |     $0.08     |     502.5         |
 | **opencode-glm5.1**       | **88.9%** |     $0.08     |     480.5         |
-| **opencode-qwen3.6pro**   | **87.4%** |     $0.08     |     448.7         |
-| opencode-mistralsmall4    | 75.8%     |     $0.03     |     412.9         |
-| kilo-glm5.1               | 83.3%     |     $0.08     |     370.2         |
+| **opencode-qwen3.6pro**   | **87.4%** |     $0.08     |     448.9         |
+| opencode-mistralsmall4    | 75.8%     |     $0.03     |     412.7         |
+| kilo-glm5.1               | 83.3%     |     $0.08     |     370.4         |
 | **kilo-deepseek3.2**      | **86.6%** |     $0.11     |     351.5         |
-| opencode-minimax2.7       | 72.7%     |     $0.03     |     349.5         |
+| opencode-minimax2.7       | 72.7%     |     $0.03     |     349.2         |
 | **kilo-qwen3.6pro**       | **85.9%** |     $0.11     |     340.3         |
 | opencode-minimax2.5-free  | 59.6%     |     $0.00     |     252.4         |
 | opencode-kimik2.5         | 70.7%     |     $0.15     |     124.9         |
-| **opencode-gpt5.4-xhigh** | **97.0%** |     $0.79     |     105.3         |
+| **opencode-gpt5.4-xhigh** | **97.0%** |     $0.79     |     105.4         |
+| **kilo-geai-gpt5.4-xhigh** | **92.9%** |     $0.87     |     81.0          |
 | coda-kimik2.5              | 75.8%     |     $0.40     |     73.4          |
 | **codex-gpt5.4-xhigh**    | **89.9%** |     $0.87     |     71.0          |
 | **antigravity-sonnet4.6** | **90.4%** |     $0.92     |     68.8          |
+| **claude-opus4.7-max**    | **94.4%** |     $1.54     |     49.9          |
 | **kilo-opus4.6-xhigh**    | **93.9%** |     $1.54     |     48.9          |
 | **claudecode-opus4.6-max** | **90.9%** |     $1.54     |     42.9          |
 | coda-glm4.6               | 51.0%     |     $0.26     |     21.8          |
@@ -99,3 +108,14 @@ Smart Value Index = ( (Score_percentage)^4 / (Cost_in_USD + $0.05) ) * 100
 The Smart Value Index is directly proportional. A model with an index of **400** mathematically provides **4 times more value** per dollar than a model with an index of **100**, according to this formula. 
 
 Keep in mind that "value" in this context is highly opinionated: because we take the score to the **4th power**, the index is designed to heavily penalize cheap but incompetent models. It ensures that a 90% capable model is treated as exponentially superior to a 60% capable model, rather than just 1.5x better. Therefore, if Model A has an index of 400 and Model B has 100, Model A is delivering four times the amount of "SOTA capability bang-for-your-buck."
+
+### Self Evaluation Gap
+
+| Model                    | Self-Score | codex-gpt5.4-xhigh | Gap   |
+| ------------------------ | ---------- | ------------------ | ----- |
+| antigravity-gemini3flash | 72.22%     | 40.40%             | 32%   |
+| opencode-gpt5.4-xhigh    | 97.47%     | 96.97%             | 0.5%  |
+| claudecode-opus4.6-max   | 97.0%      | 90.9%              | 6.1%  |
+| kilo-geai-gpt5.4-xhigh   | 91.9%      | 92.9%              | -1%   |
+| claudecode-glm5.1        | 90.4%      | 86.9%              | 3.5%  |
+| claude-opus4.7           | 95.4%      | 94.4%              | 1%    |
