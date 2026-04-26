@@ -19,12 +19,14 @@
 | kilo-glm5.1              |        83.3%        | 49kB | 0.08$ |  46,328 |
 | opencode-mistralsmall4   |        75.8%        | 16kB | 0.03$ |  38,078 |
 | coda-kimik2.5            |        75.8%        | 23kB | 0.40$ | 528,000 |
+| opencode-mimov2.5pro     |        74.6%        | 23kB | 0.12$ |  41,180 |
 | opencode-minimax2.7      |        72.7%        | 12kB | 0.03$ |  33,705 |
 | opencode-kimik2.5        |        70.7%        | 58kB | 0.15$ |  47,796 |
 | opencode-minimax2.5-free |        59.6%        |  8kB |       |  32,668 |
 | coda-glm4.6              |        51.0%        | 23kB | 0.26$ | 436,477 |
 | antigravity-gemini3.1pro |        45.6%        |  7kB |       |         |
 | antigravity-gemini3flash |        40.4%        |  7kB |       |         |
+
 
 
 
@@ -43,7 +45,7 @@ SELF EVAL
 
 
 
-
+https://artificialanalysis.ai/models/capabilities/coding?models=gpt-5-4-mini%2Cgpt-5-4%2Cgpt-5-5%2Cclaude-sonnet-4-6-adaptive%2Cclaude-opus-4-7%2Cmistral-small-4%2Cdeepseek-v4-flash%2Cdeepseek-v4-pro%2Cminimax-m2-7%2Ckimi-k2-6%2Cmimo-v2-5-pro%2Cglm-5-1%2Cqwen3-6-plus%2Cclaude-opus-4-6-adaptive#coding-index
 
 
 OPENCODE-GPT5.4-xhigh EVAL  COST ~$0.8
