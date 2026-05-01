@@ -51,6 +51,7 @@ I plan to extend both the evaluation and the benchmark itself to make it more co
 | glm4.6-coda              |        51.0%        | 23kB | 0.26$ | 436,477 |
 | gemini3.1pro-antigravity |        45.6%        |  7kB |       |         |
 | gemini3flash-antigravity |        40.4%        |  7kB |       |         |
+| nemotron3super-kilo      |        27.8%        |  2kB | 0.09$ |  58,000 |
 
 *(Note: The table above contains raw, unaltered stats and therefore missing cost data for some models.)*
 
@@ -107,6 +108,7 @@ Smart Value Index = ( (Score_percentage)^4 / (Cost_in_USD + $0.05) ) * 100
 | glm4.6-coda                | 51.0%     |     $0.26     |     21.8          |
 | gemini3flash-antigravity   | 40.4%     |     $0.17     |     12.1          |
 | gemini3.1pro-antigravity   | 45.6%     |     $0.69     |     5.8           |
+| nemotron3super-kilo        | 27.8%     |     $0.09     |     4.3           |
 
 *(Note: The items in bold above are the models scoring above 85%.)*
 

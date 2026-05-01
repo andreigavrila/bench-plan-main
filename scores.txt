@@ -29,6 +29,7 @@
 | glm4.6-coda              |        51.0%        | 23kB | 0.26$ | 436,477 |
 | gemini3.1pro-antigravity |        45.6%        |  7kB |       |         |
 | gemini3flash-antigravity |        40.4%        |  7kB |       |         |
+| nemotron3super-kilo      |        27.8%        |  2kB | 0.09$ |  58,000 |
 
 
 
