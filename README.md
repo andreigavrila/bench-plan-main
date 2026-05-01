@@ -27,6 +27,7 @@ I plan to extend both the evaluation and the benchmark itself to make it more co
 | opus4.7-max-claude       |        94.4%        | 35kB |       |         |
 | gpt5.5-high-codex        |        94.4%        | 30kB |       |         |
 | opus4.6-xhigh-kilo       |        93.9%        | 41kB | 1.54$ |  55,896 |
+| deepseekv4pro-kilo       |        93.4%        | 27kB | 0.12$ |  42,400 |
 | gpt5.4-xhigh-kilo-geai   |        92.9%        | 26kB |       |  62,613 |
 | gpt5.5-xhigh-codex       |        91.9%        | 27kB |       |         |
 | opus4.6-max-claudecode   |        90.9%        | 35kB |       |         |
@@ -85,6 +86,7 @@ Smart Value Index = ( (Score_percentage)^4 / (Cost_in_USD + $0.05) ) * 100
 | **kimik2.6-opencode**      | **89.9%** |     $0.08     |     502.5         |
 | **glm5.1-opencode**        | **88.9%** |     $0.08     |     480.5         |
 | **qwen3.6pro-opencode**    | **87.4%** |     $0.08     |     448.9         |
+| **deepseekv4pro-kilo**     | **93.4%** |     $0.12     |     447.7         |
 | mistralsmall4-opencode     | 75.8%     |     $0.03     |     412.7         |
 | glm5.1-kilo                | 83.3%     |     $0.08     |     370.4         |
 | **grok4.3-reasoning-kilo** | **96.9%** |     $0.19     |     367.4         |
