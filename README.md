@@ -31,6 +31,7 @@ I plan to extend both the evaluation and the benchmark itself to make it more co
 | gpt5.4-xhigh-kilo-geai   |        92.9%        | 26kB |       |  62,613 |
 | gpt5.5-xhigh-codex       |        91.9%        | 27kB |       |         |
 | opus4.6-max-claudecode   |        90.9%        | 35kB |       |         |
+| qwen3.6maxpreview-kilo   |        90.9%        | 57kB | 0.16$ |  52,300 |
 | sonnet4.6-antigravity    |        90.4%        | 26kB |       |         |
 | kimik2.6-opencode        |        89.9%        | 25kB | 0.08$ |  40,833 |
 | gpt5.4-xhigh-codex       |        89.9%        | 23kB |       |         |
@@ -94,6 +95,7 @@ Smart Value Index = ( (Score_percentage)^4 / (Cost_in_USD + $0.05) ) * 100
 | **deepseek3.2-kilo**       | **86.6%** |     $0.11     |     351.5         |
 | minimax2.7-opencode        | 72.7%     |     $0.03     |     349.2         |
 | **qwen3.6pro-kilo**        | **85.9%** |     $0.11     |     340.3         |
+| **qwen3.6maxpreview-kilo** | **90.9%** |     $0.16     |     325.1         |
 | minimax2.5-free-opencode   | 59.6%     |     $0.00     |     252.4         |
 | mimov2.5pro-opencode       | 74.6%     |     $0.12     |     182.1         |
 | kimik2.5-opencode          | 70.7%     |     $0.15     |     124.9         |
