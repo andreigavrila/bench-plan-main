@@ -49,6 +49,7 @@ I plan to extend both the evaluation and the benchmark itself to make it more co
 | minimax2.7-opencode      |        72.7%        | 12kB | 0.03$ |  33,705 |
 | kimik2.5-opencode        |        70.7%        | 58kB | 0.15$ |  47,796 |
 | minimax2.5-free-opencode |        59.6%        |  8kB |       |  32,668 |
+| gemma3-31b-kilo          |        56.1%        |  4kB | 0.07$ |  36,400 |
 | glm4.6-coda              |        51.0%        | 23kB | 0.26$ | 436,477 |
 | gemini3.1pro-antigravity |        45.6%        |  7kB |       |         |
 | gemini3flash-antigravity |        40.4%        |  7kB |       |         |
@@ -83,36 +84,27 @@ Smart Value Index = ( (Score_percentage)^4 / (Cost_in_USD + $0.05) ) * 100
 
 #### Value Rankings
 
+To ensure these rankings are practical, models are filtered and highlighted based on two performance thresholds:
+* **85% Minimum Capability**: Models must score at least 85% to be listed here. This threshold indicates a model is structurally competent—it understands the core architecture, data models, and feature requirements. Models below this cutoff produce fundamentally incomplete plans and are excluded to reduce noise.
+* **90.9% Recommended (Top Half)**: This threshold is mathematically derived as the **median score** of all structurally capable models (those scoring ≥ 85%). Models highlighted in bold are performing in the top 50% of the capable tier, indicating premium, production-ready planning capabilities that accurately capture nuanced behavioral contracts and rigorous AI guardrails.
+
 | Model                      | Score     | Inferred Cost | Smart Value Index |
 | -------------------------- | --------- | ------------- | ----------------- |
-| **kimik2.6-opencode**      | **89.9%** |     $0.08     |     502.5         |
-| **glm5.1-opencode**        | **88.9%** |     $0.08     |     480.5         |
-| **qwen3.6pro-opencode**    | **87.4%** |     $0.08     |     448.9         |
+| kimik2.6-opencode          | 89.9%     |     $0.08     |     502.5         |
+| glm5.1-opencode            | 88.9%     |     $0.08     |     480.5         |
+| qwen3.6pro-opencode        | 87.4%     |     $0.08     |     448.9         |
 | **deepseekv4pro-kilo**     | **93.4%** |     $0.12     |     447.7         |
-| mistralsmall4-opencode     | 75.8%     |     $0.03     |     412.7         |
-| glm5.1-kilo                | 83.3%     |     $0.08     |     370.4         |
 | **grok4.3-reasoning-kilo** | **96.9%** |     $0.19     |     367.4         |
-| **deepseek3.2-kilo**       | **86.6%** |     $0.11     |     351.5         |
-| minimax2.7-opencode        | 72.7%     |     $0.03     |     349.2         |
-| **qwen3.6pro-kilo**        | **85.9%** |     $0.11     |     340.3         |
+| deepseek3.2-kilo           | 86.6%     |     $0.11     |     351.5         |
+| qwen3.6pro-kilo            | 85.9%     |     $0.11     |     340.3         |
 | **qwen3.6maxpreview-kilo** | **90.9%** |     $0.16     |     325.1         |
-| minimax2.5-free-opencode   | 59.6%     |     $0.00     |     252.4         |
-| mimov2.5pro-opencode       | 74.6%     |     $0.12     |     182.1         |
-| kimik2.5-opencode          | 70.7%     |     $0.15     |     124.9         |
 | **gpt5.4-xhigh-opencode**  | **97.0%** |     $0.79     |     105.4         |
 | **gpt5.4-xhigh-kilo-geai** | **92.9%** |     $0.87     |     81.0          |
-| kimik2.5-coda              | 75.8%     |     $0.40     |     73.4          |
-| **gpt5.4-xhigh-codex**     | **89.9%** |     $0.87     |     71.0          |
-| **sonnet4.6-antigravity**  | **90.4%** |     $0.92     |     68.8          |
+| gpt5.4-xhigh-codex         | 89.9%     |     $0.87     |     71.0          |
+| sonnet4.6-antigravity      | 90.4%     |     $0.92     |     68.8          |
 | **opus4.7-max-claude**     | **94.4%** |     $1.54     |     49.9          |
 | **opus4.6-xhigh-kilo**     | **93.9%** |     $1.54     |     48.9          |
 | **opus4.6-max-claudecode** | **90.9%** |     $1.54     |     42.9          |
-| glm4.6-coda                | 51.0%     |     $0.26     |     21.8          |
-| gemini3flash-antigravity   | 40.4%     |     $0.17     |     12.1          |
-| gemini3.1pro-antigravity   | 45.6%     |     $0.69     |     5.8           |
-| nemotron3super-kilo        | 27.8%     |     $0.09     |     4.3           |
-
-*(Note: The items in bold above are the models scoring above 85%.)*
 
 #### How to Interpret This Index
 

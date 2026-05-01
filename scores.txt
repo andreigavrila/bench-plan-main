@@ -27,6 +27,7 @@
 | minimax2.7-opencode      |        72.7%        | 12kB | 0.03$ |  33,705 |
 | kimik2.5-opencode        |        70.7%        | 58kB | 0.15$ |  47,796 |
 | minimax2.5-free-opencode |        59.6%        |  8kB |       |  32,668 |
+| gemma3-31b-kilo          |        56.1%        |  4kB | 0.07$ |  36,400 |
 | glm4.6-coda              |        51.0%        | 23kB | 0.26$ | 436,477 |
 | gemini3.1pro-antigravity |        45.6%        |  7kB |       |         |
 | gemini3flash-antigravity |        40.4%        |  7kB |       |         |
