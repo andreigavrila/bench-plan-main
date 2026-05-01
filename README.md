@@ -23,6 +23,7 @@ I plan to extend both the evaluation and the benchmark itself to make it more co
 | Model                    | codex-gpt5.4-xhigh  | Size | Cost  | Tokens  |
 | ------------------------ | ------------------- | ---- | ----- | ------- |
 | opencode-gpt5.4-xhigh    |        97.0%        | 24kB | 0.79$ |  73,472 |
+| kilo-grok4.3-reasoning   |        96.9%        | 18kB | 0.19$ |  37,900 |
 | claude-opus4.7-max       |        94.4%        | 35kB |       |         |
 | codex-gpt5.5-high        |        94.4%        | 30kB |       |         |
 | kilo-opus4.6-xhigh       |        93.9%        | 41kB | 1.54$ |  55,896 |
@@ -39,8 +40,10 @@ I plan to extend both the evaluation and the benchmark itself to make it more co
 | kilo-deepseek3.2         |        86.6%        | 25kB | 0.11$ |  45,249 |
 | kilo-qwen3.6pro          |        85.9%        | 19kB | 0.11$ |  59,594 |
 | kilo-glm5.1              |        83.3%        | 49kB | 0.08$ |  46,328 |
+| kilo-hy3-preview         |        83.3%        | 19kB |       |  38,600 |
 | opencode-mistralsmall4   |        75.8%        | 16kB | 0.03$ |  38,078 |
 | coda-kimik2.5            |        75.8%        | 23kB | 0.40$ | 528,000 |
+| opencode-mimov2.5pro     |        74.6%        | 23kB | 0.12$ |  41,180 |
 | opencode-minimax2.7      |        72.7%        | 12kB | 0.03$ |  33,705 |
 | opencode-kimik2.5        |        70.7%        | 58kB | 0.15$ |  47,796 |
 | opencode-minimax2.5-free |        59.6%        |  8kB |       |  32,668 |
@@ -84,10 +87,12 @@ Smart Value Index = ( (Score_percentage)^4 / (Cost_in_USD + $0.05) ) * 100
 | **opencode-qwen3.6pro**    | **87.4%** |     $0.08     |     448.9         |
 | opencode-mistralsmall4     | 75.8%     |     $0.03     |     412.7         |
 | kilo-glm5.1                | 83.3%     |     $0.08     |     370.4         |
+| **kilo-grok4.3-reasoning** | **96.9%** |     $0.19     |     367.4         |
 | **kilo-deepseek3.2**       | **86.6%** |     $0.11     |     351.5         |
 | opencode-minimax2.7        | 72.7%     |     $0.03     |     349.2         |
 | **kilo-qwen3.6pro**        | **85.9%** |     $0.11     |     340.3         |
 | opencode-minimax2.5-free   | 59.6%     |     $0.00     |     252.4         |
+| opencode-mimov2.5pro       | 74.6%     |     $0.12     |     182.1         |
 | opencode-kimik2.5          | 70.7%     |     $0.15     |     124.9         |
 | **opencode-gpt5.4-xhigh**  | **97.0%** |     $0.79     |     105.4         |
 | **kilo-geai-gpt5.4-xhigh** | **92.9%** |     $0.87     |     81.0          |
