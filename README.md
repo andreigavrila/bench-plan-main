@@ -22,6 +22,7 @@ I plan to extend both the evaluation and the benchmark itself to make it more co
 
 | Model                    | gpt5.4-xhigh-codex  | Size | Cost  | Tokens  |
 | ------------------------ | ------------------- | ---- | ----- | ------- |
+| gemini3.5flash-high-antigravity |        97.0%        | 35kB |       |         |
 | gpt5.4-xhigh-opencode    |        97.0%        | 24kB | 0.79$ |  73,472 |
 | grok4.3-reasoning-kilo   |        96.9%        | 18kB | 0.19$ |  37,900 |
 | opus4.7-max-claude       |        94.4%        | 35kB |       |         |
@@ -70,7 +71,7 @@ To accurately calculate Return on Investment (ROI), I have inferred the cost-per
 *   **gemini3.1pro-antigravity**: `~$0.69` (4.5 * 0.154)
 *   **gemini3flash-antigravity**: `~$0.17` (1.13 * 0.154)
 
-Models without known or inferred cost data, including `gpt5.5-codex-*` and `glm5.1-claudecode`, are omitted from the value rankings until a cost basis is available.
+Models without known or inferred cost data, including `gemini3.5flash-high-antigravity`, `gpt5.5-codex-*`, and `glm5.1-claudecode`, are omitted from the value rankings until a cost basis is available.
 
 #### Smart ROI Index Formula
 A naive `Score / Cost` formula is heavily flawed because LLM performance does not scale linearly (a 5% jump from 90%->95% is drastically harder than 60%->65%). To fix this, the following formula calculates a **Smart Value Index**:
