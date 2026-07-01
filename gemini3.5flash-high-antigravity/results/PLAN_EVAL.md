@@ -150,7 +150,7 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 
 | PRD-ID | Requirement | Severity | Coverage | Evidence | Gap |
 | ------ | ----------- | -------- | -------- | -------- | --- |
-| PRD-001 | Use Next.js latest stable runtime | critical | full | `1.1 Benchmark Runtime & Isolation`: "Next.js App Router (v14/v15 stable)". |  |
+| PRD-001 | Use Next.js latest stable runtime | critical | partial | `1.1 Benchmark Runtime & Isolation`: "Next.js App Router (v14/v15 stable)". | The plan names older/ambiguous major versions instead of pinning the current latest stable runtime target. |
 | PRD-002 | Use Supabase official client libraries | critical | full | `1.1 Benchmark Runtime & Isolation`: `@supabase/supabase-js` and `@supabase/ssr`. |  |
 | PRD-003 | Ship `.env.example` with required variables | critical | full | `1.1 Benchmark Runtime & Isolation` and `6.1 Environment Setup`: create comprehensive `.env.example`. |  |
 | PRD-004 | Ignore `.env*` secrets except example | important | full | `1.1 Benchmark Runtime & Isolation`: configure `.gitignore` to block `.env*` secrets except example. |  |
@@ -162,7 +162,7 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 | PRD-010 | Isolate namespaces and scope destructive resets | critical | full | `1.1 Benchmark Runtime & Isolation`, `2.1 Supabase Schema`, and `7.1 Namespace Data Isolation Testing`. |  |
 | PRD-011 | Attach every user record to `user_id` | critical | full | `1.1 Benchmark Runtime & Isolation` and `2.1 Supabase Schema`: `shows` and `cloud_settings` require `user_id`. |  |
 | PRD-012 | Partition persisted data by namespace and user | critical | full | `1.1 Benchmark Runtime & Isolation` and `2.1 Supabase Schema`: compound keys on `(namespace_id, user_id, ...)`. |  |
-| PRD-013 | Support documented dev auth injection, prod-gated | important | full | `1.1 Benchmark Runtime & Isolation`: dev mode accepts `X-User-Id` or a dev cookie and blocks it in production. |  |
+| PRD-013 | Support documented dev auth injection, prod-gated | important | partial | `1.1 Benchmark Runtime & Isolation`: dev mode accepts `X-User-Id` or a dev cookie and blocks it in production. | The mechanism is described, but the plan does not add a documentation deliverable for how benchmark users inject identity. |
 | PRD-014 | Real OAuth later needs no schema redesign | important | full | `1.1 Benchmark Runtime & Isolation`: standard opaque `user_id` keys for future auth wiring. |  |
 | PRD-015 | Keep backend as persisted source of truth | critical | full | `1.1 Benchmark Runtime & Isolation`: "Always resolve mutations and reads against Supabase tables." |  |
 | PRD-016 | Make client cache safe to discard | critical | full | `1.1 Benchmark Runtime & Isolation`: cache is in memory or disposable IndexedDB and re-pulls from server. |  |
@@ -178,7 +178,7 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 | PRD-026 | Re-add preserves My Data and refreshes public data | critical | full | `1.2 Collection Data & Persistence`: retain existing `my_*` data and update only public fields. |  |
 | PRD-027 | Track per-field My Data modification timestamps | critical | full | `1.2 Collection Data & Persistence` and `2.1 Supabase Schema`: per-field `*_update_date` columns. |  |
 | PRD-028 | Use timestamps for sorting, sync, freshness | important | full | `1.2 Collection Data & Persistence`: timestamps drive home sorting, conflict resolution, and Scoop freshness. |  |
-| PRD-029 | Persist Scoop only for saved shows, 4h freshness | critical | partial | `1.2 Collection Data & Persistence` and `5.3 AI Scoop Generation` define DB caching and 4-hour refresh. | The plan does not specify the required ephemeral behavior for Scoop on unsaved shows before they enter the collection. |
+| PRD-029 | Persist Scoop only for saved shows, 4h freshness | critical | full | `1.5 Show Detail & Relationship UX`: "Save only if saved to collection"; `5.3 AI Scoop Generation`: regenerate if older than 4 hours. |  |
 | PRD-030 | Keep Ask and Alchemy state session-only | important | full | `1.2 Collection Data & Persistence`: chat history and Alchemy state stay in component state or session storage, never DB. |  |
 | PRD-031 | Resolve AI recommendations to real selectable shows | critical | partial | `1.2 Collection Data & Persistence`: match AI-emitted details to catalog search and load full show details. | It omits the external-ID-first mapping contract and does not define the non-interactive/Search fallback for unresolved titles. |
 | PRD-032 | Show collection and rating tile indicators | important | full | `1.2 Collection Data & Persistence` and `3. Directory Layout`: `ShowTile` renders in-collection and rating indicators. |  |
@@ -198,7 +198,7 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 | PRD-046 | Provide empty-library and empty-filter states | detail | full | `1.4 Collection Home & Search`: explicit empty-library and empty-filter UX states. |  |
 | PRD-047 | Search by title or keywords | important | full | `1.4 Collection Home & Search` and `6.4 Collection Home Grid & Search Page`: debounced catalog search by title/keywords. |  |
 | PRD-048 | Use poster grid with collection markers | important | full | `1.4 Collection Home & Search`: search results render as cards with overlay collection indicators. |  |
-| PRD-049 | Auto-open Search when setting is enabled | detail | full | `1.4 Collection Home & Search`: read `autoSearch` and route to Discover/Search on load. |  |
+| PRD-049 | Auto-open Search when setting is enabled | detail | partial | `1.4 Collection Home & Search`: read `autoSearch` and route to Discover/Search "if true and library is empty/new." | The plan narrows the behavior to empty/new libraries, while the requirement is launch behavior whenever the setting is enabled. |
 | PRD-050 | Keep Search non-AI in tone | important | full | `1.4 Collection Home & Search`: "Keep Search purely factual... No AI summaries here." |  |
 | PRD-051 | Preserve Show Detail narrative section order | important | full | `1.5 Show Detail & Relationship UX` and `6.5 Show Detail View & Relationship Toolbar`: preserve the exact layout hierarchy. |  |
 | PRD-052 | Prioritize motion-rich header with graceful fallback | important | full | `1.5 Show Detail & Relationship UX`: trailer-first header with poster/backdrop fallback. |  |
@@ -207,7 +207,7 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 | PRD-055 | Auto-save unsaved tagged show as Later/Interested | critical | full | `1.5 Show Detail & Relationship UX` and `4.1 Auto-Save Trigger Logic`. |  |
 | PRD-056 | Auto-save unsaved rated show as Done | critical | full | `1.5 Show Detail & Relationship UX` and `4.1 Auto-Save Trigger Logic`. |  |
 | PRD-057 | Show overview early for fast scanning | important | full | `1.5 Show Detail & Relationship UX`: overview positioned immediately below top facts and tags. |  |
-| PRD-058 | Scoop shows correct states and progressive feedback | important | full | `1.5 Show Detail & Relationship UX`: stream chunk-by-chunk with spinner and "Generating..." feedback. |  |
+| PRD-058 | Scoop shows correct states and progressive feedback | important | partial | `1.5 Show Detail & Relationship UX`: stream chunk-by-chunk with spinner and "Generating..." feedback. | It covers generation feedback and persistence, but not the required no-scoop, cached-scoop, and open-state copy/state transitions. |
 | PRD-059 | Ask-about-show deep-link seeds Ask context | important | full | `1.5 Show Detail & Relationship UX`: deep-link into Ask with a pre-filled show prompt. |  |
 | PRD-060 | Include traditional recommendations strand | important | full | `1.5 Show Detail & Relationship UX`: horizontal slider from catalog recommendations. |  |
 | PRD-061 | Explore Similar uses CTA-first concept flow | important | full | `1.5 Show Detail & Relationship UX`: "Get Concepts" first, then chips, then unlock "Explore Shows". |  |
@@ -227,7 +227,7 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 | PRD-075 | Treat concepts as taste ingredients, not genres | important | full | `1.7 Concepts, Explore Similar & Alchemy`: prompt focuses on vibes, pacing, themes, and structure. |  |
 | PRD-076 | Return bullet-only, 1-3 word, non-generic concepts | important | full | `1.7 Concepts, Explore Similar & Alchemy`: strict bullet-only, 1-3 word prompt validation. |  |
 | PRD-077 | Order concepts by strongest aha and varied axes | important | full | `1.7 Concepts, Explore Similar & Alchemy`: order by evocative strength across varied axes. |  |
-| PRD-078 | Require concept selection and guide ingredient picking | important | full | `1.7 Concepts, Explore Similar & Alchemy`: require at least one selected concept before requesting recs. |  |
+| PRD-078 | Require concept selection and guide ingredient picking | important | partial | `1.7 Concepts, Explore Similar & Alchemy`: require at least one selected concept before requesting recs. | It enforces selection, but does not plan the user guidance or empty-state copy around picking taste ingredients. |
 | PRD-079 | Return exactly five Explore Similar recommendations | important | full | `1.7 Concepts, Explore Similar & Alchemy`: constrain Explore Similar to exactly five shows. |  |
 | PRD-080 | Support full Alchemy loop with chaining | important | full | `1.7 Concepts, Explore Similar & Alchemy` and `6.6 Discover AI Services`: full loop plus chaining. |  |
 | PRD-081 | Clear downstream results when inputs change | important | full | `1.7 Concepts, Explore Similar & Alchemy`: handlers wipe concept and recommendation arrays on input changes. |  |
@@ -241,7 +241,7 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 | PRD-089 | Keep Ask brisk and dialogue-like by default | important | full | `1.8 AI Voice, Persona & Quality`: Ask kept under three paragraphs unless the user asks for depth. |  |
 | PRD-090 | Feed AI the right surface-specific context inputs | important | full | `1.8 AI Voice, Persona & Quality`, `1.6 Ask Chat`, and `1.7 Concepts`: library, show, and concept context are passed per surface. |  |
 | PRD-091 | Validate discovery with rubric and hard-fail integrity | important | partial | `1.8 AI Voice, Persona & Quality`: assertions for format, count, and real catalog keys. | It checks structural integrity, but it does not operationalize rubric-based failures for voice and taste alignment. |
-| PRD-092 | Show person gallery, name, and bio | important | full | `1.9 Person Detail`: person page with profile image, biography, and facts. |  |
+| PRD-092 | Show person gallery, name, and bio | important | partial | `1.9 Person Detail`: person page with profile image, biography, and facts. | The plan covers a profile image and biography, but not the requested person image gallery. |
 | PRD-093 | Include ratings, genres, and projects-by-year analytics | important | full | `1.9 Person Detail` and `3. Directory Layout`: analytics charts cover ratings, genres, and yearly project metrics. |  |
 | PRD-094 | Group filmography by year | important | full | `1.9 Person Detail`: credits organized in descending order by year. |  |
 | PRD-095 | Open Show Detail from selected credit | important | full | `1.9 Person Detail`: credit rows navigate back to the show detail screen. |  |
@@ -254,25 +254,25 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 
 Overall score:
 
-`(93 × 1.0 + 6 × 0.5) / 99 × 100 = 97.0%`
+`(88 × 1.0 + 11 × 0.5) / 99 × 100 = 94.4%`
 
 Score by severity tier:
 
 `Critical:  (27 × 1.0 + 3 × 0.5) / 30 × 100 = 95.0%  (28.5 of 30 critical requirements)`
-`Important: (64 × 1.0 + 3 × 0.5) / 67 × 100 = 97.8%  (65.5 of 67 important requirements)`
-`Detail:    (2 × 1.0 + 0 × 0.5) / 2 × 100 = 100.0%  (2 of 2 detail requirements)`
-`Overall:   97.0% (99 total requirements)`
+`Important: (60 × 1.0 + 7 × 0.5) / 67 × 100 = 94.8%  (63.5 of 67 important requirements)`
+`Detail:    (1 × 1.0 + 1 × 0.5) / 2 × 100 = 75.0%  (1.5 of 2 detail requirements)`
+`Overall:   94.4% (99 total requirements)`
 
 ## 4. Top Gaps
 
-1. PRD-029 | `critical` | Persist Scoop only for saved shows, 4h freshness
-Without an explicit unsaved-show path, the implementation could incorrectly persist Scoop data for catalog-only browsing and violate the product's storage semantics.
-
-2. PRD-037 | `critical` | Merge catalog fields safely and maintain timestamps
+1. PRD-037 | `critical` | Merge catalog fields safely and maintain timestamps
 The plan defines public-field merging but leaves the `my*` timestamp conflict policy underspecified, which risks losing or regressing user edits during sync and catalog refreshes.
 
-3. PRD-031 | `critical` | Resolve AI recommendations to real selectable shows
+2. PRD-031 | `critical` | Resolve AI recommendations to real selectable shows
 If the mapping logic is not external-ID-first and failure-aware, AI results can become brittle, non-interactive, or mismatched to the wrong catalog entry.
+
+3. PRD-001 | `critical` | Use Next.js latest stable runtime
+The plan's stale or ambiguous v14/v15 target could put the build outside the benchmark baseline before implementation even starts.
 
 4. PRD-091 | `important` | Validate discovery with rubric and hard-fail integrity
 Format-only validation is not enough for this product; weak voice or shallow taste alignment would pass technical checks while still failing the core discovery promise.
@@ -284,20 +284,20 @@ Conflict timestamps alone do not prevent duplicate or split library records, and
 
 #### Overall Posture
 
-This is a strong plan. It is structurally complete, tracks the benchmark denominator closely, and gives concrete implementation direction across runtime, persistence, UI structure, and AI surfaces. The remaining issues are not broad omissions; they are semantic gaps where the plan compresses nuanced product rules into shorter implementation notes.
+This is a strong but somewhat over-credited plan. It tracks almost every benchmark requirement and gives concrete implementation direction across persistence, UI structure, and AI surfaces, but several rows rely on broad traceability claims where the PRD asks for narrower behavioral contracts. The recomputed score is lower because those narrowed or incomplete behaviors should be treated as partial, not full.
 
 #### Strength Clusters
 
-The plan is strongest in Benchmark Runtime & Isolation, App Navigation & Discover Shell, Collection Home & Search, and Ask Chat. Those areas are covered with both traceability rows and follow-through sections on schema, layout, prompt contracts, and testing. Show Detail & Relationship UX is also strong because the plan includes explicit save-default logic, removal flow, and CTA sequencing rather than only naming the feature.
+The plan is strongest in App Navigation & Discover Shell, Collection Home & Search, Ask Chat, and the core save/default portions of Show Detail & Relationship UX. Those areas are covered with both traceability rows and follow-through sections on layout, prompt contracts, schema, and testing. Collection Data & Persistence is also strong on core storage shape, implicit saves, and namespace/user partitioning.
 
 #### Weakness Clusters
 
-The gaps cluster in two places. First, Collection Data & Persistence has the most meaningful slippage, especially around nuanced merge semantics, sync integrity, and the difference between persisted and session-only AI data. Second, AI Voice, Persona & Quality is mostly covered at the prompt-contract level, but the plan is thinner on how quality will be evaluated against the product rubric instead of just schema correctness.
+The gaps cluster around precision rather than missing screens. Infrastructure has a stale runtime target and lacks explicit documentation work for dev identity injection. Data and AI quality gaps center on edge-case contracts: external-ID-first recommendation resolution, timestamp-based `my*` merge semantics, duplicate handling, Scoop state transitions, concept-selection guidance, and rubric-based validation.
 
 #### Risk Assessment
 
-If this plan were executed as-is, the first visible failure would likely be subtle data-behavior drift rather than a missing screen. A user or QA reviewer would notice that AI recommendations occasionally fail to resolve cleanly, that Scoop persistence behaves inconsistently for unsaved shows, or that sync/refresh flows can blur the line between catalog refreshes and user-owned edits. On the AI side, outputs might be formally well-structured but still feel flatter or less taste-aware than the PRD expects.
+If this plan were executed as-is, the first visible failure would likely be subtle behavioral drift rather than a missing page. A QA reviewer would catch stale runtime assumptions, AI recommendations that resolve unreliably, Scoop UI states that do not match the intended cached/open/generating flow, or sync/refresh paths that can blur catalog updates with user-owned edits. On the AI side, outputs might be formally well-structured but still feel flatter or less taste-aware than the PRD expects.
 
 #### Remediation Guidance
 
-The missing work is mostly specification tightening, not wholesale replanning. The plan needs sharper acceptance criteria for persistence semantics, especially around unsaved Scoop behavior, duplicate handling, and timestamp-based merge rules for user fields. It also needs explicit behavioral contracts for AI resolution failure modes and a real validation strategy that scores voice, taste alignment, and integrity together rather than treating formatting as the whole quality bar.
+The missing work is mostly specification tightening, not wholesale replanning. The plan needs updated runtime/version language, explicit documentation tasks for benchmark auth injection, sharper acceptance criteria for duplicate handling and timestamp-based user-field merges, and fuller UI state specs for Scoop and concept selection. It also needs a real validation strategy that scores voice, taste alignment, and integrity together rather than treating formatting as the whole quality bar.

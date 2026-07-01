@@ -22,10 +22,10 @@ I plan to extend both the evaluation and the benchmark itself to make it more co
 
 | Model                    | gpt5.4-xhigh-codex  | Size | Cost  | Tokens  |
 | ------------------------ | ------------------- | ---- | ----- | ------- |
-| gemini3.5flash-high-antigravity |        97.0%        | 35kB |       |         |
 | gpt5.4-xhigh-opencode    |        97.0%        | 24kB | 0.79$ |  73,472 |
 | grok4.3-reasoning-kilo   |        96.9%        | 18kB | 0.19$ |  37,900 |
 | glm5.2-xhigh-kilo        |        96.0%        | 47kB | 0.15$ |  55,620 |
+| gemini3.5flash-high-antigravity |        94.4%        | 35kB |       |         |
 | opus4.7-max-claude       |        94.4%        | 35kB |       |         |
 | gpt5.5-high-codex        |        94.4%        | 30kB |       |         |
 | opus4.6-xhigh-kilo       |        93.9%        | 41kB | 1.54$ |  55,896 |
