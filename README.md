@@ -25,6 +25,7 @@ I plan to extend both the evaluation and the benchmark itself to make it more co
 | gemini3.5flash-high-antigravity |        97.0%        | 35kB |       |         |
 | gpt5.4-xhigh-opencode    |        97.0%        | 24kB | 0.79$ |  73,472 |
 | grok4.3-reasoning-kilo   |        96.9%        | 18kB | 0.19$ |  37,900 |
+| glm5.2-xhigh-kilo        |        96.0%        | 47kB | 0.15$ |  55,620 |
 | opus4.7-max-claude       |        94.4%        | 35kB |       |         |
 | gpt5.5-high-codex        |        94.4%        | 30kB |       |         |
 | opus4.6-xhigh-kilo       |        93.9%        | 41kB | 1.54$ |  55,896 |
@@ -95,6 +96,7 @@ To ensure these rankings are practical, models are filtered and highlighted base
 | glm5.1-opencode            | 88.9%     |     $0.08     |     480.5         |
 | qwen3.6pro-opencode        | 87.4%     |     $0.08     |     448.9         |
 | **deepseekv4pro-kilo**     | **93.4%** |     $0.12     |     447.7         |
+| **glm5.2-xhigh-kilo**      | **96.0%** |     $0.15     |     424.7         |
 | **grok4.3-reasoning-kilo** | **96.9%** |     $0.19     |     367.4         |
 | deepseek3.2-kilo           | 86.6%     |     $0.11     |     351.5         |
 | qwen3.6pro-kilo            | 85.9%     |     $0.11     |     340.3         |
