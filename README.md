@@ -22,10 +22,10 @@ I plan to extend both the evaluation and the benchmark itself to make it more co
 
 | Model                    | Score  | Evaluator            | Size | Cost  | Tokens  |
 | ------------------------ | ------ | -------------------- | ---- | ----- | ------- |
-| fable5-max-claudecode    | 100.0% | gpt5.5-high          | 51kB |       |         |
-| fable5-high-claudecode   | 99.0%  | gpt5.5-high          | 34kB |       |         |
-| fable5-extra-claudecode  | 98.5%  | gpt5.5-high          | 48kB |       |         |
-| fable5-medium-claudecode | 97.5%  | gpt5.5-high          | 21kB |       |         |
+| fable5-max-claudecode    | 100.0% | gpt5.5-high          | 51kB |       | 397,500 |
+| fable5-high-claudecode   | 99.0%  | gpt5.5-high          | 34kB |       |  74,700 |
+| fable5-extra-claudecode  | 98.5%  | gpt5.5-high          | 48kB |       |  83,100 |
+| fable5-medium-claudecode | 97.5%  | gpt5.5-high          | 21kB |       |  67,000 |
 | gpt5.4-xhigh-opencode    | 97.0%  | gpt5.4-xhigh-codex   | 24kB | 0.79$ |  73,472 |
 | grok4.3-reasoning-kilo   | 96.9%  | gpt5.4-xhigh-codex   | 18kB | 0.19$ |  37,900 |
 | glm5.2-xhigh-kilo        | 96.0%  | gpt5.4-xhigh-codex   | 47kB | 0.15$ |  55,620 |
@@ -33,7 +33,7 @@ I plan to extend both the evaluation and the benchmark itself to make it more co
 | opus4.7-max-claude       | 94.4%  | gpt5.4-xhigh-codex   | 35kB |       |         |
 | gpt5.5-high-codex        | 94.4%  | gpt5.4-xhigh-codex   | 30kB |       |         |
 | opus4.6-xhigh-kilo       | 93.9%  | gpt5.4-xhigh-codex   | 41kB | 1.54$ |  55,896 |
-| fable5-low-claudecode    | 93.4%  | gpt5.5-high          | 13kB |       |         |
+| fable5-low-claudecode    | 93.4%  | gpt5.5-high          | 13kB |       |  63,600 |
 | deepseekv4pro-kilo       | 93.4%  | gpt5.4-xhigh-codex   | 27kB | 0.12$ |  42,400 |
 | gpt5.4-xhigh-kilo-geai   | 92.9%  | gpt5.4-xhigh-codex   | 26kB |       |  62,613 |
 | gpt5.5-xhigh-codex       | 91.9%  | gpt5.4-xhigh-codex   | 27kB |       |         |
