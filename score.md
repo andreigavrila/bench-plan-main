@@ -1,23 +1,24 @@
-# 📊 Model Benchmarking & Evaluation Results
+﻿# ðŸ“Š Model Benchmarking & Evaluation Results
 
 > [!NOTE]
 > This document summarizes the evaluation results of various language models. It details performance scores, evaluators, sizes, execution costs, generated tokens, and self-evaluation calibration statistics.
 
-## 💡 Key Highlights
+## ðŸ’¡ Key Highlights
 
-* **🏆 Top Performers:** **fable5-max-claudecode** leads the benchmark at **100.0%**, followed by **fable5-high-claudecode** at **99.0%**, **fable5-extra-claudecode** at **98.5%**, **fable5-medium-claudecode** at **97.5%**, and **gpt5.4-xhigh-opencode** at **97.0%**.
-* **⚡ Cost Efficiency:** **grok4.3-reasoning-kilo** achieves a near-top score of **96.9%** at a very low cost of **$0.19** (37,900 tokens), while **deepseekv4pro-kilo** reaches **93.4%** at just **$0.12** (42,400 tokens).
-* **📉 Self-Evaluation Gap:** There is a significant calibration gap in some models. For example, **gemini3flash-antigravity** has a self-evaluation gap of **32%** (Self-Score of 72.22% vs Actual of 40.40%).
+* **ðŸ† Top Performers:** **fable5-max-claudecode** leads the benchmark at **100.0%**, followed by **opus4.8-max-claudecode** at **99.5%**, **fable5-high-claudecode** at **99.0%**, **fable5-extra-claudecode** at **98.5%**, and **fable5-medium-claudecode** at **97.5%**.
+* **âš¡ Cost Efficiency:** **grok4.3-reasoning-kilo** achieves a near-top score of **96.9%** at a very low cost of **$0.19** (37,900 tokens), while **deepseekv4pro-kilo** reaches **93.4%** at just **$0.12** (42,400 tokens).
+* **ðŸ“‰ Self-Evaluation Gap:** There is a significant calibration gap in some models. For example, **gemini3flash-antigravity** has a self-evaluation gap of **32%** (Self-Score of 72.22% vs Actual of 40.40%).
 
 ---
 
-## 🏆 Model Leaderboard
+## ðŸ† Model Leaderboard
 
 The table below lists the performance of all evaluated models, sorted in descending order of their scores. The score column is separated from the evaluator so mixed-evaluator runs can be tracked without renaming the table each time.
 
 | Model                           | Score  | Evaluator          | Size |  Cost |  Tokens |
 | ------------------------------- | :----: | ------------------ | ---: | ----: | ------: |
 | fable5-max-claudecode           | 100.0% | gpt5.5-high        | 51kB |       | 397,500 |
+| opus4.8-max-claudecode          | 99.5%  | gpt5.5-high        | 37kB |       |  95,700 |
 | fable5-high-claudecode          | 99.0%  | gpt5.5-high        | 34kB |       |  74,700 |
 | fable5-xhigh/extra-claudecode   | 98.5%  | gpt5.5-high        | 48kB |       |  83,100 |
 | fable5-medium-claudecode        | 97.5%  | gpt5.5-high        | 21kB |       |  67,000 |
@@ -59,7 +60,7 @@ The table below lists the performance of all evaluated models, sorted in descend
 
 ---
 
-## 🔍 Self-Evaluation Calibration
+## ðŸ” Self-Evaluation Calibration
 
 Self-evaluation calibration measures a model's ability to accurately assess its own performance. The **Gap** represents the difference between the model's self-score and its actual benchmark score (`Self-Score - Actual`). A smaller gap indicates better self-calibration.
 
@@ -74,7 +75,8 @@ Self-evaluation calibration measures a model's ability to accurately assess its 
 
 ---
 
-## ⚙️ Metadata & References
+## âš™ï¸ Metadata & References
 
-* **💸 Total Evaluation Cost:** `~$0.8` (for the `OPENCODE-GPT5.4-xhigh EVAL` run)
-* **🔗 Leaderboard Reference:** [Artificial Analysis Coding Leaderboard](https://artificialanalysis.ai/models/capabilities/coding?models=gpt-5-4-mini%2Cgpt-5-4%2Cgpt-5-5%2Cclaude-sonnet-4-6-adaptive%2Cclaude-opus-4-7%2Cmistral-small-4%2Cdeepseek-v4-flash%2Cdeepseek-v4-pro%2Cminimax-m2-7%2Ckimi-k2-6%2Cmimo-v2-5-pro%2Cglm-5-1%2Cqwen3-6-plus%2Cclaude-opus-4-6-adaptive#coding-index)
+* **ðŸ’¸ Total Evaluation Cost:** `~$0.8` (for the `OPENCODE-GPT5.4-xhigh EVAL` run)
+* **ðŸ”— Leaderboard Reference:** [Artificial Analysis Coding Leaderboard](https://artificialanalysis.ai/models/capabilities/coding?models=gpt-5-4-mini%2Cgpt-5-4%2Cgpt-5-5%2Cclaude-sonnet-4-6-adaptive%2Cclaude-opus-4-7%2Cmistral-small-4%2Cdeepseek-v4-flash%2Cdeepseek-v4-pro%2Cminimax-m2-7%2Ckimi-k2-6%2Cmimo-v2-5-pro%2Cglm-5-1%2Cqwen3-6-plus%2Cclaude-opus-4-6-adaptive#coding-index)
+

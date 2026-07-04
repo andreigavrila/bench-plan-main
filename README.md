@@ -23,6 +23,7 @@ I plan to extend both the evaluation and the benchmark itself to make it more co
 | Model                    | Score  | Evaluator            | Size | Cost  | Tokens  |
 | ------------------------ | ------ | -------------------- | ---- | ----- | ------- |
 | fable5-max-claudecode    | 100.0% | gpt5.5-high          | 51kB |       | 397,500 |
+| opus4.8-max-claudecode   | 99.5%  | gpt5.5-high          | 37kB |       |  95,700 |
 | fable5-high-claudecode   | 99.0%  | gpt5.5-high          | 34kB |       |  74,700 |
 | fable5-extra-claudecode  | 98.5%  | gpt5.5-high          | 48kB |       |  83,100 |
 | fable5-medium-claudecode | 97.5%  | gpt5.5-high          | 21kB |       |  67,000 |
@@ -68,6 +69,8 @@ I plan to extend both the evaluation and the benchmark itself to make it more co
 
 To accurately calculate Return on Investment (ROI), I have inferred the cost-per-run for models missing price data by using the known `1.54$` Opus measure and mapping it to the current cost ratio (Opus: $10, Sonnet: $6, GPT-5.4: $5.63, Gemini 3.1 Pro: $4.5, Gemini Flash: $1.13). The calculated ratio multiplier is `1.54 / 10 = 0.154`.
 
+For Fable 5 runs, I do not have explicit dollar costs, but I do have token counts. I therefore inferred costs from the closest Claude-family benchmark point with both values available: `opus4.6-xhigh-kilo` at `$1.54` for `55,896` tokens. I then scaled that baseline by the Artificial Analysis blended-price ratio: Opus 4.6 at `$3.85` versus Fable at `$7.70`, so Fable is estimated at `2x` the Opus 4.6 token-rate.
+
 **Inferred Costs:**
 *   **opus4.7-max-claude**: `~$1.54` (10 * 0.154)
 *   **opus4.6-max-claudecode**: `~$1.54` (10 * 0.154)
@@ -76,8 +79,14 @@ To accurately calculate Return on Investment (ROI), I have inferred the cost-per
 *   **gpt5.4-xhigh-kilo-geai**: `~$0.87` (5.63 * 0.154)
 *   **gemini3.1pro-antigravity**: `~$0.69` (4.5 * 0.154)
 *   **gemini3flash-antigravity**: `~$0.17` (1.13 * 0.154)
+*   **fable5-max-claudecode**: `~$21.90` (397,500 tokens * 1.54 / 55,896 * 7.70 / 3.85)
+*   **fable5-high-claudecode**: `~$4.12` (74,700 tokens * 1.54 / 55,896 * 7.70 / 3.85)
+*   **fable5-extra-claudecode**: `~$4.58` (83,100 tokens * 1.54 / 55,896 * 7.70 / 3.85)
+*   **fable5-medium-claudecode**: `~$3.69` (67,000 tokens * 1.54 / 55,896 * 7.70 / 3.85)
+*   **fable5-low-claudecode**: `~$3.50` (63,600 tokens * 1.54 / 55,896 * 7.70 / 3.85)
+*   **opus4.8-max-claudecode**: `~$2.64` (95,700 tokens * 1.54 / 55,896)
 
-Models without known or inferred cost data, including `fable5-max-claudecode`, `fable5-high-claudecode`, `fable5-extra-claudecode`, `fable5-medium-claudecode`, `fable5-low-claudecode`, `gemini3.5flash-high-antigravity`, `gpt5.5-codex-*`, and `glm5.1-claudecode`, are omitted from the value rankings until a cost basis is available.
+Models without known or inferred cost data, including `gemini3.5flash-high-antigravity`, `gpt5.5-codex-*`, and `glm5.1-claudecode`, are omitted from the value rankings until a cost basis is available.
 
 #### Smart ROI Index Formula
 A naive `Score / Cost` formula is heavily flawed because LLM performance does not scale linearly (a 5% jump from 90%->95% is drastically harder than 60%->65%). To fix this, the following formula calculates a **Smart Value Index**:
@@ -113,6 +122,12 @@ To ensure these rankings are practical, models are filtered and highlighted base
 | **opus4.7-max-claude**     | **94.4%** |     $1.54     |     49.9          |
 | **opus4.6-xhigh-kilo**     | **93.9%** |     $1.54     |     48.9          |
 | **opus4.6-max-claudecode** | **90.9%** |     $1.54     |     42.9          |
+| **opus4.8-max-claudecode** | **99.5%** |     $2.64     |     36.5          |
+| **fable5-medium-claudecode** | **97.5%** |     $3.69     |     24.2          |
+| **fable5-high-claudecode** | **99.0%** |     $4.12     |     23.1          |
+| **fable5-low-claudecode**  | **93.4%** |     $3.50     |     21.4          |
+| **fable5-extra-claudecode** | **98.5%** |     $4.58     |     20.3          |
+| **fable5-max-claudecode**  | **100.0%** |    $21.90     |      4.6          |
 
 #### How to Interpret This Index
 
