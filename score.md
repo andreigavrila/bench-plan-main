@@ -5,7 +5,7 @@
 
 ## 💡 Key Highlights
 
-* **🏆 Top Performers:** **gpt5.4-xhigh-opencode** leads the benchmark at **97.0%**, followed by **grok4.3-reasoning-kilo** at **96.9%** and **glm5.2-xhigh-kilo** at **96.0%**. The recomputed **gemini3.5flash-high-antigravity** score is **94.4%**.
+* **🏆 Top Performers:** **fable5-max-claudecode** leads the benchmark at **100.0%**, followed by **gpt5.4-xhigh-opencode** at **97.0%**, **grok4.3-reasoning-kilo** at **96.9%**, and **glm5.2-xhigh-kilo** at **96.0%**.
 * **⚡ Cost Efficiency:** **grok4.3-reasoning-kilo** achieves a near-top score of **96.9%** at a very low cost of **$0.19** (37,900 tokens), while **deepseekv4pro-kilo** reaches **93.4%** at just **$0.12** (42,400 tokens).
 * **📉 Self-Evaluation Gap:** There is a significant calibration gap in some models. For example, **gemini3flash-antigravity** has a self-evaluation gap of **32%** (Self-Score of 72.22% vs Actual of 40.40%).
 
@@ -17,6 +17,7 @@ The table below lists the performance of all evaluated models on the `gpt5.4-xhi
 
 | Model                           | gpt5.4-xhigh-codex | Size |  Cost |  Tokens |
 | ------------------------------- | :----------------: | ---: | ----: | ------: |
+| fable5-max-claudecode           |       100.0%       | 51kB |       |         |
 | gpt5.4-xhigh-opencode           |       97.0%        | 24kB | 0.79$ |  73,472 |
 | grok4.3-reasoning-kilo          |       96.9%        | 18kB | 0.19$ |  37,900 |
 | glm5.2-xhigh-kilo               |       96.0%        | 47kB | 0.15$ |  55,620 |
