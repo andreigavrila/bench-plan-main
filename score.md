@@ -28,6 +28,7 @@ The table below lists the performance of all evaluated models on the `gpt5.4-xhi
 | opus4.7-max-claude              |       94.4%        | 35kB |       |         |
 | gpt5.5-high-codex               |       94.4%        | 30kB |       |         |
 | opus4.6-xhigh-kilo              |       93.9%        | 41kB | 1.54$ |  55,896 |
+| fable5-low-claudecode           |       93.4%        | 13kB |       |  63,600 |
 | deepseekv4pro-kilo              |       93.4%        | 27kB | 0.12$ |  42,400 |
 | gpt5.4-xhigh-kilo-geai          |       92.9%        | 26kB |       |  62,613 |
 | gpt5.5-xhigh-codex              |       91.9%        | 27kB |       |         |

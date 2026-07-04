@@ -33,6 +33,7 @@ I plan to extend both the evaluation and the benchmark itself to make it more co
 | opus4.7-max-claude       |        94.4%        | 35kB |       |         |
 | gpt5.5-high-codex        |        94.4%        | 30kB |       |         |
 | opus4.6-xhigh-kilo       |        93.9%        | 41kB | 1.54$ |  55,896 |
+| fable5-low-claudecode    |        93.4%        | 13kB |       |         |
 | deepseekv4pro-kilo       |        93.4%        | 27kB | 0.12$ |  42,400 |
 | gpt5.4-xhigh-kilo-geai   |        92.9%        | 26kB |       |  62,613 |
 | gpt5.5-xhigh-codex       |        91.9%        | 27kB |       |         |
@@ -76,7 +77,7 @@ To accurately calculate Return on Investment (ROI), I have inferred the cost-per
 *   **gemini3.1pro-antigravity**: `~$0.69` (4.5 * 0.154)
 *   **gemini3flash-antigravity**: `~$0.17` (1.13 * 0.154)
 
-Models without known or inferred cost data, including `fable5-max-claudecode`, `fable5-high-claudecode`, `fable5-extra-claudecode`, `fable5-medium-claudecode`, `gemini3.5flash-high-antigravity`, `gpt5.5-codex-*`, and `glm5.1-claudecode`, are omitted from the value rankings until a cost basis is available.
+Models without known or inferred cost data, including `fable5-max-claudecode`, `fable5-high-claudecode`, `fable5-extra-claudecode`, `fable5-medium-claudecode`, `fable5-low-claudecode`, `gemini3.5flash-high-antigravity`, `gpt5.5-codex-*`, and `glm5.1-claudecode`, are omitted from the value rankings until a cost basis is available.
 
 #### Smart ROI Index Formula
 A naive `Score / Cost` formula is heavily flawed because LLM performance does not scale linearly (a 5% jump from 90%->95% is drastically harder than 60%->65%). To fix this, the following formula calculates a **Smart Value Index**:
