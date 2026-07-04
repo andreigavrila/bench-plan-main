@@ -5,7 +5,7 @@
 
 ## 💡 Key Highlights
 
-* **🏆 Top Performers:** **fable5-max-claudecode** leads the benchmark at **100.0%**, followed by **fable5-medium-claudecode** at **97.5%**, **gpt5.4-xhigh-opencode** at **97.0%**, and **grok4.3-reasoning-kilo** at **96.9%**.
+* **🏆 Top Performers:** **fable5-max-claudecode** leads the benchmark at **100.0%**, followed by **fable5-high-claudecode** at **99.0%**, **fable5-extra-claudecode** at **98.5%**, **fable5-medium-claudecode** at **97.5%**, and **gpt5.4-xhigh-opencode** at **97.0%**.
 * **⚡ Cost Efficiency:** **grok4.3-reasoning-kilo** achieves a near-top score of **96.9%** at a very low cost of **$0.19** (37,900 tokens), while **deepseekv4pro-kilo** reaches **93.4%** at just **$0.12** (42,400 tokens).
 * **📉 Self-Evaluation Gap:** There is a significant calibration gap in some models. For example, **gemini3flash-antigravity** has a self-evaluation gap of **32%** (Self-Score of 72.22% vs Actual of 40.40%).
 
@@ -17,8 +17,10 @@ The table below lists the performance of all evaluated models on the `gpt5.4-xhi
 
 | Model                           | gpt5.4-xhigh-codex | Size |  Cost |  Tokens |
 | ------------------------------- | :----------------: | ---: | ----: | ------: |
-| fable5-max-claudecode           |       100.0%       | 51kB |       |         |
-| fable5-medium-claudecode        |       97.5%        | 21kB |       |         |
+| fable5-max-claudecode           |       100.0%       | 51kB |       | 397,500 |
+| fable5-high-claudecode          |       99.0%        | 34kB |       |  74,700 |
+| fable5-xhigh/extra-claudecode   |       98.5%        | 48kB |       |  83,100 |
+| fable5-medium-claudecode        |       97.5%        | 21kB |       |  67,000 |
 | gpt5.4-xhigh-opencode           |       97.0%        | 24kB | 0.79$ |  73,472 |
 | grok4.3-reasoning-kilo          |       96.9%        | 18kB | 0.19$ |  37,900 |
 | glm5.2-xhigh-kilo               |       96.0%        | 47kB | 0.15$ |  55,620 |
