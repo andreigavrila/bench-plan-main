@@ -22,7 +22,7 @@ I plan to extend both the evaluation and the benchmark itself to make it more co
 
 | Model                           | Score  | Evaluator            | Size | Cost  | Tokens  |
 | ------------------------------- | ------ | -------------------- | ---- | ----- | ------- |
-| fable5-max-claudecode           | 100.0% | gpt5.5-high          | 51kB |       | 397,500 |
+| fable5-max-claudecode           | 100.0% | gpt5.5-high          | 51kB |       |  94,400 |
 | opus4.8-max-claudecode          | 99.5%  | gpt5.5-high          | 37kB |       |  95,700 |
 | opus4.8-xhigh-claudecode        | 99.5%  | gpt5.5-high          | 33kB |       |  85,700 |
 | fable5-high-claudecode          | 99.0%  | gpt5.5-high          | 34kB |       |  74,700 |
@@ -92,7 +92,7 @@ When token counts are available, the formula is `tokens * 1.54 / 55,896 * family
 *   **gpt5.5-medium-codex**: `~$0.79` (0.38 * inferred `gpt5.5-xhigh-codex` cost of `$2.07`, per DeepSWE v1.1 extrapolation)
 *   **gpt5.4-xhigh-codex**: `~$0.87` (2.17 * 1.54 / 3.85)
 *   **gpt5.4-xhigh-kilo-geai**: `~$0.97` (62,613 tokens * 1.54 / 55,896 * 2.17 / 3.85)
-*   **fable5-max-claudecode**: `~$21.90` (397,500 tokens * 1.54 / 55,896 * 7.70 / 3.85)
+*   **fable5-max-claudecode**: `~$5.20` (94,400 tokens * 1.54 / 55,896 * 7.70 / 3.85)
 *   **fable5-high-claudecode**: `~$4.12` (74,700 tokens * 1.54 / 55,896 * 7.70 / 3.85)
 *   **fable5-extra-claudecode**: `~$4.58` (83,100 tokens * 1.54 / 55,896 * 7.70 / 3.85)
 *   **fable5-medium-claudecode**: `~$3.69` (67,000 tokens * 1.54 / 55,896 * 7.70 / 3.85)
@@ -147,7 +147,7 @@ To ensure these rankings are practical, models are filtered and highlighted base
 | **fable5-high-claudecode**   | **99.0%**  |     $4.12     |     23.1          |
 | fable5-low-claudecode        | 93.4%      |     $3.50     |     21.4          |
 | **fable5-extra-claudecode**  | **98.5%**  |     $4.58     |     20.3          |
-| **fable5-max-claudecode**    | **100.0%** |    $21.90     |      4.6          |
+| **fable5-max-claudecode**    | **100.0%** |     $5.20     |     19.0          |
 
 #### How to Interpret This Index
 

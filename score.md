@@ -17,12 +17,12 @@ The table below lists the performance of all evaluated models, sorted in descend
 
 | Model                           | Score  | Evaluator          | Size |  Cost |  Tokens |
 | ------------------------------- | :----: | ------------------ | ---: | ----: | ------: |
-| fable5-max-claudecode           | 100.0% | gpt5.5-high        | 51kB |       | 397,500 |
+| fable5-max-claudecode           | 100.0% | gpt5.5-high        | 51kB |       |  94,400 |
 | opus4.8-max-claudecode          | 99.5%  | gpt5.5-high        | 37kB |       |  95,700 |
 | opus4.8-xhigh-claudecode        | 99.5%  | gpt5.5-high        | 33kB |       |  85,700 |
 | fable5-high-claudecode          | 99.0%  | gpt5.5-high        | 34kB |       |  74,700 |
 | opus4.8-high-claudecode         | 99.0%  | gpt5.5-high        | 37kB |       |  75,500 |
-| fable5-xhigh/extra-claudecode   | 98.5%  | gpt5.5-high        | 48kB |       |  83,100 |
+| fable5-extra-claudecode         | 98.5%  | gpt5.5-high        | 48kB |       |  83,100 |
 | fable5-medium-claudecode        | 97.5%  | gpt5.5-high        | 21kB |       |  67,000 |
 | gpt5.4-xhigh-opencode           | 97.0%  | gpt5.4-xhigh-codex | 24kB | 0.79$ |  73,472 |
 | gpt5.5-xhigh-codex              | 97.0%  | gpt5.5-high        | 34kB |       |         |
