@@ -24,6 +24,7 @@ I plan to extend both the evaluation and the benchmark itself to make it more co
 | ------------------------ | ------ | -------------------- | ---- | ----- | ------- |
 | fable5-max-claudecode    | 100.0% | gpt5.5-high          | 51kB |       | 397,500 |
 | opus4.8-max-claudecode   | 99.5%  | gpt5.5-high          | 37kB |       |  95,700 |
+| opus4.8-xhigh-claudecode | 99.5%  | gpt5.5-high          | 33kB |       |  85,700 |
 | fable5-high-claudecode   | 99.0%  | gpt5.5-high          | 34kB |       |  74,700 |
 | fable5-extra-claudecode  | 98.5%  | gpt5.5-high          | 48kB |       |  83,100 |
 | fable5-medium-claudecode | 97.5%  | gpt5.5-high          | 21kB |       |  67,000 |
@@ -80,6 +81,7 @@ When token counts are available, the formula is `tokens * 1.54 / 55,896 * family
 *   **opus4.7-max-claude**: `~$1.54` (3.85 * 1.54 / 3.85)
 *   **opus4.6-max-claudecode**: `~$1.54` (3.85 * 1.54 / 3.85)
 *   **opus4.8-max-claudecode**: `~$2.64` (95,700 tokens * 1.54 / 55,896 * 3.85 / 3.85)
+*   **opus4.8-xhigh-claudecode**: `~$2.36` (85,700 tokens * 1.54 / 55,896 * 3.85 / 3.85)
 *   **gpt5.5-high-codex**: `~$1.74` (4.35 * 1.54 / 3.85)
 *   **gpt5.5-xhigh-codex**: `~$1.74` (4.35 * 1.54 / 3.85)
 *   **gpt5.5-medium-codex**: `~$1.74` (4.35 * 1.54 / 3.85)
@@ -127,6 +129,7 @@ To ensure these rankings are practical, models are filtered and highlighted base
 | opus4.6-xhigh-kilo         | 93.9%     |     $1.54     |     48.9          |
 | gpt5.5-high-codex          | 94.4%     |     $1.74     |     44.4          |
 | opus4.6-max-claudecode     | 90.9%     |     $1.54     |     42.9          |
+| **opus4.8-xhigh-claudecode** | **99.5%** |     $2.36     |     40.6          |
 | gpt5.5-xhigh-codex         | 91.9%     |     $1.74     |     39.8          |
 | gpt5.5-medium-codex        | 89.9%     |     $1.74     |     36.5          |
 | **opus4.8-max-claudecode** | **99.5%** |     $2.64     |     36.5          |
