@@ -33,6 +33,7 @@ I plan to extend both the evaluation and the benchmark itself to make it more co
 | gpt5.5-xhigh-codex              | 97.0%  | gpt5.5-high          | 34kB |       |         |
 | grok4.3-reasoning-kilo          | 96.9%  | gpt5.4-xhigh-codex   | 18kB | 0.19$ |  37,900 |
 | glm5.2-xhigh-kilo               | 96.0%  | gpt5.4-xhigh-codex   | 47kB | 0.15$ |  55,620 |
+| sonnet5-high-claudecode         | 95.5%  | gpt5.5-high          | 36kB |       |  91,700 |
 | gemini3.5flash-high-antigravity | 94.4%  | gpt5.4-xhigh-codex   | 35kB |       |         |
 | opus4.7-max-claude              | 94.4%  | gpt5.4-xhigh-codex   | 35kB |       |         |
 | gpt5.5-high-codex               | 94.4%  | gpt5.4-xhigh-codex   | 30kB |       |         |
@@ -47,7 +48,7 @@ I plan to extend both the evaluation and the benchmark itself to make it more co
 | gpt5.4-xhigh-codex              | 89.9%  | gpt5.4-xhigh-codex   | 23kB |       |         |
 | gpt5.5-medium-codex             | 89.9%  | gpt5.4-xhigh-codex   | 21kB |       |         |
 | glm5.1-opencode                 | 88.9%  | gpt5.4-xhigh-codex   | 19kB | 0.08$ |  51,019 |
-| sonnet5-max-claudecode          | 88.9%  | gpt5.5-high          | 47kB | $2.31 | 134,900 |
+| sonnet5-max-claudecode          | 88.9%  | gpt5.5-high          | 47kB |       | 134,900 |
 | qwen3.6pro-opencode             | 87.4%  | gpt5.4-xhigh-codex   | 22kB | 0.08$ |  39,716 |
 | glm5.1-claudecode               | 86.9%  | gpt5.4-xhigh-codex   | 30kB |       |         |
 | deepseek3.2-kilo                | 86.6%  | gpt5.4-xhigh-codex   | 25kB | 0.11$ |  45,249 |
@@ -73,7 +74,8 @@ I plan to extend both the evaluation and the benchmark itself to make it more co
 To accurately calculate Return on Investment (ROI), I infer missing cost-per-run values from the measured `opus4.6-xhigh-kilo` run: `$1.54` for `55,896` tokens. I treat this as the Opus-family baseline and scale it by the current blended prices:
 
 * **Fable 5**: `$7.70`
-* **Opus family**: `$3.85`
+* **Opus 4.* family**: `$3.85`
+* **Sonnet 5**: `$2.31`
 * **GPT-5.5 Codex rows without token counts**: `0.875 * Opus 4.8 xhigh/extra inferred run cost` (~`$2.07` per run), based on DeepSWE v1.1 cost positioning
 * **GPT-5.4**: `$2.17`
 
@@ -95,6 +97,8 @@ When token counts are available, the formula is `tokens * 1.54 / 55,896 * family
 *   **fable5-extra-claudecode**: `~$4.58` (83,100 tokens * 1.54 / 55,896 * 7.70 / 3.85)
 *   **fable5-medium-claudecode**: `~$3.69` (67,000 tokens * 1.54 / 55,896 * 7.70 / 3.85)
 *   **fable5-low-claudecode**: `~$3.50` (63,600 tokens * 1.54 / 55,896 * 7.70 / 3.85)
+*   **sonnet5-high-claudecode**: `~$1.52` (91,700 tokens * 1.54 / 55,896 * 2.31 / 3.85)
+*   **sonnet5-max-claudecode**: `~$2.23` (134,900 tokens * 1.54 / 55,896 * 2.31 / 3.85)
 
 Models without known or inferred cost data, including `sonnet4.6-antigravity`, `gemini3.5flash-high-antigravity`, `gemini3.1pro-antigravity`, `gemini3flash-antigravity`, and `glm5.1-claudecode`, are omitted from the value rankings until a cost basis is available.
 
@@ -128,16 +132,17 @@ To ensure these rankings are practical, models are filtered and highlighted base
 | **gpt5.4-xhigh-opencode**    | **97.0%**  |     $0.79     |     105.4         |
 | gpt5.4-xhigh-kilo-geai       | 92.9%      |     $0.97     |     73.0          |
 | gpt5.4-xhigh-codex           | 89.9%      |     $0.87     |     71.0          |
+| **sonnet5-high-claudecode**  | **95.5%**  |     $1.52     |     53.1          |
 | opus4.7-max-claude           | 94.4%      |     $1.54     |     49.9          |
 | opus4.6-xhigh-kilo           | 93.9%      |     $1.54     |     48.9          |
 | **opus4.8-high-claudecode**  | **99.0%**  |     $2.08     |     45.1          |
 | opus4.6-max-claudecode       | 90.9%      |     $1.54     |     42.9          |
-| **gpt5.5-xhigh-codex**    | **97.0%**  |     $2.07     |     41.7          |
+| **gpt5.5-xhigh-codex**       | **97.0%**  |     $2.07     |     41.7          |
 | **opus4.8-xhigh-claudecode** | **99.5%**  |     $2.36     |     40.6          |
 | gpt5.5-high-codex            | 94.4%      |     $2.07     |     37.5          |
 | **opus4.8-max-claudecode**   | **99.5%**  |     $2.64     |     36.5          |
 | gpt5.5-medium-codex          | 89.9%      |     $2.07     |     30.8          |
-| sonnet5-max-claudecode       | 88.9%      |     $2.31     |     26.5          |
+| sonnet5-max-claudecode       | 88.9%      |     $2.23     |     27.4          |
 | **fable5-medium-claudecode** | **97.5%**  |     $3.69     |     24.2          |
 | **fable5-high-claudecode**   | **99.0%**  |     $4.12     |     23.1          |
 | fable5-low-claudecode        | 93.4%      |     $3.50     |     21.4          |
