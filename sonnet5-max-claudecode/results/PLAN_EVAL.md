@@ -215,7 +215,7 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 | PRD-063 | Gate seasons to TV and financials to movies | important | full | Section 3.2 `SeasonsStrand` TV only and `BudgetRevenue` movie only | |
 | PRD-064 | Keep primary actions early and page not overwhelming | important | partial | Section 3.2 places core facts, controls, overview, scoop before long-tail sections | The plan implies early actions by ordering, but does not address busyness/power or clutter management directly. |
 | PRD-065 | Provide conversational Ask chat interface | important | full | Section 3.2 `AskMode/features/{ChatThread...}`; Phase 2 Ask | |
-| PRD-066 | Answer directly with confident, spoiler-safe recommendations | important | full | Section 8.1 base persona; Section 8.2 Ask contract; Section 11 quality rubric | |
+| PRD-066 | Answer directly with confident, spoiler-safe recommendations | important | partial | Section 8.1 base persona; Section 8.2 Ask contract; Section 11 quality rubric | The plan covers persona and spoiler safety, but does not explicitly require direct answers in the opening lines. |
 | PRD-067 | Show horizontal mentioned-shows strip from chat | important | full | Section 3.2 `MentionedShowsStrip`; Section 6.3 Ask resolves `showList` before strip render | |
 | PRD-068 | Open Detail from mentions or Search fallback | important | full | Section 8.3 resolved shows selectable; unresolved hand off to Search | |
 | PRD-069 | Show six random starter prompts with refresh | important | partial | Section 6.3 `GET /api/ai/ask/starters` returns 6 random prompts | Refresh behavior is not explicitly planned, only random retrieval. |
@@ -257,9 +257,9 @@ score = (full_count x 1.0 + partial_count x 0.5) / total_count x 100
 ```
 
 Critical:  (29 x 1.0 + 1 x 0.5) / 30 x 100 = 98.3%  (29.5 of 30 critical requirements)
-Important: (50 x 1.0 + 15 x 0.5) / 67 x 100 = 85.8%  (57.5 of 67 important requirements)
+Important: (49 x 1.0 + 16 x 0.5) / 67 x 100 = 85.1%  (57 of 67 important requirements)
 Detail:    (1 x 1.0 + 0 x 0.5) / 2 x 100 = 50.0%  (1 of 2 detail requirements)
-Overall:   88.9% (99 total requirements)
+Overall:   88.4% (99 total requirements)
 
 ### 4. Top Gaps
 

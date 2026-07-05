@@ -188,7 +188,7 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 | PRD-051 | Preserve Show Detail narrative section order | important | partial | `8. Frontend Architecture`; `10. Visual testing` | The plan includes the major sections and screenshot tests, but its listed order differs from the supporting doc hierarchy and omits an explicit genres/languages placement. |
 | PRD-052 | Prioritize motion-rich header with graceful fallback | important | partial | `HeaderMedia` feature; `Phase 2` | The plan names trailers/backdrops/posters/logos but does not explicitly specify prioritizing motion or graceful fallback behavior when media is missing. |
 | PRD-053 | Surface year, runtime/seasons, and community score early | important | full | `CoreFactsRow`; `Phase 2` |  |
-| PRD-054 | Place status/interest controls in toolbar | important | full | `6.1 Save/Remove Triggers`; `MyRelationshipControls`; `Phase 2` |  |
+| PRD-054 | Place status/interest controls in toolbar | important | partial | `6.1 Save/Remove Triggers`; `MyRelationshipControls`; `Phase 2` | The plan includes status and interest controls, but does not explicitly place them in a toolbar. |
 | PRD-055 | Auto-save unsaved tagged show as Later/Interested | critical | full | `4.2 Collection Mutations`; `6.1 Save/Remove Triggers` |  |
 | PRD-056 | Auto-save unsaved rated show as Done | critical | full | `4.2 Collection Mutations`; `6.1 Save/Remove Triggers` |  |
 | PRD-057 | Show overview early for fast scanning | important | full | `OverviewAndScoop`; `Phase 2` |  |
@@ -198,7 +198,7 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 | PRD-061 | Explore Similar uses CTA-first concept flow | important | full | `ExploreSimilar`; `Phase 4` |  |
 | PRD-062 | Include streaming availability and person-linking credits | important | full | `4.1 GET /api/shows/:id`; `StreamingAvailability`; `CastCrewStrands`; `Phase 2` |  |
 | PRD-063 | Gate seasons to TV and financials to movies | important | full | `SeasonsStrand`; `BudgetRevenue`; `Phase 2` |  |
-| PRD-064 | Keep primary actions early and page not overwhelming | important | full | `Detail` feature order; `Phase 2`; `4. Busyness vs Power` reflected in long-tail section placement |  |
+| PRD-064 | Keep primary actions early and page not overwhelming | important | partial | `Detail` feature order; `Phase 2` | The plan orders primary content early, but does not directly specify busyness/clutter management. |
 | PRD-065 | Provide conversational Ask chat interface | important | full | `Ask/features/ChatThread, Composer`; `Phase 6` |  |
 | PRD-066 | Answer directly with confident, spoiler-safe recommendations | important | partial | `5.2 Shared Persona Layer`; `5.3 Contracts Per Surface`; `9. Cross-Cutting Rules` | The plan covers confidence and spoiler safety, but does not explicitly preserve the quality-bar requirement to answer directly within the first few lines. |
 | PRD-067 | Show horizontal mentioned-shows strip from chat | important | full | `MentionedShowsStrip`; `Phase 6` |  |
@@ -208,11 +208,11 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 | PRD-071 | Seed Ask-about-show sessions with show handoff | important | full | `4.3 POST /api/ai/ask`; `Phase 6` |  |
 | PRD-072 | Emit `commentary` plus exact `showList` contract | critical | full | `5.3 Contracts Per Surface`; `5.5 Structured Output Parsing` |  |
 | PRD-073 | Retry malformed mention output once, then fallback | important | full | `5.5 Structured Output Parsing & Fallback` |  |
-| PRD-074 | Redirect Ask back into TV/movie domain | important | full | `5.2 Shared Persona Layer`; `9. Cross-Cutting Rules` |  |
-| PRD-075 | Treat concepts as taste ingredients, not genres | important | full | `5.2 Shared Persona Layer`; `5.3 Contracts Per Surface` |  |
+| PRD-074 | Redirect Ask back into TV/movie domain | important | partial | `5.2 Shared Persona Layer`; `9. Cross-Cutting Rules` | The plan establishes the TV/movie product domain, but does not explicitly define Ask redirect behavior for off-domain prompts. |
+| PRD-075 | Treat concepts as taste ingredients, not genres | important | partial | `5.2 Shared Persona Layer`; `5.3 Contracts Per Surface` | The plan constrains concepts, but does not explicitly encode the taste-ingredient-not-genre/plot-label rule. |
 | PRD-076 | Return bullet-only, 1-3 word, non-generic concepts | important | full | `5.3 Contracts Per Surface`; `5.7 Concept & Recommendation Quality Guardrails` |  |
 | PRD-077 | Order concepts by strongest aha and varied axes | important | partial | `4.3 POST /api/ai/concepts`; `5.7 Concept & Recommendation Quality Guardrails` | The plan requires ordering by strength, but varied axes are not explicitly required or tested beyond a generic quality process. |
-| PRD-078 | Require concept selection and guide ingredient picking | important | full | `ExploreSimilar`; `Alchemy ConceptSelector`; `Phase 4`; `Phase 5` |  |
+| PRD-078 | Require concept selection and guide ingredient picking | important | partial | `ExploreSimilar`; `Alchemy ConceptSelector`; `Phase 4`; `Phase 5` | Concept selection is covered, but ingredient-picking guidance and nudges are not fully specified. |
 | PRD-079 | Return exactly five Explore Similar recommendations | important | full | `4.3 POST /api/ai/recommendations`; `5.3 Contracts Per Surface`; `Phase 4` |  |
 | PRD-080 | Support full Alchemy loop with chaining | important | full | `Phase 5` |  |
 | PRD-081 | Clear downstream results when inputs change | important | full | `Phase 5` says backtracking clears downstream state |  |
@@ -220,7 +220,7 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 | PRD-083 | Cite selected concepts in concise recommendation reasons | important | full | `5.3 Contracts Per Surface`; `5.4 Real-Show Resolution` |  |
 | PRD-084 | Deliver surprising but defensible taste-aligned recommendations | important | full | `10. Testing & Quality Strategy`; quality checklist includes surprise and taste alignment |  |
 | PRD-085 | Keep one consistent AI persona across surfaces | important | full | `5.2 Shared Persona Layer` |  |
-| PRD-086 | Enforce shared AI guardrails across all surfaces | critical | full | `5.2 Shared Persona Layer`; `9. Cross-Cutting Rules` |  |
+| PRD-086 | Enforce shared AI guardrails across all surfaces | critical | partial | `5.2 Shared Persona Layer`; `9. Cross-Cutting Rules` | The shared persona layer covers several guardrails, but does not fully include the all-surface TV/movie-domain redirect rule. |
 | PRD-087 | Make AI warm, joyful, and light in critique | important | full | `5.2 Shared Persona Layer` |  |
 | PRD-088 | Structure Scoop as personal taste mini-review | important | full | `5.3 Contracts Per Surface` |  |
 | PRD-089 | Keep Ask brisk and dialogue-like by default | important | full | `5.3 Contracts Per Surface`; `5.6 Conversation Summarization` |  |
@@ -240,40 +240,40 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 Overall score:
 
 ```
-score = (92 full × 1.0 + 7 partial × 0.5) / 99 total × 100 = 95.5%
+score = (86 full × 1.0 + 13 partial × 0.5) / 99 total × 100 = 93.4%
 ```
 
-Critical:  (30 full × 1.0 + 0 partial × 0.5) / 30 critical_total × 100 = 100.0%  (30 of 30 critical requirements)
-Important: (60 full × 1.0 + 7 partial × 0.5) / 67 important_total × 100 = 94.8%  (63.5 of 67 important requirements)
+Critical:  (29 full × 1.0 + 1 partial × 0.5) / 30 critical_total × 100 = 98.3%  (29.5 of 30 critical requirements)
+Important: (55 full × 1.0 + 12 partial × 0.5) / 67 important_total × 100 = 91.0%  (61 of 67 important requirements)
 Detail:    (2 full × 1.0 + 0 partial × 0.5) / 2 detail_total × 100 = 100.0%  (2 of 2 detail requirements)
-Overall:   95.5% (99 total requirements)
+Overall:   93.4% (99 total requirements)
 
 ### 4. Top Gaps
 
+- PRD-086 | `critical` | Enforce shared AI guardrails across all surfaces: This matters because the shared persona layer is the control point for spoiler safety, domain boundaries, honesty, and specificity; without a complete shared guardrail contract, Ask, Scoop, Explore Similar, and Alchemy can drift inconsistently.
 - PRD-051 | `important` | Preserve Show Detail narrative section order: This matters because the detail page is not just a data dump; the PRD treats its sequence as the intended first-15-seconds experience, and the plan's ordering could produce a page that is functionally complete but emotionally off.
 - PRD-033 | `important` | Sync libraries/settings consistently and merge duplicates: This matters because duplicate handling is a user-trust issue in a cross-device library; timestamp conflict resolution alone does not guarantee users will not see duplicate saved shows or divergent settings.
-- PRD-058 | `important` | Scoop shows correct states and progressive feedback: This matters because Scoop is a delight surface, and missing cached/empty/open state definitions can turn a premium-feeling interaction into ambiguous loading or stale-content behavior.
-- PRD-066 | `important` | Answer directly with confident, spoiler-safe recommendations: This matters because Ask quality is judged by the first response users see; without an explicit direct-answer constraint, an implementation can satisfy persona rules while still feeling slow or evasive.
-- PRD-077 | `important` | Order concepts by strongest aha and varied axes: This matters because concepts are the steering wheel for Explore Similar and Alchemy; weakly varied concepts make discovery feel like genre filtering under a different name.
+- PRD-054 | `important` | Place status/interest controls in toolbar: This matters because relationship controls are core repeat actions; leaving toolbar placement implicit can produce a detail page that is functional but less scannable and less aligned with the specified interaction model.
+- PRD-064 | `important` | Keep primary actions early and page not overwhelming: This matters because the detail page has many sections; without an explicit busyness/clutter constraint, long-tail content can crowd out the primary relationship and discovery actions.
 
 ### 5. Coverage Narrative
 
 #### Overall Posture
 
-This is a strong plan with minor but real specification gaps. It covers the infrastructure baseline, persistence model, namespace/user isolation, core collection lifecycle, AI contracts, and major app screens with enough architectural detail to guide implementation. The missing strength is not broad feature omission; it is that a few experience-defining behaviors are left as broad intent rather than acceptance-level contracts.
+This is a strong plan with minor but real specification gaps. It covers the infrastructure baseline, persistence model, namespace/user isolation, core collection lifecycle, AI contracts, and major app screens with enough architectural detail to guide implementation. The missing strength is not broad feature omission; it is that several experience-defining behaviors are left as broad intent rather than acceptance-level contracts.
 
 #### Strength Clusters
 
-The plan is strongest in Benchmark Runtime & Isolation, Collection Data & Persistence, App Navigation & Discover Shell, Collection Home & Search, AI Voice, Persona & Quality, Person Detail, and Settings & Export. It gives concrete table design, API boundaries, merge functions, RLS/namespace behavior, test/reset tooling, and phase sequencing, which means most critical correctness requirements are directly grounded in implementation tasks.
+The plan is strongest in Benchmark Runtime & Isolation, Collection Data & Persistence, App Navigation & Discover Shell, Collection Home & Search, Person Detail, and Settings & Export. It gives concrete table design, API boundaries, merge functions, RLS/namespace behavior, test/reset tooling, and phase sequencing, which means most correctness requirements are directly grounded in implementation tasks.
 
 #### Weakness Clusters
 
-The partials cluster around user-experience fidelity and AI output quality rather than basic functionality. Show Detail has the most visible risk because the plan lists all components but does not fully preserve the supporting document's narrative order and header/Scoop state nuance. AI discovery has a smaller cluster where the plan relies on prompt intent or manual quality review instead of explicit response-shape acceptance criteria.
+The partials cluster around user-experience fidelity and AI output quality rather than basic functionality. Show Detail has the most visible risk because the plan lists all components but does not fully preserve the supporting document's narrative order, toolbar placement, busyness constraints, and header/Scoop state nuance. AI discovery has a smaller cluster where the plan relies on prompt intent or manual quality review instead of explicit response-shape and guardrail acceptance criteria.
 
 #### Risk Assessment
 
-If executed as-is, the most likely failure mode is a product that works correctly in data and navigation terms but feels slightly flatter than the PRD intends. QA would probably notice first on Show Detail and Ask: sections may appear in a reasonable but not prescribed order, Scoop may lack precise cached/empty/open state behavior, and Ask may be on-brand without consistently answering immediately.
+If executed as-is, the most likely failure mode is a product that works correctly in data and navigation terms but feels slightly flatter than the PRD intends. QA would probably notice first on Show Detail and Ask: sections may appear in a reasonable but not prescribed order, primary controls may not land in the intended toolbar treatment, Scoop may lack precise cached/empty/open state behavior, and Ask may be on-brand without consistently answering immediately or redirecting off-domain prompts.
 
 #### Remediation Guidance
 
-The remaining planning work is mostly acceptance criteria tightening. Add explicit UI state contracts for Show Detail header media fallback and Scoop states, pin the exact detail-page section order including genres/languages, state the Ask direct-answer rule as a prompt and test criterion, require concept diversity across axes, and add a duplicate-detection/merge rule to the sync plan. These are refinements to existing sections, not new architecture.
+The remaining planning work is mostly acceptance criteria tightening. Add explicit UI state contracts for Show Detail header media fallback and Scoop states, pin the exact detail-page section order including genres/languages, place relationship controls in the toolbar, state the Ask direct-answer and domain-redirect rules as prompt/test criteria, require concept diversity across axes and ingredient-picking guidance, and add a duplicate-detection/merge rule to the sync plan. These are refinements to existing sections, not new architecture.

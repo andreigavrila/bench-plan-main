@@ -28,11 +28,11 @@ The table below lists the performance of all evaluated models, sorted in descend
 | gpt5.5-xhigh-codex              | 97.0%  | gpt5.5-high        | 34kB |       |         |
 | grok4.3-reasoning-kilo          | 96.9%  | gpt5.4-xhigh-codex | 18kB | 0.19$ |  37,900 |
 | glm5.2-xhigh-kilo               | 96.0%  | gpt5.4-xhigh-codex | 47kB | 0.15$ |  55,620 |
-| sonnet5-high-claudecode         | 95.5%  | gpt5.5-high        | 36kB |       |  91,700 |
 | gemini3.5flash-high-antigravity | 94.4%  | gpt5.4-xhigh-codex | 35kB |       |         |
 | opus4.7-max-claude              | 94.4%  | gpt5.4-xhigh-codex | 35kB |       |         |
 | gpt5.5-high-codex               | 94.4%  | gpt5.4-xhigh-codex | 30kB |       |         |
 | opus4.6-xhigh-kilo              | 93.9%  | gpt5.4-xhigh-codex | 41kB | 1.54$ |  55,896 |
+| sonnet5-high-claudecode         | 93.4%  | gpt5.5-high        | 36kB |       |  91,700 |
 | fable5-low-claudecode           | 93.4%  | gpt5.5-high        | 13kB |       |  63,600 |
 | deepseekv4pro-kilo              | 93.4%  | gpt5.4-xhigh-codex | 27kB | 0.12$ |  42,400 |
 | gpt5.4-xhigh-kilo-geai          | 92.9%  | gpt5.4-xhigh-codex | 26kB |       |  62,613 |
@@ -43,7 +43,7 @@ The table below lists the performance of all evaluated models, sorted in descend
 | gpt5.4-xhigh-codex              | 89.9%  | gpt5.4-xhigh-codex | 23kB |       |         |
 | gpt5.5-medium-codex             | 89.9%  | gpt5.4-xhigh-codex | 21kB |       |         |
 | glm5.1-opencode                 | 88.9%  | gpt5.4-xhigh-codex | 19kB | 0.08$ |  51,019 |
-| sonnet5-max-claudecode          | 88.9%  | gpt5.5-high        | 47kB |       | 134,900 |
+| sonnet5-max-claudecode          | 88.4%  | gpt5.5-high        | 47kB |       | 134,900 |
 | qwen3.6pro-opencode             | 87.4%  | gpt5.4-xhigh-codex | 22kB | 0.08$ |  39,716 |
 | glm5.1-claudecode               | 86.9%  | gpt5.4-xhigh-codex | 30kB |       |         |
 | deepseek3.2-kilo                | 86.6%  | gpt5.4-xhigh-codex | 25kB | 0.11$ |  45,249 |
