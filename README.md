@@ -76,10 +76,10 @@ To accurately calculate Return on Investment (ROI), I infer missing cost-per-run
 * **Fable 5**: `$7.70`
 * **Opus 4.* family**: `$3.85`
 * **Sonnet 5**: `$2.31`
-* **GPT-5.5 Codex rows without token counts**: `0.875 * Opus 4.8 xhigh/extra inferred run cost` (~`$2.07` per run), based on DeepSWE v1.1 cost positioning
+* **GPT-5.5 Codex rows without token counts**: xhigh uses `0.875 * Opus 4.8 xhigh/extra inferred run cost` (~`$2.07` per run), high uses `0.70 * gpt5.5-xhigh-codex inferred run cost` (~`$1.45` per run), and medium uses `0.38 * gpt5.5-xhigh-codex inferred run cost` (~`$0.79` per run), based on DeepSWE v1.1 cost positioning
 * **GPT-5.4**: `$2.17`
 
-When token counts are available, the formula is `tokens * 1.54 / 55,896 * family_blended / 3.85`. When token counts are missing, I use the family-level estimate `family_blended * 1.54 / 3.85`, except for GPT-5.5 Codex rows where I use the requested DeepSWE-based extrapolation: 87.5% of the inferred Opus 4.8 xhigh/extra run cost.
+When token counts are available, the formula is `tokens * 1.54 / 55,896 * family_blended / 3.85`. When token counts are missing, I use the family-level estimate `family_blended * 1.54 / 3.85`, except for GPT-5.5 Codex rows where I use the requested DeepSWE-based extrapolation: xhigh is 87.5% of the inferred Opus 4.8 xhigh/extra run cost, high is 70% of the inferred GPT-5.5 xhigh run cost, and medium is 38% of the inferred GPT-5.5 xhigh run cost.
 
 **Inferred Costs:**
 *   **opus4.7-max-claude**: `~$1.54` (3.85 * 1.54 / 3.85)
@@ -87,9 +87,9 @@ When token counts are available, the formula is `tokens * 1.54 / 55,896 * family
 *   **opus4.8-max-claudecode**: `~$2.64` (95,700 tokens * 1.54 / 55,896 * 3.85 / 3.85)
 *   **opus4.8-xhigh-claudecode**: `~$2.36` (85,700 tokens * 1.54 / 55,896 * 3.85 / 3.85)
 *   **opus4.8-high-claudecode**: `~$2.08` (75,500 tokens * 1.54 / 55,896 * 3.85 / 3.85)
-*   **gpt5.5-high-codex**: `~$2.07` (0.875 * inferred `opus4.8-xhigh-claudecode` cost of `$2.36`)
+*   **gpt5.5-high-codex**: `~$1.45` (0.70 * inferred `gpt5.5-xhigh-codex` cost of `$2.07`, per DeepSWE v1.1 extrapolation)
 *   **gpt5.5-xhigh-codex**: `~$2.07` (0.875 * inferred `opus4.8-xhigh-claudecode` cost of `$2.36`, per DeepSWE v1.1 extrapolation)
-*   **gpt5.5-medium-codex**: `~$2.07` (0.875 * inferred `opus4.8-xhigh-claudecode` cost of `$2.36`)
+*   **gpt5.5-medium-codex**: `~$0.79` (0.38 * inferred `gpt5.5-xhigh-codex` cost of `$2.07`, per DeepSWE v1.1 extrapolation)
 *   **gpt5.4-xhigh-codex**: `~$0.87` (2.17 * 1.54 / 3.85)
 *   **gpt5.4-xhigh-kilo-geai**: `~$0.97` (62,613 tokens * 1.54 / 55,896 * 2.17 / 3.85)
 *   **fable5-max-claudecode**: `~$21.90` (397,500 tokens * 1.54 / 55,896 * 7.70 / 3.85)
@@ -130,18 +130,18 @@ To ensure these rankings are practical, models are filtered and highlighted base
 | qwen3.6pro-kilo              | 85.9%      |     $0.11     |     340.3         |
 | qwen3.6maxpreview-kilo       | 90.9%      |     $0.16     |     325.1         |
 | **gpt5.4-xhigh-opencode**    | **97.0%**  |     $0.79     |     105.4         |
+| gpt5.5-medium-codex          | 89.9%      |     $0.79     |     77.8          |
 | gpt5.4-xhigh-kilo-geai       | 92.9%      |     $0.97     |     73.0          |
 | gpt5.4-xhigh-codex           | 89.9%      |     $0.87     |     71.0          |
 | **sonnet5-high-claudecode**  | **95.5%**  |     $1.52     |     53.1          |
+| gpt5.5-high-codex            | 94.4%      |     $1.45     |     52.9          |
 | opus4.7-max-claude           | 94.4%      |     $1.54     |     49.9          |
 | opus4.6-xhigh-kilo           | 93.9%      |     $1.54     |     48.9          |
 | **opus4.8-high-claudecode**  | **99.0%**  |     $2.08     |     45.1          |
 | opus4.6-max-claudecode       | 90.9%      |     $1.54     |     42.9          |
 | **gpt5.5-xhigh-codex**       | **97.0%**  |     $2.07     |     41.7          |
 | **opus4.8-xhigh-claudecode** | **99.5%**  |     $2.36     |     40.6          |
-| gpt5.5-high-codex            | 94.4%      |     $2.07     |     37.5          |
 | **opus4.8-max-claudecode**   | **99.5%**  |     $2.64     |     36.5          |
-| gpt5.5-medium-codex          | 89.9%      |     $2.07     |     30.8          |
 | sonnet5-max-claudecode       | 88.9%      |     $2.23     |     27.4          |
 | **fable5-medium-claudecode** | **97.5%**  |     $3.69     |     24.2          |
 | **fable5-high-claudecode**   | **99.0%**  |     $4.12     |     23.1          |
@@ -153,6 +153,6 @@ To ensure these rankings are practical, models are filtered and highlighted base
 
 The Smart Value Index is directly proportional. A model with an index of **400** mathematically provides **4 times more value** per dollar than a model with an index of **100**, according to this formula. 
 
-Cost extrapolation note: GPT-5.5 Codex rows without token counts use the requested [DeepSWE v1.1](https://deepswe.datacurve.ai/blog/deepswe-v1-1)-based assumption that GPT-5.5 costs roughly 87.5% of Opus 4.8 xhigh/extra.
+Cost extrapolation note: GPT-5.5 Codex rows without token counts use the requested [DeepSWE v1.1](https://deepswe.datacurve.ai/blog/deepswe-v1-1)-based assumptions that GPT-5.5 xhigh costs roughly 87.5% of Opus 4.8 xhigh/extra, GPT-5.5 high costs roughly 70% of GPT-5.5 xhigh, and GPT-5.5 medium costs roughly 38% of GPT-5.5 xhigh.
 
 Keep in mind that "value" in this context is highly opinionated: because we take the score to the **4th power**, the index is designed to heavily penalize cheap but incompetent models. It ensures that a 90% capable model is treated as exponentially superior to a 60% capable model, rather than just 1.5x better. Therefore, if Model A has an index of 400 and Model B has 100, Model A is delivering four times the amount of "SOTA capability bang-for-your-buck."
