@@ -67,26 +67,31 @@ I plan to extend both the evaluation and the benchmark itself to make it more co
 
 ### Smart ROI Analysis (Using Inferred Costs)
 
-To accurately calculate Return on Investment (ROI), I have inferred the cost-per-run for models missing price data by using the known `1.54$` Opus measure and mapping it to the current cost ratio (Opus: $10, Sonnet: $6, GPT-5.4: $5.63, Gemini 3.1 Pro: $4.5, Gemini Flash: $1.13). The calculated ratio multiplier is `1.54 / 10 = 0.154`.
+To accurately calculate Return on Investment (ROI), I infer missing cost-per-run values from the measured `opus4.6-xhigh-kilo` run: `$1.54` for `55,896` tokens. I treat this as the Opus-family baseline and scale it by the current blended prices:
 
-For Fable 5 runs, I do not have explicit dollar costs, but I do have token counts. I therefore inferred costs from the closest Claude-family benchmark point with both values available: `opus4.6-xhigh-kilo` at `$1.54` for `55,896` tokens. I then scaled that baseline by the Artificial Analysis blended-price ratio: Opus 4.6 at `$3.85` versus Fable at `$7.70`, so Fable is estimated at `2x` the Opus 4.6 token-rate.
+* **Fable 5**: `$7.70`
+* **Opus family**: `$3.85`
+* **GPT-5.5**: `$4.35`
+* **GPT-5.4**: `$2.17`
+
+When token counts are available, the formula is `tokens * 1.54 / 55,896 * family_blended / 3.85`. When token counts are missing, I use the family-level estimate `family_blended * 1.54 / 3.85`.
 
 **Inferred Costs:**
-*   **opus4.7-max-claude**: `~$1.54` (10 * 0.154)
-*   **opus4.6-max-claudecode**: `~$1.54` (10 * 0.154)
-*   **sonnet4.6-antigravity**: `~$0.92` (6 * 0.154)
-*   **gpt5.4-xhigh-codex**: `~$0.87` (5.63 * 0.154)
-*   **gpt5.4-xhigh-kilo-geai**: `~$0.87` (5.63 * 0.154)
-*   **gemini3.1pro-antigravity**: `~$0.69` (4.5 * 0.154)
-*   **gemini3flash-antigravity**: `~$0.17` (1.13 * 0.154)
+*   **opus4.7-max-claude**: `~$1.54` (3.85 * 1.54 / 3.85)
+*   **opus4.6-max-claudecode**: `~$1.54` (3.85 * 1.54 / 3.85)
+*   **opus4.8-max-claudecode**: `~$2.64` (95,700 tokens * 1.54 / 55,896 * 3.85 / 3.85)
+*   **gpt5.5-high-codex**: `~$1.74` (4.35 * 1.54 / 3.85)
+*   **gpt5.5-xhigh-codex**: `~$1.74` (4.35 * 1.54 / 3.85)
+*   **gpt5.5-medium-codex**: `~$1.74` (4.35 * 1.54 / 3.85)
+*   **gpt5.4-xhigh-codex**: `~$0.87` (2.17 * 1.54 / 3.85)
+*   **gpt5.4-xhigh-kilo-geai**: `~$0.97` (62,613 tokens * 1.54 / 55,896 * 2.17 / 3.85)
 *   **fable5-max-claudecode**: `~$21.90` (397,500 tokens * 1.54 / 55,896 * 7.70 / 3.85)
 *   **fable5-high-claudecode**: `~$4.12` (74,700 tokens * 1.54 / 55,896 * 7.70 / 3.85)
 *   **fable5-extra-claudecode**: `~$4.58` (83,100 tokens * 1.54 / 55,896 * 7.70 / 3.85)
 *   **fable5-medium-claudecode**: `~$3.69` (67,000 tokens * 1.54 / 55,896 * 7.70 / 3.85)
 *   **fable5-low-claudecode**: `~$3.50` (63,600 tokens * 1.54 / 55,896 * 7.70 / 3.85)
-*   **opus4.8-max-claudecode**: `~$2.64` (95,700 tokens * 1.54 / 55,896)
 
-Models without known or inferred cost data, including `gemini3.5flash-high-antigravity`, `gpt5.5-codex-*`, and `glm5.1-claudecode`, are omitted from the value rankings until a cost basis is available.
+Models without known or inferred cost data, including `sonnet4.6-antigravity`, `gemini3.5flash-high-antigravity`, `gemini3.1pro-antigravity`, `gemini3flash-antigravity`, and `glm5.1-claudecode`, are omitted from the value rankings until a cost basis is available.
 
 #### Smart ROI Index Formula
 A naive `Score / Cost` formula is heavily flawed because LLM performance does not scale linearly (a 5% jump from 90%->95% is drastically harder than 60%->65%). To fix this, the following formula calculates a **Smart Value Index**:
@@ -101,31 +106,33 @@ Smart Value Index = ( (Score_percentage)^4 / (Cost_in_USD + $0.05) ) * 100
 #### Value Rankings
 
 To ensure these rankings are practical, models are filtered and highlighted based on two performance thresholds:
-* **85% Minimum Capability**: Models must score at least 85% to be listed here. This threshold indicates a model is structurally competent—it understands the core architecture, data models, and feature requirements. Models below this cutoff produce fundamentally incomplete plans and are excluded to reduce noise.
-* **90.9% Recommended (Top Half)**: This threshold is mathematically derived as the **median score** of all structurally capable models (those scoring ≥ 85%). Models highlighted in bold are performing in the top 50% of the capable tier, indicating premium, production-ready planning capabilities that accurately capture nuanced behavioral contracts and rigorous AI guardrails.
+* **85% Minimum Capability**: Models must score at least 85% to be listed here. This threshold indicates a model is structurally competent: it understands the core architecture, data models, and feature requirements. Models below this cutoff produce fundamentally incomplete plans and are excluded to reduce noise.
+* **95% Recommended Tier**: Models highlighted in bold score above 95%, indicating premium, production-ready planning capabilities that accurately capture nuanced behavioral contracts and rigorous AI guardrails.
 
 | Model                      | Score     | Inferred Cost | Smart Value Index |
 | -------------------------- | --------- | ------------- | ----------------- |
 | kimik2.6-opencode          | 89.9%     |     $0.08     |     502.5         |
 | glm5.1-opencode            | 88.9%     |     $0.08     |     480.5         |
 | qwen3.6pro-opencode        | 87.4%     |     $0.08     |     448.9         |
-| **deepseekv4pro-kilo**     | **93.4%** |     $0.12     |     447.7         |
+| deepseekv4pro-kilo         | 93.4%     |     $0.12     |     447.7         |
 | **glm5.2-xhigh-kilo**      | **96.0%** |     $0.15     |     424.7         |
 | **grok4.3-reasoning-kilo** | **96.9%** |     $0.19     |     367.4         |
 | deepseek3.2-kilo           | 86.6%     |     $0.11     |     351.5         |
 | qwen3.6pro-kilo            | 85.9%     |     $0.11     |     340.3         |
-| **qwen3.6maxpreview-kilo** | **90.9%** |     $0.16     |     325.1         |
+| qwen3.6maxpreview-kilo     | 90.9%     |     $0.16     |     325.1         |
 | **gpt5.4-xhigh-opencode**  | **97.0%** |     $0.79     |     105.4         |
-| **gpt5.4-xhigh-kilo-geai** | **92.9%** |     $0.87     |     81.0          |
+| gpt5.4-xhigh-kilo-geai     | 92.9%     |     $0.97     |     73.0          |
 | gpt5.4-xhigh-codex         | 89.9%     |     $0.87     |     71.0          |
-| sonnet4.6-antigravity      | 90.4%     |     $0.92     |     68.8          |
-| **opus4.7-max-claude**     | **94.4%** |     $1.54     |     49.9          |
-| **opus4.6-xhigh-kilo**     | **93.9%** |     $1.54     |     48.9          |
-| **opus4.6-max-claudecode** | **90.9%** |     $1.54     |     42.9          |
+| opus4.7-max-claude         | 94.4%     |     $1.54     |     49.9          |
+| opus4.6-xhigh-kilo         | 93.9%     |     $1.54     |     48.9          |
+| gpt5.5-high-codex          | 94.4%     |     $1.74     |     44.4          |
+| opus4.6-max-claudecode     | 90.9%     |     $1.54     |     42.9          |
+| gpt5.5-xhigh-codex         | 91.9%     |     $1.74     |     39.8          |
+| gpt5.5-medium-codex        | 89.9%     |     $1.74     |     36.5          |
 | **opus4.8-max-claudecode** | **99.5%** |     $2.64     |     36.5          |
 | **fable5-medium-claudecode** | **97.5%** |     $3.69     |     24.2          |
 | **fable5-high-claudecode** | **99.0%** |     $4.12     |     23.1          |
-| **fable5-low-claudecode**  | **93.4%** |     $3.50     |     21.4          |
+| fable5-low-claudecode      | 93.4%     |     $3.50     |     21.4          |
 | **fable5-extra-claudecode** | **98.5%** |     $4.58     |     20.3          |
 | **fable5-max-claudecode**  | **100.0%** |    $21.90     |      4.6          |
 
