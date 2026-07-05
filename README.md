@@ -47,6 +47,7 @@ I plan to extend both the evaluation and the benchmark itself to make it more co
 | gpt5.4-xhigh-codex              | 89.9%  | gpt5.4-xhigh-codex   | 23kB |       |         |
 | gpt5.5-medium-codex             | 89.9%  | gpt5.4-xhigh-codex   | 21kB |       |         |
 | glm5.1-opencode                 | 88.9%  | gpt5.4-xhigh-codex   | 19kB | 0.08$ |  51,019 |
+| sonnet5-max-claudecode          | 88.9%  | gpt5.5-high          | 47kB | $2.31 | 134,900 |
 | qwen3.6pro-opencode             | 87.4%  | gpt5.4-xhigh-codex   | 22kB | 0.08$ |  39,716 |
 | glm5.1-claudecode               | 86.9%  | gpt5.4-xhigh-codex   | 30kB |       |         |
 | deepseek3.2-kilo                | 86.6%  | gpt5.4-xhigh-codex   | 25kB | 0.11$ |  45,249 |
@@ -136,6 +137,7 @@ To ensure these rankings are practical, models are filtered and highlighted base
 | gpt5.5-high-codex            | 94.4%      |     $2.07     |     37.5          |
 | **opus4.8-max-claudecode**   | **99.5%**  |     $2.64     |     36.5          |
 | gpt5.5-medium-codex          | 89.9%      |     $2.07     |     30.8          |
+| sonnet5-max-claudecode       | 88.9%      |     $2.31     |     26.5          |
 | **fable5-medium-claudecode** | **97.5%**  |     $3.69     |     24.2          |
 | **fable5-high-claudecode**   | **99.0%**  |     $4.12     |     23.1          |
 | fable5-low-claudecode        | 93.4%      |     $3.50     |     21.4          |

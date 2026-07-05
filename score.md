@@ -42,6 +42,7 @@ The table below lists the performance of all evaluated models, sorted in descend
 | gpt5.4-xhigh-codex              | 89.9%  | gpt5.4-xhigh-codex | 23kB |       |         |
 | gpt5.5-medium-codex             | 89.9%  | gpt5.4-xhigh-codex | 21kB |       |         |
 | glm5.1-opencode                 | 88.9%  | gpt5.4-xhigh-codex | 19kB | 0.08$ |  51,019 |
+| sonnet5-max-claudecode          | 88.9%  | gpt5.5-high        | 47kB | $2.31 | 134,900 |
 | qwen3.6pro-opencode             | 87.4%  | gpt5.4-xhigh-codex | 22kB | 0.08$ |  39,716 |
 | glm5.1-claudecode               | 86.9%  | gpt5.4-xhigh-codex | 30kB |       |         |
 | deepseek3.2-kilo                | 86.6%  | gpt5.4-xhigh-codex | 25kB | 0.11$ |  45,249 |
