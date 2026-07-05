@@ -1,94 +1,141 @@
 # Implementation Plan
 
-## 1. Scope and Product Reading
+## 1. Objective
 
-Build a personal TV and movie companion that lets each user maintain their own overlay on top of public catalog data, then uses that taste profile for search, AI chat, concept-based discovery, and per-show recommendations.
+Build a Next.js and Supabase application for a personal TV and movie companion that lets users maintain a durable collection, overlay personal data on catalog items, and use taste-aware AI discovery through Search, Ask, Alchemy, Explore Similar, and AI Scoop.
 
-Documents read for this plan:
+The implementation must satisfy three non-negotiable constraints:
+
+1. User-owned persisted data is always scoped by `(namespace_id, user_id)`.
+2. Supabase is the backend source of truth; browser/local storage is disposable.
+3. Every surface that displays a saved show must display the user's overlaid version of that show, with user data winning over catalog refreshes.
+
+This plan intentionally does not implement product code. It is the build plan for the application.
+
+## 2. Source Documents Reviewed
 
 - `docs/prd/product_prd.md`
 - `docs/prd/infra_rider_prd.md`
 - `docs/prd/supporting_docs/ai_voice_personality.md`
 - `docs/prd/supporting_docs/ai_prompting_context.md`
-- `docs/prd/supporting_docs/concept_system.md`
 - `docs/prd/supporting_docs/detail_page_experience.md`
+- `docs/prd/supporting_docs/concept_system.md`
 - `docs/prd/supporting_docs/discovery_quality_bar.md`
 - `docs/prd/supporting_docs/technical_docs/storage-schema.md`
 - `docs/prd/supporting_docs/technical_docs/storage-schema.ts`
 - `INSTRUCTIONS.md`
 
-This is a planning-only deliverable. No application source files should be created until implementation begins.
+## 3. Technical Baseline
 
-## 2. Core Decisions and Assumptions
+Use the benchmark-required stack:
 
-1. Use Next.js with the App Router, TypeScript, and React for the application runtime.
-2. Use Supabase as the persistence layer through official Supabase client libraries.
-3. Do not require Docker. Hosted Supabase is the primary path; local Supabase can be optional documentation later.
-4. Store all user-owned records with both `namespace_id` and `user_id`. Treat the effective data boundary as `(namespace_id, user_id)`.
-5. Use a development identity provider in benchmark/dev mode:
-   - `APP_NAMESPACE_ID` defines the run namespace.
-   - `DEFAULT_USER_ID` defines the default dev user.
-   - `X-User-Id` may override the user only in development/test.
-   - Production mode must disable header-based identity injection.
-6. Keep the backend as source of truth. Client storage may cache UI state, but clearing browser storage must not delete the library.
-7. Use a catalog adapter abstraction with an initial TMDB-compatible implementation because the PRD field set maps naturally to TMDB-style movies, TV, credits, providers, videos, and people.
-8. Use an AI provider abstraction with an OpenAI-compatible first implementation. API keys and model names come from environment variables first; user-entered key storage is optional and must be encrypted/server-only if implemented.
-9. Persist `next` as a possible status but do not expose it as a first-class UI status unless a later product decision promotes it.
-10. Import/Restore is an optional extension. Implement Export/Backup first.
+- Next.js latest stable, App Router, TypeScript.
+- Supabase as persistence, accessed through official Supabase client libraries.
+- Server route handlers and server actions as the controlled backend boundary.
+- Browser/client code may use the Supabase anon key only. Any elevated key, if needed for namespace reset or migration tooling, must stay server-side or script-only.
+- No Docker requirement. Hosted Supabase is the primary path; local Supabase can be optional.
 
-## 3. Target Architecture
+Recommended supporting libraries:
 
-### 3.1 Application Layers
+- Zod for request/response validation and parsing AI structured output.
+- TanStack Query or equivalent client cache for interactive client state, with server data remaining canonical.
+- React Hook Form for settings/tag entry forms if form complexity grows.
+- Playwright for end-to-end and visual smoke tests.
+- Vitest or Jest plus Testing Library for unit and component tests.
+- JSZip or equivalent for export zip generation.
 
-- UI: Next.js route pages and feature components.
-- Feature logic: colocated hooks and utilities per page/feature, following the fractal structure in `INSTRUCTIONS.md`.
-- Server boundary: route handlers/server actions for catalog, AI, collection, settings, export, and test reset operations.
-- Domain services: pure business logic for save defaults, merge rules, filters, grouping, AI parsing, and export serialization.
-- Persistence: Supabase migrations, tables, indexes, and server-only repository functions.
-- Integrations: catalog provider adapter and AI provider adapter.
+## 4. Repository Deliverables
 
-### 3.2 Directory Shape
+Create or maintain these top-level implementation deliverables:
 
-Use the repo's fractal pattern and avoid `index.tsx`:
+- `.env.example`
+  - Lists required environment variables with short comments.
+  - Must include Supabase URL and anon key, namespace, default user identity, catalog key, AI key/model defaults, and any optional reset/admin secret.
+- `.gitignore`
+  - Excludes `.env*` secrets while allowing `.env.example`.
+- `package.json`
+  - Scripts for app start, tests, lint/build, database migrations, and namespace reset.
+- `supabase/migrations/`
+  - Repeatable schema evolution artifacts.
+- `scripts/reset-namespace.*`
+  - Deletes only records for the selected namespace.
+- `README.md`
+  - Local setup, hosted Supabase setup, benchmark identity injection, reset procedure, and test commands.
+
+Required script shape:
+
+- `npm run dev` - starts the Next.js app.
+- `npm test` - runs unit/component tests.
+- `npm run test:e2e` - runs browser journeys.
+- `npm run test:reset -- --namespace <id>` - clears test data for one namespace only.
+- `npm run db:migrate` - applies Supabase migrations to the configured database.
+
+## 5. Environment and Identity Model
+
+Define the environment contract before feature work.
+
+Required variables:
+
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `APP_NAMESPACE_ID`
+- `DEFAULT_USER_ID`
+- `CATALOG_API_KEY`
+- `AI_PROVIDER`
+- `AI_API_KEY`
+- `AI_MODEL`
+
+Optional variables:
+
+- `SUPABASE_SERVICE_ROLE_KEY` for server-only reset/migration utilities.
+- `DEV_IDENTITY_ENABLED=true` for benchmark/dev identity injection.
+- `NEXT_PUBLIC_DEFAULT_REGION=US` for provider availability.
+
+Identity rules:
+
+- `namespace_id` is stable for the lifetime of a run/build and is not presented as a user concept.
+- `user_id` is an opaque stable string.
+- In benchmark mode, resolve identity from a dev-only source in this order:
+  1. `X-User-Id` header in server route tests.
+  2. Dev-only user selector if enabled.
+  3. `DEFAULT_USER_ID`.
+- Gate dev identity injection behind `DEV_IDENTITY_ENABLED` and never allow arbitrary header identity in production.
+- All server data access helpers must require both namespace and user where user-owned data is involved.
+
+## 6. Architecture
+
+Use a feature-first, fractal structure from `INSTRUCTIONS.md`. Avoid `index.tsx`; main files match their directory names.
+
+Suggested layout:
 
 ```text
 src/
   app/
     layout.tsx
     page.tsx
-    discover/
-      page.tsx
-    show/
-      [mediaType]/
-        [externalId]/
-          page.tsx
-    person/
-      [personId]/
-        page.tsx
-    settings/
-      page.tsx
+    find/page.tsx
+    shows/[showType]/[id]/page.tsx
+    people/[id]/page.tsx
+    settings/page.tsx
     api/
-      catalog/
       ai/
-      collection/
+      catalog/
+      library/
       settings/
       export/
-      test/
+      admin/
   components/
   config/
-  domain/
-    shows/
-    collection/
+  hooks/
+  lib/
     ai/
-    filters/
-    export/
-  integrations/
     catalog/
-    ai/
+    identity/
     supabase/
+    validation/
   pages/
     HomePage/
-    DiscoverPage/
+    FindPage/
     ShowDetailPage/
     PersonDetailPage/
     SettingsPage/
@@ -96,720 +143,945 @@ src/
   utils/
 ```
 
-Each page directory contains `features/FeatureName/FeatureName.tsx`, local hooks, local constants, and local utilities. TSX files should stay humble: markup and bindings only, with business behavior moved into hooks and domain utilities.
+Feature directories follow this shape:
 
-### 3.3 Server Boundary
+```text
+pages/ShowDetailPage/
+  ShowDetailPage.tsx
+  hooks/
+  utils/
+  features/
+    HeaderMedia/
+      HeaderMedia.tsx
+    RelationshipToolbar/
+      RelationshipToolbar.tsx
+      hooks/
+    ScoopPanel/
+      ScoopPanel.tsx
+    ExploreSimilar/
+      ExploreSimilar.tsx
+```
 
-The browser should not write directly to Supabase tables in the benchmark implementation. Client components call Next.js server routes/actions; server code injects `namespace_id` and `user_id`, validates payloads, and uses the Supabase client.
+Component rules:
 
-This keeps benchmark identity explicit while preserving a clean path to real OAuth later. When OAuth is added, the identity provider changes, but table keys and repository methods remain stable.
+- TSX files bind data and render UI only.
+- Feature logic lives in hooks and local utilities.
+- Shared pure business logic lives in `src/lib` or `src/utils`.
+- Constants live in `src/config` or feature-local `constants.ts`.
+- Theme tokens own colors, spacing, type, and responsive values. Avoid magic numbers and inline styles in TSX.
 
-## 4. Environment, Scripts, and Repo Deliverables
+## 7. Data Model
 
-### 4.1 Required Environment Variables
+Implement a Supabase schema that preserves the conceptual `Show` shape while separating catalog snapshots from user overlays. This makes multi-user support and conflict resolution straightforward.
 
-Create `.env.example` with comments for:
+Core tables:
 
-- `NEXT_PUBLIC_SUPABASE_URL`
-- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-- `SUPABASE_SERVICE_ROLE_KEY` server-only, optional for migrations/admin/test reset
-- `APP_NAMESPACE_ID`
-- `DEFAULT_USER_ID`
-- `ENABLE_DEV_IDENTITY_HEADER`
-- `CATALOG_API_KEY`
-- `CATALOG_PROVIDER`
-- `CATALOG_DEFAULT_REGION`
-- `AI_PROVIDER`
-- `AI_API_KEY`
-- `AI_MODEL`
-- `AI_BASE_URL` optional for compatible providers
-- `SETTINGS_ENCRYPTION_KEY` only if user-entered synced API keys are stored
+### 7.1 `catalog_shows`
 
-Ensure `.gitignore` excludes `.env*` but allows `.env.example`.
+Stores namespace-scoped catalog snapshots.
 
-### 4.2 Required Scripts
+Important columns:
 
-Add package scripts during implementation:
+- `namespace_id text not null`
+- `show_id text not null`
+- `show_type text not null check in ('movie', 'tv', 'person', 'unknown')`
+- `title text not null`
+- `external_ids jsonb`
+- `overview text`
+- `genres text[] not null default '{}'`
+- `tagline text`
+- `homepage text`
+- `original_language text`
+- `spoken_languages text[] not null default '{}'`
+- `languages text[] not null default '{}'`
+- `poster_url text`
+- `backdrop_url text`
+- `logo_url text`
+- `network_logos text[] not null default '{}'`
+- `vote_average numeric`
+- `vote_count integer`
+- `popularity numeric`
+- `release_date timestamptz`
+- `first_air_date timestamptz`
+- `last_air_date timestamptz`
+- `runtime integer`
+- `budget bigint`
+- `revenue bigint`
+- `series_status text`
+- `number_of_episodes integer`
+- `number_of_seasons integer`
+- `episode_run_time integer[] not null default '{}'`
+- `last_episode_run_time integer`
+- `provider_data jsonb`
+- `details_update_date timestamptz`
+- `creation_date timestamptz not null default now()`
+- `is_test boolean not null default false`
 
-- `npm run dev`: start Next.js locally.
-- `npm run build`: production build.
-- `npm run lint`: lint and type-aware checks.
-- `npm test`: unit and integration tests.
-- `npm run test:e2e`: Playwright journey tests.
-- `npm run test:reset -- --namespace <id>`: delete test data only inside one namespace.
-- `npm run db:migrate`: apply Supabase migrations.
-- `npm run db:types`: generate database TypeScript types.
+Primary key:
 
-### 4.3 Migration Artifacts
+- `(namespace_id, show_id)`
 
-Use `supabase/migrations/` as the repeatable schema source. Include seed/fixture scripts only for deterministic development and tests. Test reset must be namespace-scoped and must never require global database teardown.
+### 7.2 `user_show_overlays`
 
-## 5. Data Model and Persistence Plan
+Stores collection membership and My Data.
 
-### 5.1 Tables
-
-Use these core Supabase tables:
-
-#### `saved_shows`
-
-Purpose: canonical saved show rows containing public catalog fields, user overlay, AI scoop, and provider data.
-
-Key columns:
+Important columns:
 
 - `namespace_id text not null`
 - `user_id text not null`
 - `show_id text not null`
-- `title text not null`
-- `show_type text not null check in ('movie','tv','person','unknown')`
-- `external_ids jsonb`
-- public catalog fields from the storage schema: overview, genres, tagline, homepage, languages, image URLs, vote metrics, dates, runtime, TV fields, budget/revenue, provider data
-- user fields: `my_tags text[]`, `my_score numeric`, `my_status text`, `my_interest text`
-- user timestamp fields: `my_tags_update_date`, `my_score_update_date`, `my_status_update_date`, `my_interest_update_date`
-- AI fields: `ai_scoop text`, `ai_scoop_update_date timestamptz`
-- management fields: `details_update_date`, `creation_date`, `is_test`
+- `my_status text null check in ('active', 'next', 'later', 'done', 'quit', 'wait')`
+- `my_status_update_date timestamptz`
+- `my_interest text null check in ('excited', 'interested')`
+- `my_interest_update_date timestamptz`
+- `my_score numeric`
+- `my_score_update_date timestamptz`
+- `my_tags text[] not null default '{}'`
+- `my_tags_update_date timestamptz`
+- `ai_scoop text`
+- `ai_scoop_update_date timestamptz`
+- `creation_date timestamptz not null default now()`
+- `is_test boolean not null default false`
 
-Primary key: `(namespace_id, user_id, show_id)`.
+Primary key:
 
-Indexes:
+- `(namespace_id, user_id, show_id)`
 
-- `(namespace_id, user_id, my_status)`
-- GIN index on `my_tags`
-- GIN index on `genres`
-- expression/index support for decade and community score filters if needed
-- `(namespace_id, user_id, details_update_date)`
+Foreign key:
 
-#### `user_settings`
+- `(namespace_id, show_id)` references `catalog_shows(namespace_id, show_id)`.
 
-Purpose: synced settings and preferences.
+Collection membership:
 
-Columns:
+- A show is in collection when `my_status is not null`.
+- Clearing status deletes the overlay row or clears all My Data and then deletes the row. Prefer delete to match "removed from storage" semantics.
 
-- `namespace_id`
-- `user_id`
-- `user_name`
-- `font_size`
-- `auto_search`
-- `ai_model`
-- encrypted optional `catalog_api_key`
-- encrypted optional `ai_api_key`
-- `settings_version`
-- `updated_at`
+### 7.3 `cloud_settings`
 
-Primary key: `(namespace_id, user_id)`.
-
-For the first benchmark implementation, prefer environment API keys and leave synced key storage behind an explicit encrypted path.
-
-#### `app_metadata`
-
-Purpose: track data model version per namespace.
+Stores synced settings.
 
 Columns:
 
-- `namespace_id`
-- `data_model_version`
-- `updated_at`
+- `namespace_id text not null`
+- `user_id text not null`
+- `id text not null default 'globalSettings'`
+- `user_name text not null`
+- `version numeric not null`
+- `catalog_api_key text`
+- `ai_api_key text`
+- `ai_model text not null`
 
-Primary key: `namespace_id`.
+Primary key:
 
-#### Optional `ui_preferences`
+- `(namespace_id, user_id, id)`
 
-Purpose: sync or store non-critical UI choices if desired.
+Security note:
+
+- User-entered API keys are optional. If stored, document that they are synced user settings. Never commit configured keys.
+
+### 7.4 `app_metadata`
+
+Tracks namespace-level data model version.
 
 Columns:
 
-- `namespace_id`
-- `user_id`
-- `hide_status_removal_confirmation`
-- `status_removal_count`
-- `last_selected_filter jsonb`
-- `updated_at`
+- `namespace_id text primary key`
+- `data_model_version integer not null default 3`
+- `updated_at timestamptz not null default now()`
 
-These preferences can also be local client settings because they are not the user's entertainment library. The saved library must remain server-side.
+### 7.5 Optional Normalized Tables
 
-### 5.2 ID Strategy
+Add only if needed for performance or clean querying:
 
-Use a canonical show id that avoids movie/TV collisions:
+- `user_show_tag_index(namespace_id, user_id, show_id, tag)` for fast tag filters.
+- `catalog_people` for cached person profiles.
+- `catalog_show_credits` only if person/detail performance requires it. Credits can remain transient per the schema reference.
 
-```text
-tmdb:movie:<id>
-tmdb:tv:<id>
-```
+If normalized tag rows are used, still maintain `my_tags` and `my_tags_update_date` as the conflict-resolution source of truth.
 
-Store catalog provider ids in `external_ids`, for example:
+## 8. Persistence and Merge Rules
 
-```json
-{
-  "tmdb": "123",
-  "imdb": "tt1234567"
-}
-```
-
-AI recommendations can resolve by external id first and title/media type second.
-
-### 5.3 Collection Membership and Save Rules
-
-Implement collection membership as `my_status is not null`.
-
-Saving triggers:
-
-- Setting any status saves the show.
-- Choosing Interested or Excited saves the show as `my_status = later` and sets `my_interest`.
-- Rating an unsaved show saves it as `done`.
-- Adding at least one tag to an unsaved show saves it as `later` and `interested`.
-
-Default save behavior:
-
-- Generic save: `later` + `interested`.
-- Rating-first save: `done`.
-- Tag-first save: `later` + `interested`.
-
-Removal:
-
-- Reselecting an active status asks for confirmation unless the user has suppressed it.
-- Removing status deletes the saved show row and clears all My Data and persisted AI scoop.
-- If implementation needs an audit trail later, add a separate history table; do not leave a row that appears in collection.
-
-### 5.4 Merge and Conflict Rules
-
-Implement pure functions for merge behavior:
-
-- Public catalog fields use `selectFirstNonEmpty(newValue, oldValue)`.
-- Never overwrite non-empty stored strings/arrays with empty values.
-- Never overwrite stored non-null values with null.
-- User fields resolve by their corresponding update timestamps.
-- If only one side has an update timestamp, keep that side.
-- `creation_date` is set once.
-- `details_update_date` updates whenever public details are refreshed.
-- User edits always win over catalog refreshes.
-
-Unit tests must cover every merge branch.
-
-### 5.5 Data Continuity
-
-Every schema change must ship as a migration. Migrations must preserve saved shows, statuses, interest, tags, ratings, and AI scoop. Add migration tests with representative rows before any data model change.
-
-## 6. Catalog Integration Plan
-
-### 6.1 Adapter Interface
-
-Create a provider-neutral interface:
-
-- `searchShows(query, mediaType?)`
-- `getShowDetails(mediaType, externalId)`
-- `getShowCredits(mediaType, externalId)`
-- `getShowImages(mediaType, externalId)`
-- `getShowVideos(mediaType, externalId)`
-- `getSimilarShows(mediaType, externalId)`
-- `getRecommendedShows(mediaType, externalId)`
-- `getWatchProviders(mediaType, externalId, region)`
-- `getPersonDetails(personId)`
-- `getPersonCredits(personId)`
-- `resolveRecommendation({ title, externalId, mediaType })`
-
-### 6.2 Normalization
-
-Normalize every catalog payload into the domain `Show` shape:
-
-- Reject entries without a usable title/name.
-- Infer media type only when catalog media type is missing.
-- Map genre ids to display names.
-- Convert image paths to full renderable URLs.
-- Choose one deterministic best logo, preferring English where available.
-- Store provider ids only in `provider_data`.
-- Keep credits, seasons, images, videos, similar, recommendations, and person details transient unless the user saves the show.
-
-### 6.3 API Routes
-
-Use server routes to hide catalog keys:
-
-- `GET /api/catalog/search`
-- `GET /api/catalog/show/:mediaType/:externalId`
-- `GET /api/catalog/show/:mediaType/:externalId/credits`
-- `GET /api/catalog/show/:mediaType/:externalId/recommendations`
-- `GET /api/catalog/show/:mediaType/:externalId/providers`
-- `GET /api/catalog/person/:personId`
-- `POST /api/catalog/resolve`
-
-## 7. AI and Discovery Plan
-
-### 7.1 Shared AI Infrastructure
-
-Create an AI service with:
-
-- Provider abstraction.
-- Prompt/context builders by surface.
-- Structured output validators.
-- Retry-on-parse-failure once for strict formats.
-- Domain guardrails for TV/movie scope.
-- Library context assembler that summarizes saved shows with status, interest, tags, rating, and notable AI scoop when useful.
-- Recommendation resolver that maps AI output to real catalog entries.
-
-All AI surfaces must share the same persona: warm, chatty, opinionated, spoiler-safe, specific, and honest.
-
-### 7.2 Ask
-
-Behavior:
-
-- Session-only chat state, cleared on reset/leaving Ask.
-- General Ask from Discover starts without a show.
-- Ask About This Show starts Ask with the current show context.
-- Older turns summarize after roughly 10 messages into 1-2 persona-preserving sentences.
-- Multi-recommendation replies use scannable bullets.
-- The first answer should be direct within the first few lines.
-
-Structured mentions:
-
-- AI response contains user-facing `commentary`.
-- AI response contains `showList` formatted exactly as `Title::externalId::mediaType;;Title2::externalId::mediaType`.
-- The UI renders a mentioned-shows strip from resolved real catalog items.
-- If resolution fails, show a non-interactive title or hand off to Search.
-
-### 7.3 Scoop
-
-Behavior:
-
-- Available on Show Detail.
-- Spoiler-safe mini taste review, roughly 150-350 words.
-- Must include personal take, honest stack-up, Scoop centerpiece, fit/warnings, and verdict.
-- Stream progressively where possible.
-- Cached for 4 hours when the show is saved.
-- Unsaved show scoop can be generated ephemerally but should not persist unless the show is later saved.
-
-### 7.4 Concepts
-
-Behavior:
-
-- Generate 8 concepts by default.
-- Bullet list only.
-- Each concept is 1-3 words.
-- Concepts are spoiler-free, specific, evocative, and varied across structure, tone, emotion, relationships, and craft.
-- Multi-show Alchemy concepts must represent commonality across all input shows.
-
-### 7.5 Explore Similar
-
-Flow:
-
-1. User opens Show Detail.
-2. User selects Get Concepts.
-3. User selects one or more concept chips, capped consistently with Alchemy.
-4. User selects Explore Shows.
-5. AI returns 5 recommendations.
-6. Each recommendation resolves to a real catalog item where possible and includes a concept-specific reason.
-
-### 7.6 Alchemy
-
-Flow:
-
-1. User selects 2 or more starting shows from library and global catalog.
-2. User selects Conceptualize Shows.
-3. User selects 1-8 concept catalysts.
-4. User selects Alchemize.
-5. AI returns 6 real-show recommendations with short reasons tied to selected concepts.
-6. User can choose More Alchemy to start another round with results as inputs.
+Create a central data service for all catalog and overlay merging. Do not spread merge logic through UI code.
 
 Rules:
 
-- Changing starting shows clears concepts and results.
-- Changing selected concepts clears downstream results.
-- Alchemy sessions are session-only and not persisted.
+- External catalog data maps into a fresh catalog show snapshot.
+- Existing non-user catalog fields use `selectFirstNonEmpty(newValue, oldValue)`:
+  - Empty strings, empty arrays, and nulls never overwrite non-empty stored data.
+  - Non-empty new values may fill missing stored values.
+- User fields resolve by their update timestamps:
+  - If both sides have timestamps, newer wins.
+  - If only one side has a timestamp, that side wins.
+- `details_update_date` updates whenever catalog details are refreshed.
+- `creation_date` is set only once.
+- `ai_scoop` uses its own update timestamp and expires after 4 hours for regeneration on demand.
 
-### 7.7 Discovery Quality Validation
+Implement and unit test these functions:
 
-Add a lightweight AI quality harness with human-reviewable fixtures:
+- `mergeCatalogShow`
+- `mergeUserOverlay`
+- `isCollectionMember`
+- `applyStatusChange`
+- `applyInterestChange`
+- `applyRatingChange`
+- `applyTagChange`
+- `removeFromCollection`
+- `overlayShowForDisplay`
 
-- Voice adherence.
-- Taste alignment.
-- Surprise without betrayal.
-- Specific reasoning.
-- Real-show integrity.
+## 9. Catalog Provider Layer
 
-Automated tests should verify structure, parser behavior, and catalog resolution. Human/manual review should score output quality using the 0-2 rubric in the PRD.
+Create a provider adapter abstraction so the app is not hard-wired throughout the UI.
 
-## 8. UI and Feature Plan
+Adapter responsibilities:
 
-### 8.1 Global Layout
+- Search title/keyword across movies and TV.
+- Fetch show details.
+- Fetch videos, backdrops, posters, logos, images.
+- Fetch recommendations and similar shows.
+- Fetch watch providers by region.
+- Fetch cast and crew.
+- Fetch seasons for TV.
+- Fetch person details, images, and combined credits.
+- Resolve AI recommendations by external ID and title/media type.
 
-Create a persistent app shell:
+The first implementation can be a TMDB-like adapter because the PRD references fields such as movie/TV media types, providers, credits, similar, recommendations, logos, and community scores that map cleanly to that style of catalog.
 
-- Left navigation/filter panel on desktop.
-- Mobile-friendly drawer or tab navigation.
-- Main content area for Home, Discover, Show Detail, Person Detail, and Settings.
+Resolution rule for AI recommendations:
+
+1. If AI provides an external ID, fetch that catalog item.
+2. Accept it only when media type matches and title matches case-insensitively against the AI title or known alternate title.
+3. If no ID or mismatch, search by title and accept the first deterministic match.
+4. If unresolved, render non-interactive text and provide a Search handoff.
+
+Every catalog item returned to UI should be passed through `overlayShowForDisplay` before rendering.
+
+## 10. API and Server Boundary
+
+Use route handlers or server actions as the boundary for all mutations and secret-bearing operations.
+
+Recommended API groups:
+
+### 10.1 Catalog
+
+- `GET /api/catalog/search?q=&type=`
+- `GET /api/catalog/shows/[showType]/[id]`
+- `GET /api/catalog/shows/[showType]/[id]/media`
+- `GET /api/catalog/shows/[showType]/[id]/recommendations`
+- `GET /api/catalog/shows/[showType]/[id]/providers`
+- `GET /api/catalog/people/[id]`
+
+### 10.2 Library
+
+- `GET /api/library`
+- `PATCH /api/library/[showId]/status`
+- `PATCH /api/library/[showId]/interest`
+- `PATCH /api/library/[showId]/rating`
+- `PATCH /api/library/[showId]/tags`
+- `DELETE /api/library/[showId]`
+
+All library endpoints must:
+
+- Resolve `namespace_id` and `user_id`.
+- Validate request body with Zod.
+- Fetch or upsert catalog snapshot before writing overlay when the show came from Search or AI.
+- Return the overlaid show object.
+
+### 10.3 AI
+
+- `POST /api/ai/ask`
+- `POST /api/ai/ask/resolve-mentions`
+- `POST /api/ai/scoop`
+- `POST /api/ai/concepts`
+- `POST /api/ai/concept-recommendations`
+
+### 10.4 Settings and Data
+
+- `GET /api/settings`
+- `PATCH /api/settings`
+- `GET /api/export`
+
+### 10.5 Test/Admin
+
+- `POST /api/admin/reset-namespace`
+
+Gate admin/reset routes to test or development mode and require a server-only secret if exposed over HTTP.
+
+## 11. Application Shell and Routing
+
+Build the app as the first screen, not a marketing landing page.
+
+Top-level shell:
+
+- Left or responsive navigation/filter panel.
+- Main content area.
 - Persistent Find/Discover entry point.
 - Persistent Settings entry point.
+- Media-type toggle state available on Home filters.
 
-Use design tokens for spacing, color, type, and radii. Keep cards to repeated items and framed tools; do not nest cards inside cards.
+Routes:
 
-### 8.2 Collection Home
+- `/` - Collection Home.
+- `/find?mode=search|ask|alchemy` - Find/Discover hub.
+- `/shows/[showType]/[id]` - Show Detail.
+- `/people/[id]` - Person Detail.
+- `/settings` - Settings and Your Data.
 
-Features:
+Client state that may remain local:
 
-- Fetch saved shows for `(namespace_id, user_id)`.
-- Apply selected sidebar filter.
-- Apply media type toggle: All, Movies, TV.
-- Group into:
-  1. Active
-  2. Excited (`later` + `excited`)
-  3. Interested (`later` + `interested`)
-  4. Other statuses: Wait, Quit, Done, and unclassified Later
-- Active uses more prominent tiles.
-- Tiles show poster, title, collection badge, and user rating badge.
+- Last selected filter.
+- Status removal confirmation suppression/count.
+- Current Ask conversation.
+- Current Alchemy session.
+- Current Explore Similar concepts/results.
+- UI-only expansion/collapse state.
+
+Persisted user data must not depend on local state.
+
+## 12. Core Feature Plan
+
+### 12.1 Collection Home
+
+Build Home after persistence and catalog overlay helpers are in place.
+
+Functional requirements:
+
+- Load collection for `(namespace_id, user_id)`.
+- Apply selected sidebar filter plus media type toggle.
+- Group results into:
+  1. Active.
+  2. Excited: `my_status = later` and `my_interest = excited`.
+  3. Interested: `my_status = later` and `my_interest = interested`.
+  4. Other: Wait, Quit, Done, Next if present, and Later without interest.
+- Active uses more prominent/larger tiles.
+- Tile displays poster, title, in-collection indicator, and rating badge when present.
+- Empty states:
+  - No collection: prompt to Search or Ask.
+  - Filter yields none: "No results found."
 
 Filters:
 
 - All Shows.
-- One filter per tag.
-- No Tags if any tagless saved show exists.
-- Genre.
-- Decade.
+- Tag filters for every user tag.
+- No tags if any saved show has no tags.
+- Genre filters.
+- Decade filters.
 - Community score ranges.
-- Media type toggle composes with the active filter.
+- Media toggle: All / Movies / TV applied on top.
 
-Empty states:
+Implementation notes:
 
-- Empty collection: prompt to Search or Ask.
-- Empty filter result: "No results found."
+- Derive tag library from overlays.
+- Use stable sort helpers, with recently updated user fields first where applicable.
+- Always render overlaid show data.
 
-### 8.3 Discover Hub
+### 12.2 Search
 
-Use a mode switcher for:
+Functional requirements:
 
-- Search.
-- Ask.
-- Alchemy.
+- Text search by title/keywords.
+- Poster grid results.
+- In-collection items marked.
+- Selecting a result opens Show Detail.
+- If user setting `autoSearch` is enabled, launch into Search on app load.
 
-Search:
+Implementation notes:
 
-- Text query against external catalog.
-- Poster grid.
-- In-collection items display the user-overlaid version and badge.
-- Selecting a show opens Detail.
-- If Search on Launch is enabled, open Discover/Search on startup.
+- Search results are transient until saved or details are opened.
+- When opening details, fetch full detail and merge into `catalog_shows`.
+- Overlay saved state onto every result by matching catalog show ID.
 
-Ask:
+### 12.3 Show Detail Page
 
-- Welcome view with 6 random starter prompts and refresh.
-- Chat transcript.
-- Mentioned-shows horizontal strip.
-- Detail handoff for resolved shows.
+This page is the single source of truth for public facts, My Data, and discovery actions.
 
-Alchemy:
+Preserve the narrative hierarchy:
 
-- Starting show picker supporting saved library and global catalog search.
-- Concept generation step.
-- Concept chip selection with max 8.
-- Results list/grid with reasons and selectable show tiles.
-- More Alchemy chaining.
-
-### 8.4 Show Detail Page
-
-Preserve the required narrative hierarchy:
-
-1. Header media carousel: backdrops, posters, logos, trailers when available.
+1. Header media carousel with trailer/backdrop/poster/logo fallback.
 2. Core facts row: year, runtime or seasons/episodes, community score.
-3. My Tags.
-4. Overview and Scoop toggle/stream.
-5. Ask About This Show CTA.
+3. Tag chips.
+4. Overview plus Scoop toggle/stream.
+5. "Ask about this show" CTA.
 6. Genres and languages.
 7. Traditional recommendations strand.
 8. Explore Similar.
-9. Streaming availability.
+9. Streaming providers.
 10. Cast and Crew.
 11. Seasons for TV.
-12. Budget/Revenue for movies.
+12. Budget vs Revenue for movies where available.
 
 Relationship controls:
 
-- Status/interest chips live in the toolbar, not buried in the scroll body.
+- Put status/interest chips in the toolbar.
 - Chips: Active, Interested, Excited, Done, Quit, Wait.
-- Interested maps to `later` + `interested`.
-- Excited maps to `later` + `excited`.
-- Reselecting the active status starts the removal confirmation flow.
-- Rating control auto-saves unsaved shows as Done.
-- Tag picker auto-saves unsaved shows as Later + Interested.
+- Interested sets `my_status = later` and `my_interest = interested`.
+- Excited sets `my_status = later` and `my_interest = excited`.
+- Reselecting an active status asks for removal confirmation unless suppressed.
+- Clearing status removes the show and clears My Data.
+- Rating an unsaved show auto-saves as Done.
+- Adding a tag to an unsaved show auto-saves as Later + Interested.
+- Setting any status saves the show.
+
+Scoop:
+
+- Toggle copy:
+  - No scoop: "Give me the scoop!"
+  - Cached scoop: "Show the scoop"
+  - Open: "The Scoop"
+- Stream progressively where possible.
+- Generate spoiler-safe content by default.
+- Cache for 4 hours.
+- Persist only if the show is in collection; otherwise keep ephemeral.
 
 Critical states:
 
-- No trailer/backdrop: premium poster/logo fallback.
-- Unsaved show: My Data controls still work and trigger save rules.
-- No concepts: only Get Concepts CTA is shown.
-- TV/movie-specific data appears only when relevant.
+- Unsaved show can generate ephemeral Scoop.
+- Missing trailers/backdrops gracefully fall back.
+- TV/movie-specific facts render conditionally.
+- No concepts yet shows only Get Concepts CTA.
 
-### 8.5 Person Detail
+### 12.4 Ask
 
-Features:
+Functional requirements:
 
-- Person image gallery.
-- Name and bio.
-- Filmography grouped by year.
-- Cast/crew credits open Show Detail.
-- Lightweight analytics charts:
-  - average project ratings,
-  - top genres,
-  - projects by year.
+- Chat UI with user and assistant turns.
+- Welcome view presents 6 random starter prompts and a refresh action.
+- General Ask starts from Find.
+- Ask About This Show enters Ask with show context seeded.
+- Conversation context is session-only.
+- Older turns summarize automatically after about 10 messages.
+- AI may mention shows inline.
+- Mentioned shows render in a horizontal strip.
+- Tapping a mentioned show opens Detail if resolved, or hands off to Search if unresolved.
 
-Credits remain transient catalog data unless the user saves a show from the filmography.
+AI response contract:
 
-### 8.6 Settings and Your Data
+- Use a shared AI persona.
+- Stay in TV/movies.
+- Spoiler-safe unless user asks for spoilers.
+- Be warm, playful, opinionated, and honest.
+- Direct answer within first few lines.
+- Use bullets for multiple recommendations.
+- Structured mention output:
+  - `commentary`
+  - `showList` as `Title::externalId::mediaType;;Title2::externalId::mediaType`
 
-Settings:
+Fallback:
 
+- If parsing fails, retry once with stricter formatting.
+- If still invalid, show commentary and provide Search handoff.
+
+### 12.5 Alchemy
+
+Functional requirements:
+
+1. User selects at least 2 starting shows from library and global catalog.
+2. Tap Conceptualize Shows.
+3. AI returns shared concept catalysts.
+4. User selects 1 to 8 concepts.
+5. Tap ALCHEMIZE!
+6. AI returns 6 recommendations grounded in selected concepts.
+7. User can choose More Alchemy! to chain results as new inputs.
+
+State rules:
+
+- Alchemy session is not persisted.
+- Changing input shows clears concepts and results.
+- Selecting/unselecting concepts clears downstream results.
+- Results carry transient reasons.
+- Saved results go through normal library save rules.
+
+Quality rules:
+
+- Concepts must be shared across all input shows.
+- Concepts are 1 to 3 words, bullet-only, evocative, spoiler-free, and non-generic.
+- Reasons explicitly name selected concepts.
+- Recommendations resolve to real catalog items where possible.
+
+### 12.6 Explore Similar
+
+Functional requirements:
+
+1. From Show Detail, user taps Get Concepts.
+2. AI returns concepts for the single show.
+3. User selects at least 1 concept.
+4. User taps Explore Shows.
+5. AI returns 5 recommendations.
+
+Rules:
+
+- Same concept quality bar as Alchemy.
+- Same recommendation resolution pipeline.
+- Results are session-only and can be saved through normal My Data controls.
+- UI copy should imply "pick the ingredients you want more of."
+
+### 12.7 Person Detail
+
+Functional requirements:
+
+- Reachable from cast/crew strands.
+- Displays image gallery, name, and bio.
+- Shows filmography/credits grouped by year.
+- Provides lightweight analytics:
+  - Average project ratings.
+  - Top genres.
+  - Projects by year.
+- Selecting a credit opens Show Detail.
+
+Implementation notes:
+
+- Person and credit data can be transient unless caching is needed.
+- Overlay saved state on every credit that maps to a show.
+
+### 12.8 Settings and Your Data
+
+Functional requirements:
+
+- Font size/readability setting.
+- Search on Launch toggle.
 - Username.
-- Font size/readability.
-- Search on Launch.
+- AI provider API key input, optional.
 - AI model selection.
-- AI provider key entry if encrypted storage is implemented; otherwise explain env-based benchmark configuration.
-- Catalog provider key entry if encrypted storage is implemented; otherwise env-based benchmark configuration.
+- Catalog provider API key input, optional.
+- Export My Data.
 
-Your Data:
+Export:
 
-- Export My Data creates a `.zip` containing JSON backup of all saved shows and My Data for the current `(namespace_id, user_id)`.
+- Produces a `.zip`.
+- Contains JSON backup of saved shows, My Data, cloud settings, app metadata, local settings, and UI state where relevant.
 - Dates encoded ISO-8601.
-- Do not implement Import/Restore in the first pass unless scope expands.
+- Scope export to `(namespace_id, user_id)`.
 
-## 9. Business Logic Modules
+Import/Restore:
 
-Implement and unit test pure modules before wiring UI:
+- Document as desired but not implemented unless explicitly added later.
 
-- `applySaveTrigger`
-- `setStatus`
-- `setInterestChip`
-- `setRating`
-- `setTags`
-- `removeFromCollection`
-- `mergeCatalogShowWithStoredShow`
-- `resolveUserFieldByTimestamp`
-- `groupCollectionByStatus`
-- `buildAvailableFilters`
-- `applyCollectionFilter`
-- `parseMentionedShows`
-- `parseConceptList`
-- `parseRecommendationList`
-- `isScoopFresh`
-- `serializeExportSnapshot`
+## 13. AI System Plan
 
-These modules are the highest-value test targets because they encode the PRD's implicit behaviors.
+Create a dedicated `src/lib/ai` layer.
 
-## 10. Testing Plan
+Modules:
 
-### 10.1 Unit Tests
+- `provider.ts` - AI provider interface.
+- `prompts/persona.ts` - shared voice pillars and guardrails.
+- `prompts/ask.ts`
+- `prompts/scoop.ts`
+- `prompts/concepts.ts`
+- `prompts/recommendations.ts`
+- `context/libraryContext.ts`
+- `context/showContext.ts`
+- `parsers/mentions.ts`
+- `parsers/concepts.ts`
+- `parsers/recommendations.ts`
+- `quality/validation.ts`
 
-Cover:
+Shared persona requirements:
 
-- Save defaults for status, interest, rating, and tags.
-- Interested/Excited mapping to Later plus interest.
-- Removing status clears collection membership and My Data.
-- Timestamp-based conflict resolution.
-- Public catalog merge never overwrites stored values with empty/null.
-- Filter generation for tags, No Tags, genre, decade, community score.
-- Status grouping order.
-- Media type toggle composition.
-- AI mention parser exact format.
-- Concept parser: bullet-only, 1-3 word validation.
-- Scoop freshness window.
-- Export JSON date serialization.
+- Fun, chatty TV/movie nerd friend.
+- Water-cooler gossip plus critic brain plus hype friend.
+- 70 percent friend, 30 percent critic.
+- Joy-forward and warm.
+- Opinionated honesty.
+- Vibe-first and spoiler-safe.
+- Specific, not generic.
+- Brisk by default, richer for Scoop.
 
-### 10.2 Integration Tests
+Surface-specific behavior:
 
-Cover:
+- Search has no AI voice.
+- Ask is conversational, direct, and low-friction.
+- Scoop is a 150 to 350 word mini taste review with personal take, stack-up, Scoop centerpiece, fit/warnings, and gut-check verdict.
+- Concepts are bullet-only, 1 to 3 words each, no explanation.
+- Concept recommendations include concise reasons tied to selected concepts.
 
-- Supabase CRUD scoped by namespace and user.
-- Test reset deletes only the requested namespace.
-- Server routes inject identity consistently.
-- Catalog normalization for movie, TV, and person payloads.
-- Recommendation resolution by external id and title/media type.
-- AI parser retry path and fallback path.
-- Settings read/write and version conflict behavior.
+Context construction:
 
-### 10.3 E2E Tests
+- Include saved library and My Data in compact form.
+- Include current show context for Scoop and Ask About This Show.
+- Include selected concepts for Explore Similar and Alchemy.
+- Include recent conversation turns.
+- Summarize older turns into 1 to 2 persona-consistent sentences after about 10 messages.
 
-Use Playwright against a test namespace:
+AI quality enforcement:
 
-1. Search for a show, open Detail, set Interested, verify Home grouping.
-2. Rate an unsaved show, verify it saves as Done.
-3. Add a tag to an unsaved show, verify it saves as Later + Interested and tag filter appears.
-4. Remove a status, confirm warning, verify show leaves collection.
-5. Ask for recommendations, verify mentioned shows strip resolves at least one item.
-6. Generate Scoop on a saved show, reload, verify cached scoop.
-7. Explore Similar: Get Concepts, select concepts, get 5 recommendations.
-8. Alchemy: select 2+ shows, conceptualize, select catalysts, get 6 recommendations, chain.
-9. Person Detail: open cast member, inspect credits, open a credit.
-10. Export data and verify zip contains ISO-8601 JSON for current user only.
+- Reject generic concepts such as "good characters" or "great story".
+- Enforce counts:
+  - Concepts: 8 by default.
+  - Explore Similar recs: 5.
+  - Alchemy recs: 6.
+- Validate real-show resolution before displaying interactive result tiles.
+- Score prompt outputs during tests against:
+  - Voice adherence.
+  - Taste alignment.
+  - Surprise without betrayal.
+  - Specificity.
+  - Real-show integrity.
 
-### 10.4 Visual and Accessibility Checks
+## 14. UI and Interaction Plan
 
-- Responsive screenshots for Home, Discover modes, Detail, Person, and Settings.
-- Keyboard navigation for mode switchers, chips, chat input, and carousels.
-- Accessible labels for icon-only controls.
-- Contrast and text overflow checks across font-size settings.
+Design principles:
 
-## 11. Implementation Milestones
+- Build the usable app as the first screen.
+- Keep operational UI dense, clear, and direct.
+- Use familiar controls: segmented toggles for modes, chips for status/concepts/tags, sliders for ratings, icon buttons for compact actions, tabs or segmented control for Find modes.
+- Cards only for repeated items, modal surfaces, and framed tools. Avoid nested cards.
+- Use responsive constraints for poster tiles, media headers, toolbars, and grids to prevent layout shift.
+- Ensure text fits within buttons/chips across mobile and desktop.
+- Use full-width sections or unframed layouts for page sections.
 
-### Milestone 0: Project Foundation
+Accessibility:
 
-Deliver:
+- Keyboard navigable status chips, concept chips, rating control, carousels, and mode switchers.
+- Visible focus states.
+- ARIA labels for icon-only buttons.
+- Sufficient contrast for badges and text.
+- Reduced-motion handling for carousels or media transitions.
 
-- Next.js app scaffold.
-- TypeScript, linting, formatting, test runner, Playwright.
-- Theme tokens and shared UI primitives.
-- `.env.example`, `.gitignore`, scripts.
-- Supabase client setup.
+## 15. Namespace Reset and Test Isolation
 
-Acceptance:
+Implement deterministic destructive reset:
 
-- `npm run dev`, `npm run build`, `npm run lint`, and `npm test` run.
-- No source code requires hardcoded credentials.
+- Reset accepts a namespace ID.
+- Deletes rows only where `namespace_id = target`.
+- Does not truncate global tables.
+- Can optionally filter `is_test = true` for test-only reset modes, but benchmark reset should be able to clear the entire namespace.
+- Requires explicit confirmation or test/admin secret.
 
-### Milestone 1: Supabase Schema and Identity Boundary
+Tables touched by reset:
 
-Deliver:
+- `user_show_overlays`
+- `catalog_shows`
+- `cloud_settings`
+- `app_metadata`
+- Optional normalized tag/person/cache tables
 
-- Supabase migrations for `saved_shows`, `user_settings`, `app_metadata`, and optional `ui_preferences`.
-- Server identity resolver for namespace/user.
-- Repository layer that requires namespace and user for every user-owned operation.
-- Namespace-scoped reset script.
+Tests must create their own namespace and never depend on shared data.
 
-Acceptance:
+## 16. Milestone Plan
 
-- Tests prove namespace isolation and user isolation.
-- Test reset cannot delete data outside the target namespace.
+### Milestone 0: Project Bootstrap
 
-### Milestone 2: Domain Logic
-
-Deliver:
-
-- Pure business logic modules for save triggers, merge rules, grouping, filters, and export serialization.
-- Unit tests for PRD edge cases.
-
-Acceptance:
-
-- Save, remove, merge, filter, and grouping behavior matches the PRD.
-
-### Milestone 3: Catalog Integration
-
-Deliver:
-
-- Catalog adapter interface.
-- TMDB-compatible adapter.
-- Search, detail, credits, providers, recommendations, person endpoints.
-- Normalization to domain `Show`.
+- Create Next.js TypeScript app structure.
+- Add lint, format, test, build, and dev scripts.
+- Add `.env.example` and secure `.gitignore`.
+- Add theme tokens and base app shell.
+- Add Supabase client factories:
+  - Browser anon client.
+  - Server client.
+  - Server-only admin client if reset requires it.
+- Add identity resolution helper.
 
 Acceptance:
 
-- Search and detail payloads normalize consistently.
-- Existing saved shows render with My Data overlay after catalog refresh.
+- App starts with `npm run dev`.
+- Build and test commands run.
+- Missing environment variables fail with clear messages.
 
-### Milestone 4: Collection Home and Search
+### Milestone 1: Supabase Schema and Data Services
 
-Deliver:
-
-- App shell/navigation.
-- Home grouped collection view.
-- Sidebar filters and media type toggle.
-- Search mode in Discover.
-- Show tiles and in-collection/rating badges.
-
-Acceptance:
-
-- User can search, open a show, save it, and see it grouped correctly on Home.
-
-### Milestone 5: Show Detail and My Data Controls
-
-Deliver:
-
-- Detail page narrative hierarchy.
-- Header media fallback behavior.
-- Status/interest toolbar.
-- Rating and tag controls.
-- Traditional recommendations strand.
-- Providers, cast/crew, seasons, and financial sections.
+- Create migrations for core tables.
+- Add namespace and user scoping helpers.
+- Implement catalog and overlay repositories.
+- Implement merge/default/removal business logic.
+- Implement namespace reset script.
 
 Acceptance:
 
-- Rating/tag/status save triggers behave correctly for saved and unsaved shows.
-- Removing status clears collection membership and My Data.
+- Unit tests cover save defaults, timestamp merges, status removal, and overlay display.
+- Integration tests prove two namespaces cannot see each other's data through app services.
+- Reset clears only the target namespace.
 
-### Milestone 6: AI Scoop and Ask
+### Milestone 2: Catalog Adapter
 
-Deliver:
-
-- AI provider abstraction.
-- Shared persona/context builders.
-- Scoop streaming and 4-hour saved-show cache.
-- Ask chat with session state, starter prompts, show handoff, summarization, structured mentions, and catalog resolution.
+- Implement provider abstraction and first catalog adapter.
+- Implement search, detail, media, recommendations, providers, credits, seasons, and person fetches.
+- Implement catalog-to-show mapper.
+- Implement AI recommendation resolver.
 
 Acceptance:
 
-- Scoop feels on-voice and caches only when allowed.
-- Ask recommendations produce a mentioned-shows row with real resolved items when possible.
+- Search and detail fetches map to canonical `Show` shape.
+- Empty catalog values do not erase stored non-empty fields.
+- Recommendations can be resolved by ID/title/media type.
+
+### Milestone 3: Collection Home and Filters
+
+- Build navigation/filter panel.
+- Build grouped collection home.
+- Build media type toggle.
+- Build tile badges.
+- Build empty states.
+
+Acceptance:
+
+- Saved shows group correctly by Active, Excited, Interested, and Other.
+- Tag, no-tag, genre, decade, community score, and media-type filters compose correctly.
+- Saved user overlays appear on all tiles.
+
+### Milestone 4: Search and Basic Detail
+
+- Build Find Search mode.
+- Build result grid and detail navigation.
+- Build Show Detail with header media, facts, overview, genres/languages, traditional recommendations, providers, cast/crew, seasons, and budget/revenue.
+- Build relationship toolbar, rating, and tags.
+
+Acceptance:
+
+- Status, interest, rating, and tag mutations follow save defaults.
+- Rating an unsaved show saves as Done.
+- Tagging an unsaved show saves as Later + Interested.
+- Clearing status confirms and removes all My Data.
+- Refreshing details preserves user edits.
+
+### Milestone 5: AI Foundation and Scoop
+
+- Build AI provider interface and prompt/context modules.
+- Implement Scoop generation with streaming if supported.
+- Implement 4-hour freshness and saved-vs-ephemeral persistence.
+- Add AI settings model selection.
+
+Acceptance:
+
+- Scoop includes required sections/intent.
+- Unsaved show Scoop does not persist long-term.
+- Saved show Scoop persists and refreshes after expiry on demand.
+
+### Milestone 6: Ask
+
+- Build Ask chat UI.
+- Add starter prompts with refresh.
+- Add session-only chat state.
+- Add conversation summarization after about 10 messages.
+- Add structured mentioned shows parsing and row rendering.
+- Add Ask About This Show handoff.
+
+Acceptance:
+
+- Ask stays within TV/movie domain and uses product voice.
+- Mentioned shows resolve to selectable show tiles where possible.
+- Parser retries once on structured output failure.
+- Clearing/resetting Ask removes session chat.
 
 ### Milestone 7: Concepts, Explore Similar, and Alchemy
 
-Deliver:
-
-- Concept generation.
-- Explore Similar flow.
-- Alchemy flow.
-- Recommendation resolution and fallback UI.
-- Chaining for Alchemy.
+- Implement single-show concepts.
+- Implement multi-show shared concepts.
+- Implement concept chip selection with cap of 8.
+- Implement Explore Similar with 5 recs.
+- Implement Alchemy with 6 recs and chaining.
+- Clear downstream results when inputs or concepts change.
 
 Acceptance:
 
-- Concepts are 1-3 word evocative chips.
-- Explore Similar returns 5 recommendations.
-- Alchemy returns 6 recommendations.
-- Reasons explicitly reference selected concepts.
+- Concepts are 1 to 3 words, evocative, no explanation, and non-generic.
+- Multi-show concepts represent shared ingredients.
+- Reasons explicitly cite selected concepts.
+- Interactive recs resolve to real catalog shows.
 
 ### Milestone 8: Person Detail, Settings, and Export
 
-Deliver:
-
-- Person detail with charts and filmography.
-- Settings page.
-- Export My Data zip.
-- Optional encrypted synced API key storage if time allows.
-
-Acceptance:
-
-- Export contains only current `(namespace_id, user_id)` saved data.
-- Settings persist without client-only dependence for user-owned data.
-
-### Milestone 9: Hardening and Benchmark Readiness
-
-Deliver:
-
-- E2E coverage for key journeys.
-- Visual regression screenshots.
-- AI quality review fixtures.
-- Documentation for environment setup, dev identity, test reset, and optional local Supabase.
+- Build Person Detail page.
+- Build analytics charts.
+- Build Settings page.
+- Build synced settings and local settings.
+- Build export zip.
 
 Acceptance:
 
-- Build is repeatable in a fresh namespace.
-- No Docker requirement.
-- No secret committed.
-- Clearing browser storage does not lose saved shows.
+- Cast/crew navigation to person and credits back to shows works.
+- Settings persist according to their intended storage.
+- Export zip contains ISO-8601 JSON for saved shows and My Data scoped to the active user.
 
-## 12. Risk Register
+### Milestone 9: Hardening, Visual QA, and Benchmark Compliance
 
-| Risk | Mitigation |
-| --- | --- |
-| AI returns malformed structured mentions or recommendations | Validate output, retry once with stricter instructions, fall back to commentary plus Search handoff. |
-| AI recommends hallucinated or mismatched titles | Require catalog resolution by external id and case-insensitive title/media type check before rendering as selectable. |
-| Namespace isolation is missed in one route | Centralize identity resolution and repository constructors; add integration tests that create two namespaces and verify no cross-read/write. |
-| User API keys are exposed to client code | Prefer env keys for benchmark; if user-entered storage is added, encrypt server-side and never expose elevated keys. |
-| Public catalog refresh overwrites user edits | Keep merge logic pure and heavily tested; never mutate My Data in catalog normalization. |
-| Detail page becomes too busy | Preserve narrative hierarchy and keep primary relationship controls in the toolbar; move long-tail detail down-page. |
-| AI voice drifts across surfaces | Centralize persona rules and add human-review fixtures using the discovery quality rubric. |
-| Test reset deletes production-like data | Require explicit namespace argument, reject empty/default production namespace, and scope SQL deletes by namespace. |
+- Run full unit, integration, and E2E suite.
+- Add visual smoke screenshots for Home, Search, Detail, Ask, Alchemy, Person, and Settings on desktop and mobile.
+- Audit `.env.example`, `.gitignore`, and README.
+- Confirm no product data depends on local storage.
+- Confirm namespace reset and user scoping.
 
-## 13. Open Questions to Defer
+Acceptance:
 
-- Whether `next` should become a first-class UI status.
-- Whether users need named custom lists beyond tags.
-- Whether generating Scoop on an unsaved show should save the show.
-- Whether clearing My Rating should store explicit Unrated rather than null.
-- Whether Import/Restore should ship alongside Export.
-- Whether Alchemy sessions should be saved or shared.
-- Whether explicit myStatus sidebar filters should be promoted beyond the current grouped Home view.
+- Clean build.
+- Clean test suite.
+- Verified benchmark scripts.
+- No committed secrets.
 
-The implementation should leave room for these decisions without blocking the required benchmark scope.
+## 17. Testing Plan
+
+### Unit Tests
+
+Cover:
+
+- `selectFirstNonEmpty`.
+- Catalog mapping for movie and TV payloads.
+- Timestamp conflict resolution.
+- Save defaults for status, interest, rating, and tags.
+- Removing from collection clears all My Data.
+- Filter grouping and media toggle composition.
+- Mention parser exact format.
+- Concept parser and generic concept rejection.
+- Recommendation resolver title/media matching.
+- Export JSON date serialization.
+
+### Integration Tests
+
+Cover:
+
+- Supabase repository operations with namespace and user scoping.
+- Two users in one namespace do not see each other's overlays.
+- Two namespaces do not collide.
+- Reset deletes only one namespace.
+- Detail refresh preserves My Data.
+- AI endpoints with mocked provider and parser retry.
+
+### Component Tests
+
+Cover:
+
+- Home grouped sections and empty states.
+- Search result badges.
+- Detail relationship toolbar behavior.
+- Removal confirmation suppression.
+- Scoop cached/open/generating states.
+- Ask mentioned shows row.
+- Concept selection limits and downstream clearing.
+- Alchemy chaining.
+
+### E2E Journeys
+
+Cover the PRD journeys:
+
+1. Search -> Detail -> Interested/Excited/Active -> tag/rate.
+2. Rating an unsaved show auto-saves as Done.
+3. Tagging an unsaved show auto-saves as Later + Interested.
+4. Home filtering by status/tag/media type.
+5. Ask discovery -> select recommendation -> save.
+6. Detail -> Get Concepts -> Explore Shows -> save one.
+7. Alchemy -> conceptualize -> select catalysts -> recommendations -> chain.
+8. Detail -> Person -> credit -> Detail.
+9. Settings -> Export My Data.
+10. Clear browser storage -> reload -> collection still present from Supabase.
+
+### AI Quality Tests
+
+Use mocked deterministic AI outputs for CI, plus optional manual/golden-set review for live models.
+
+Score outputs against:
+
+- Voice adherence >= 1.
+- Taste alignment >= 1.
+- Real-show integrity = 2.
+- Total >= 7 out of 10.
+
+Live AI tests should not block normal CI unless credentials are present.
+
+## 18. Security and Privacy Plan
+
+- Never commit secrets.
+- Keep service-role key out of browser bundles.
+- Validate all server inputs.
+- Scope all user-owned queries by namespace and user.
+- Avoid exposing raw AI or catalog keys to client code unless they are explicitly user-provided and intended for client use. Prefer server-side calls.
+- Document benchmark dev identity and production gating.
+- Prepare schema for future OAuth by keeping `user_id` opaque.
+- Avoid storing chat history, Alchemy sessions, and transient AI recommendation reasons in the database.
+
+## 19. Performance Plan
+
+- Server-render initial Home and Detail data where practical.
+- Use client cache for interactive mutations and optimistic feedback.
+- Debounce search input.
+- Lazy-load long-tail detail sections such as providers, cast/crew, seasons, and budget/revenue.
+- Use responsive image sizes and poster/backdrop placeholders.
+- Cache catalog details with `details_update_date`, while preserving user overlays.
+- Keep AI context compact by summarizing library and older chat turns.
+- Avoid preloading the entire catalog.
+
+## 20. Data Continuity and Migration Plan
+
+- Set `data_model_version` in `app_metadata`.
+- Each migration must be additive or include a backfill path.
+- Preserve saved shows and My Data through schema changes.
+- Use per-field timestamps for conflict resolution.
+- Keep export format versioned so future import/restore can be added without guessing.
+
+## 21. Key Product Decisions to Lock for v1
+
+- `Next` remains in the data model but is not a first-class UI status unless later required.
+- Tags are the v1 list mechanism; named custom lists are out of scope.
+- AI Scoop on an unsaved show is ephemeral and does not implicitly save.
+- Clearing My Rating sets `my_score = null` and updates `my_score_update_date`; no separate explicit Unrated state for v1 unless later required.
+- Import/Restore is documented as future work; Export is required.
+- Alchemy sessions are not persisted.
+- Chat history is not persisted.
+
+## 22. Risks and Mitigations
+
+### Real-show resolution can fail or mismatch
+
+Mitigation:
+
+- Prefer external IDs.
+- Validate title and media type.
+- Fall back to deterministic search.
+- Render unresolved recommendations as non-interactive with Search handoff.
+
+### AI output may drift off-brand or break structure
+
+Mitigation:
+
+- Central prompt builders.
+- Strict parsers.
+- One retry with stricter formatting.
+- Mocked contract tests plus manual quality rubric.
+
+### Namespace/user scoping can be accidentally bypassed
+
+Mitigation:
+
+- Central identity helper.
+- Repository functions require namespace and user explicitly.
+- Integration tests for cross-namespace and cross-user isolation.
+- Code review checklist item for every query.
+
+### Detail page can become cluttered
+
+Mitigation:
+
+- Preserve narrative hierarchy.
+- Keep primary relationship actions in toolbar.
+- Put optional depth lower on the page.
+- Use progressive loading for long-tail sections.
+
+### Catalog provider rate limits or missing data can degrade UX
+
+Mitigation:
+
+- Graceful empty states.
+- Cache catalog snapshots.
+- Avoid required preloading.
+- Fetch long-tail detail sections on demand.
+
+### Secret handling in benchmark mode can leak into client
+
+Mitigation:
+
+- Server-only AI and catalog calls by default.
+- Only expose Supabase anon key publicly.
+- Automated check for env files and secret-like values before final delivery.
+
+## 23. Definition of Done
+
+The build is complete when:
+
+- The app runs with one command after filling `.env`.
+- Supabase migrations produce a deterministic fresh schema.
+- All user-owned records include `namespace_id` and `user_id`.
+- Namespace reset works without global teardown.
+- Clearing browser storage does not delete user data.
+- Home, Search, Detail, Ask, Alchemy, Explore Similar, Person, Settings, and Export are implemented.
+- User overlays display everywhere and survive catalog refreshes.
+- AI surfaces follow the shared persona and structured output contracts.
+- Recommendations either resolve to real selectable catalog items or fall back cleanly.
+- Unit, integration, and E2E tests cover the key journeys.
+- No secrets are committed.

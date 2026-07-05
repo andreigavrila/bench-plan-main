@@ -30,6 +30,7 @@ I plan to extend both the evaluation and the benchmark itself to make it more co
 | fable5-extra-claudecode         | 98.5%  | gpt5.5-high          | 48kB |       |  83,100 |
 | fable5-medium-claudecode        | 97.5%  | gpt5.5-high          | 21kB |       |  67,000 |
 | gpt5.4-xhigh-opencode           | 97.0%  | gpt5.4-xhigh-codex   | 24kB | 0.79$ |  73,472 |
+| gpt5.5-xhigh-codex              | 97.0%  | gpt5.5-high          | 34kB |       |         |
 | grok4.3-reasoning-kilo          | 96.9%  | gpt5.4-xhigh-codex   | 18kB | 0.19$ |  37,900 |
 | glm5.2-xhigh-kilo               | 96.0%  | gpt5.4-xhigh-codex   | 47kB | 0.15$ |  55,620 |
 | gemini3.5flash-high-antigravity | 94.4%  | gpt5.4-xhigh-codex   | 35kB |       |         |
@@ -39,7 +40,6 @@ I plan to extend both the evaluation and the benchmark itself to make it more co
 | fable5-low-claudecode           | 93.4%  | gpt5.5-high          | 13kB |       |  63,600 |
 | deepseekv4pro-kilo              | 93.4%  | gpt5.4-xhigh-codex   | 27kB | 0.12$ |  42,400 |
 | gpt5.4-xhigh-kilo-geai          | 92.9%  | gpt5.4-xhigh-codex   | 26kB |       |  62,613 |
-| gpt5.5-xhigh-codex              | 91.9%  | gpt5.4-xhigh-codex   | 27kB |       |         |
 | opus4.6-max-claudecode          | 90.9%  | gpt5.4-xhigh-codex   | 35kB |       |         |
 | qwen3.6maxpreview-kilo          | 90.9%  | gpt5.4-xhigh-codex   | 57kB | 0.16$ |  52,300 |
 | sonnet4.6-antigravity           | 90.4%  | gpt5.4-xhigh-codex   | 26kB |       |         |
@@ -65,7 +65,7 @@ I plan to extend both the evaluation and the benchmark itself to make it more co
 | gemini3flash-antigravity        | 40.4%  | gpt5.4-xhigh-codex   |  7kB |       |         |
 | nemotron3super-kilo             | 27.8%  | gpt5.4-xhigh-codex   |  2kB | 0.09$ |  58,000 |
 
-*(Note: The table above contains raw, unaltered stats and therefore missing cost data for some models.)*
+*(Note: The table above contains raw run metadata and therefore missing cost data for some models; inferred costs are handled only in the ROI section below.)*
 
 ### Smart ROI Analysis (Using Inferred Costs)
 
@@ -73,10 +73,10 @@ To accurately calculate Return on Investment (ROI), I infer missing cost-per-run
 
 * **Fable 5**: `$7.70`
 * **Opus family**: `$3.85`
-* **GPT-5.5**: `$4.35`
+* **GPT-5.5 Codex rows without token counts**: `0.875 * Opus 4.8 xhigh/extra inferred run cost` (~`$2.07` per run), based on DeepSWE v1.1 cost positioning
 * **GPT-5.4**: `$2.17`
 
-When token counts are available, the formula is `tokens * 1.54 / 55,896 * family_blended / 3.85`. When token counts are missing, I use the family-level estimate `family_blended * 1.54 / 3.85`.
+When token counts are available, the formula is `tokens * 1.54 / 55,896 * family_blended / 3.85`. When token counts are missing, I use the family-level estimate `family_blended * 1.54 / 3.85`, except for GPT-5.5 Codex rows where I use the requested DeepSWE-based extrapolation: 87.5% of the inferred Opus 4.8 xhigh/extra run cost.
 
 **Inferred Costs:**
 *   **opus4.7-max-claude**: `~$1.54` (3.85 * 1.54 / 3.85)
@@ -84,9 +84,9 @@ When token counts are available, the formula is `tokens * 1.54 / 55,896 * family
 *   **opus4.8-max-claudecode**: `~$2.64` (95,700 tokens * 1.54 / 55,896 * 3.85 / 3.85)
 *   **opus4.8-xhigh-claudecode**: `~$2.36` (85,700 tokens * 1.54 / 55,896 * 3.85 / 3.85)
 *   **opus4.8-high-claudecode**: `~$2.08` (75,500 tokens * 1.54 / 55,896 * 3.85 / 3.85)
-*   **gpt5.5-high-codex**: `~$1.74` (4.35 * 1.54 / 3.85)
-*   **gpt5.5-xhigh-codex**: `~$1.74` (4.35 * 1.54 / 3.85)
-*   **gpt5.5-medium-codex**: `~$1.74` (4.35 * 1.54 / 3.85)
+*   **gpt5.5-high-codex**: `~$2.07` (0.875 * inferred `opus4.8-xhigh-claudecode` cost of `$2.36`)
+*   **gpt5.5-xhigh-codex**: `~$2.07` (0.875 * inferred `opus4.8-xhigh-claudecode` cost of `$2.36`, per DeepSWE v1.1 extrapolation)
+*   **gpt5.5-medium-codex**: `~$2.07` (0.875 * inferred `opus4.8-xhigh-claudecode` cost of `$2.36`)
 *   **gpt5.4-xhigh-codex**: `~$0.87` (2.17 * 1.54 / 3.85)
 *   **gpt5.4-xhigh-kilo-geai**: `~$0.97` (62,613 tokens * 1.54 / 55,896 * 2.17 / 3.85)
 *   **fable5-max-claudecode**: `~$21.90` (397,500 tokens * 1.54 / 55,896 * 7.70 / 3.85)
@@ -130,12 +130,12 @@ To ensure these rankings are practical, models are filtered and highlighted base
 | opus4.7-max-claude           | 94.4%      |     $1.54     |     49.9          |
 | opus4.6-xhigh-kilo           | 93.9%      |     $1.54     |     48.9          |
 | **opus4.8-high-claudecode**  | **99.0%**  |     $2.08     |     45.1          |
-| gpt5.5-high-codex            | 94.4%      |     $1.74     |     44.4          |
 | opus4.6-max-claudecode       | 90.9%      |     $1.54     |     42.9          |
+| **gpt5.5-xhigh-codex**    | **97.0%**  |     $2.07     |     41.7          |
 | **opus4.8-xhigh-claudecode** | **99.5%**  |     $2.36     |     40.6          |
-| gpt5.5-xhigh-codex           | 91.9%      |     $1.74     |     39.8          |
-| gpt5.5-medium-codex          | 89.9%      |     $1.74     |     36.5          |
+| gpt5.5-high-codex            | 94.4%      |     $2.07     |     37.5          |
 | **opus4.8-max-claudecode**   | **99.5%**  |     $2.64     |     36.5          |
+| gpt5.5-medium-codex          | 89.9%      |     $2.07     |     30.8          |
 | **fable5-medium-claudecode** | **97.5%**  |     $3.69     |     24.2          |
 | **fable5-high-claudecode**   | **99.0%**  |     $4.12     |     23.1          |
 | fable5-low-claudecode        | 93.4%      |     $3.50     |     21.4          |
@@ -145,5 +145,7 @@ To ensure these rankings are practical, models are filtered and highlighted base
 #### How to Interpret This Index
 
 The Smart Value Index is directly proportional. A model with an index of **400** mathematically provides **4 times more value** per dollar than a model with an index of **100**, according to this formula. 
+
+Cost extrapolation note: GPT-5.5 Codex rows without token counts use the requested [DeepSWE v1.1](https://deepswe.datacurve.ai/blog/deepswe-v1-1)-based assumption that GPT-5.5 costs roughly 87.5% of Opus 4.8 xhigh/extra.
 
 Keep in mind that "value" in this context is highly opinionated: because we take the score to the **4th power**, the index is designed to heavily penalize cheap but incompetent models. It ensures that a 90% capable model is treated as exponentially superior to a 60% capable model, rather than just 1.5x better. Therefore, if Model A has an index of 400 and Model B has 100, Model A is delivering four times the amount of "SOTA capability bang-for-your-buck."
