@@ -6,7 +6,7 @@
 ## ðŸ’¡ Key Highlights
 
 * **ðŸ† Top Performers:** **fable5-max-claudecode** leads the benchmark at **100.0%**, followed by **opus4.8-max-claudecode** and **opus4.8-xhigh-claudecode** at **99.5%**, **fable5-high-claudecode** and **opus4.8-high-claudecode** at **99.0%**, and **fable5-extra-claudecode** at **98.5%**.
-* **âš¡ Cost Efficiency:** **grok4.3-reasoning-kilo** achieves a near-top score of **96.9%** at a very low cost of **$0.19** (37,900 tokens), while **deepseekv4pro-kilo** reaches **93.4%** at just **$0.12** (42,400 tokens).
+* **âš¡ Cost Efficiency:** **grok4.3-reasoning-kilo** achieves a near-top score of **96.9%** at a very low cost of **$0.19** (37,900 tokens), while **qwen3.7max-kilo** reaches **94.9%** for **$0.22** (47,203 tokens) and **deepseekv4pro-kilo** reaches **93.4%** at just **$0.12** (42,400 tokens).
 * **ðŸ“‰ Self-Evaluation Gap:** There is a significant calibration gap in some models. For example, **gemini3flash-antigravity** has a self-evaluation gap of **32%** (Self-Score of 72.22% vs Actual of 40.40%).
 
 ---
@@ -28,6 +28,7 @@ The table below lists the performance of all evaluated models, sorted in descend
 | gpt5.5-xhigh-codex              | 97.0%  | gpt5.5-high        | 34kB |       |         |
 | grok4.3-reasoning-kilo          | 96.9%  | gpt5.4-xhigh-codex | 18kB | 0.19$ |  37,900 |
 | glm5.2-xhigh-kilo               | 96.0%  | gpt5.4-xhigh-codex | 47kB | 0.15$ |  55,620 |
+| qwen3.7max-kilo                 | 94.9%  | gpt5.4-xhigh-codex | 34kB | 0.22$ |  47,203 |
 | gemini3.5flash-high-antigravity | 94.4%  | gpt5.4-xhigh-codex | 35kB |       |         |
 | opus4.7-max-claude              | 94.4%  | gpt5.4-xhigh-codex | 35kB |       |         |
 | gpt5.5-high-codex               | 94.4%  | gpt5.4-xhigh-codex | 30kB |       |         |

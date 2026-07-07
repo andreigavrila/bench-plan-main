@@ -33,6 +33,7 @@ I plan to extend both the evaluation and the benchmark itself to make it more co
 | gpt5.5-xhigh-codex              | 97.0%  | gpt5.5-high          | 34kB |       |         |
 | grok4.3-reasoning-kilo          | 96.9%  | gpt5.4-xhigh-codex   | 18kB | 0.19$ |  37,900 |
 | glm5.2-xhigh-kilo               | 96.0%  | gpt5.4-xhigh-codex   | 47kB | 0.15$ |  55,620 |
+| qwen3.7max-kilo                 | 94.9%  | gpt5.4-xhigh-codex   | 34kB | 0.22$ |  47,203 |
 | gemini3.5flash-high-antigravity | 94.4%  | gpt5.4-xhigh-codex   | 35kB |       |         |
 | opus4.7-max-claude              | 94.4%  | gpt5.4-xhigh-codex   | 35kB |       |         |
 | gpt5.5-high-codex               | 94.4%  | gpt5.4-xhigh-codex   | 30kB |       |         |
@@ -112,11 +113,31 @@ Smart Value Index = ( (Score_percentage)^4 / (Cost_in_USD + $0.05) ) * 100
 1. **Score ^ 4**: Exponentiating to the fourth power heavily compounds high test scores, correctly rewarding SOTA capability even if it comes at a higher cost. 
 2. **+$0.05 Base Cost**: We add a fixed infrastructure/latency proxy overhead to the denominator, avoiding a division by zero that would otherwise grant "free" models an infinite ROI loop. 
 
-#### Value Rankings
+#### Recommended 95%+ Value Shortlist
 
-To ensure these rankings are practical, models are filtered and highlighted based on two performance thresholds:
-* **85% Minimum Capability**: Models must score at least 85% to be listed here. This threshold indicates a model is structurally competent: it understands the core architecture, data models, and feature requirements. Models below this cutoff produce fundamentally incomplete plans and are excluded to reduce noise.
-* **95% Recommended Tier**: Models highlighted in bold score above 95%, indicating premium, production-ready planning capabilities that accurately capture nuanced behavioral contracts and rigorous AI guardrails.
+This is the main decision table. It only includes the most useful models that clear the recommended capability tier.
+
+**Best picks:**
+* **Best value above 95%**: `glm5.2-xhigh-kilo`
+* **Best cheap near-SOTA run**: `grok4.3-reasoning-kilo`
+* **Best 99%+ value**: `opus4.8-high-claudecode`
+* **Best absolute score**: `fable5-max-claudecode`
+
+| Model                        | Score  | Est. Cost | Smart Value Index | Use When |
+| ---------------------------- | ------ | ------------- | ----------------- | -------- |
+| **glm5.2-xhigh-kilo**        | 96.0%  |     $0.15     |     424.7         | You want the best value above 95% |
+| **grok4.3-reasoning-kilo**   | 96.9%  |     $0.19     |     367.4         | You want a very cheap near-SOTA run |
+| **gpt5.4-xhigh-opencode**    | 97.0%  |     $0.79     |     105.4         | You want the best OpenAI value row |
+| **opus4.8-high-claudecode**  | 99.0%  |     $2.08     |     45.1          | You want the best 99%+ value |
+| **gpt5.5-xhigh-codex**       | 97.0%  |     $2.07     |     41.7          | You want the strongest GPT-5.5 Codex option listed |
+| **opus4.8-xhigh-claudecode** | 99.5%  |     $2.36     |     40.6          | You want the best 99.5% run |
+| **fable5-medium-claudecode** | 97.5%  |     $3.69     |     24.2          | You want the best Fable value |
+| **fable5-high-claudecode**   | 99.0%  |     $4.12     |     23.1          | You want a 99% Fable run |
+| **fable5-max-claudecode**    | 100.0% |     $5.20     |     19.0          | You want the top score |
+
+#### Full Value Rankings, Including 85%+ Models
+
+The full table is the audit trail behind the shortlist. Models must score at least 85% to be listed here; below that cutoff, plans are usually incomplete enough that cost efficiency becomes misleading. Models highlighted in bold clear the 95% recommended tier.
 
 | Model                        | Score      | Inferred Cost | Smart Value Index |
 | ---------------------------- | ---------- | ------------- | ----------------- |
@@ -129,6 +150,7 @@ To ensure these rankings are practical, models are filtered and highlighted base
 | deepseek3.2-kilo             | 86.6%      |     $0.11     |     351.5         |
 | qwen3.6pro-kilo              | 85.9%      |     $0.11     |     340.3         |
 | qwen3.6maxpreview-kilo       | 90.9%      |     $0.16     |     325.1         |
+| qwen3.7max-kilo              | 94.9%      |     $0.22     |     300.4         |
 | **gpt5.4-xhigh-opencode**    | **97.0%**  |     $0.79     |     105.4         |
 | gpt5.5-medium-codex          | 89.9%      |     $0.79     |     77.8          |
 | gpt5.4-xhigh-kilo-geai       | 92.9%      |     $0.97     |     73.0          |
