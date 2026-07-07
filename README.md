@@ -34,6 +34,7 @@ I plan to extend both the evaluation and the benchmark itself to make it more co
 | grok4.3-reasoning-kilo          | 96.9%  | gpt5.4-xhigh-codex   | 18kB | 0.19$ |  37,900 |
 | glm5.2-xhigh-kilo               | 96.0%  | gpt5.4-xhigh-codex   | 47kB | 0.15$ |  55,620 |
 | qwen3.7max-kilo                 | 94.9%  | gpt5.4-xhigh-codex   | 34kB | 0.22$ |  47,203 |
+| qwen3.7plus-kilo                | 94.4%  | gpt5.4-xhigh-codex   | 29kB | 0.07$ |  44,200 |
 | gemini3.5flash-high-antigravity | 94.4%  | gpt5.4-xhigh-codex   | 35kB |       |         |
 | opus4.7-max-claude              | 94.4%  | gpt5.4-xhigh-codex   | 35kB |       |         |
 | gpt5.5-high-codex               | 94.4%  | gpt5.4-xhigh-codex   | 30kB |       |         |
@@ -144,6 +145,7 @@ The full table is the audit trail behind the shortlist. Models must score at lea
 | Model                        | Score      | Inferred Cost | Smart Value Index |
 | ---------------------------- | ---------- | ------------- | ----------------- |
 | minimaxm3-opencode           | 93.9%      |     $0.05     |     777.4         |
+| qwen3.7plus-kilo             | 94.4%      |     $0.07     |     661.8         |
 | kimik2.7code-opencode        | 91.9%      |     $0.08     |     548.7         |
 | kimik2.6-opencode            | 89.9%      |     $0.08     |     502.5         |
 | glm5.1-opencode              | 88.9%      |     $0.08     |     480.5         |
@@ -154,7 +156,7 @@ The full table is the audit trail behind the shortlist. Models must score at lea
 | deepseek3.2-kilo             | 86.6%      |     $0.11     |     351.5         |
 | qwen3.6pro-kilo              | 85.9%      |     $0.11     |     340.3         |
 | qwen3.6maxpreview-kilo       | 90.9%      |     $0.16     |     325.1         |
-| qwen3.7max-kilo              | 94.9%      |     $0.22     |     300.4         |
+| **qwen3.7max-kilo**              | 94.9%      |     $0.22     |     300.4         |
 | **gpt5.4-xhigh-opencode**    | **97.0%**  |     $0.79     |     105.4         |
 | gpt5.5-medium-codex          | 89.9%      |     $0.79     |     77.8          |
 | gpt5.4-xhigh-kilo-geai       | 92.9%      |     $0.97     |     73.0          |
