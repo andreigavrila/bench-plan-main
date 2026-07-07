@@ -38,6 +38,7 @@ I plan to extend both the evaluation and the benchmark itself to make it more co
 | opus4.7-max-claude              | 94.4%  | gpt5.4-xhigh-codex   | 35kB |       |         |
 | gpt5.5-high-codex               | 94.4%  | gpt5.4-xhigh-codex   | 30kB |       |         |
 | opus4.6-xhigh-kilo              | 93.9%  | gpt5.4-xhigh-codex   | 41kB | 1.54$ |  55,896 |
+| minimaxm3-opencode              | 93.9%  | gpt5.4-xhigh-codex   | 43kB | 0.05$ |  48,002 |
 | sonnet5-high-claudecode         | 93.4%  | gpt5.5-high          | 36kB |       |  91,700 |
 | fable5-low-claudecode           | 93.4%  | gpt5.5-high          | 13kB |       |  63,600 |
 | deepseekv4pro-kilo              | 93.4%  | gpt5.4-xhigh-codex   | 27kB | 0.12$ |  42,400 |
@@ -141,6 +142,7 @@ The full table is the audit trail behind the shortlist. Models must score at lea
 
 | Model                        | Score      | Inferred Cost | Smart Value Index |
 | ---------------------------- | ---------- | ------------- | ----------------- |
+| minimaxm3-opencode           | 93.9%      |     $0.05     |     777.4         |
 | kimik2.6-opencode            | 89.9%      |     $0.08     |     502.5         |
 | glm5.1-opencode              | 88.9%      |     $0.08     |     480.5         |
 | qwen3.6pro-opencode          | 87.4%      |     $0.08     |     448.9         |
