@@ -38,6 +38,7 @@ The table below lists the performance of all evaluated models, sorted in descend
 | fable5-low-claudecode           | 93.4%  | gpt5.5-high        | 13kB |       |  63,600 |
 | deepseekv4pro-kilo              | 93.4%  | gpt5.4-xhigh-codex | 27kB | 0.12$ |  42,400 |
 | gpt5.4-xhigh-kilo-geai          | 92.9%  | gpt5.4-xhigh-codex | 26kB |       |  62,613 |
+| kimik2.7code-opencode           | 91.9%  | gpt5.4-xhigh-codex | 31kB | 0.08$ |  44,130 |
 | opus4.6-max-claudecode          | 90.9%  | gpt5.4-xhigh-codex | 35kB |       |         |
 | qwen3.6maxpreview-kilo          | 90.9%  | gpt5.4-xhigh-codex | 57kB | 0.16$ |  52,300 |
 | sonnet4.6-antigravity           | 90.4%  | gpt5.4-xhigh-codex | 26kB |       |         |
