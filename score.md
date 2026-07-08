@@ -42,6 +42,7 @@ The table below lists the performance of all evaluated models, sorted in descend
 | kimik2.7code-opencode           | 91.9%  | gpt5.4-xhigh-codex | 31kB | 0.08$ |  44,130 |
 | opus4.6-max-claudecode          | 90.9%  | gpt5.4-xhigh-codex | 35kB |       |         |
 | qwen3.6maxpreview-kilo          | 90.9%  | gpt5.4-xhigh-codex | 57kB | 0.16$ |  52,300 |
+| mistral-medium3.5-opencode      | 90.9%  | gpt5.4-xhigh-codex | 55kB | 0.43$ |  95,336 |
 | sonnet4.6-antigravity           | 90.4%  | gpt5.4-xhigh-codex | 26kB |       |         |
 | kimik2.6-opencode               | 89.9%  | gpt5.4-xhigh-codex | 25kB | 0.08$ |  40,833 |
 | gpt5.4-xhigh-codex              | 89.9%  | gpt5.4-xhigh-codex | 23kB |       |         |

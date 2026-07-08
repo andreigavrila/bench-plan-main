@@ -47,6 +47,7 @@ I plan to extend both the evaluation and the benchmark itself to make it more co
 | kimik2.7code-opencode           | 91.9%  | gpt5.4-xhigh-codex   | 31kB | 0.08$ |  44,130 |
 | opus4.6-max-claudecode          | 90.9%  | gpt5.4-xhigh-codex   | 35kB |       |         |
 | qwen3.6maxpreview-kilo          | 90.9%  | gpt5.4-xhigh-codex   | 57kB | 0.16$ |  52,300 |
+| mistral-medium3.5-opencode      | 90.9%  | gpt5.4-xhigh-codex   | 55kB | 0.43$ |  95,336 |
 | sonnet4.6-antigravity           | 90.4%  | gpt5.4-xhigh-codex   | 26kB |       |         |
 | kimik2.6-opencode               | 89.9%  | gpt5.4-xhigh-codex   | 25kB | 0.08$ |  40,833 |
 | gpt5.4-xhigh-codex              | 89.9%  | gpt5.4-xhigh-codex   | 23kB |       |         |
@@ -156,7 +157,8 @@ The full table is the audit trail behind the shortlist. Models must score at lea
 | deepseek3.2-kilo             | 86.6%      |     $0.11     |     351.5         |
 | qwen3.6pro-kilo              | 85.9%      |     $0.11     |     340.3         |
 | qwen3.6maxpreview-kilo       | 90.9%      |     $0.16     |     325.1         |
-| **qwen3.7max-kilo**              | 94.9%      |     $0.22     |     300.4         |
+| **qwen3.7max-kilo**          | 94.9%      |     $0.22     |     300.4         |
+| mistral-medium3.5-opencode   | 90.9%      |     $0.43     |     142.2         |
 | **gpt5.4-xhigh-opencode**    | **97.0%**  |     $0.79     |     105.4         |
 | gpt5.5-medium-codex          | 89.9%      |     $0.79     |     77.8          |
 | gpt5.4-xhigh-kilo-geai       | 92.9%      |     $0.97     |     73.0          |
