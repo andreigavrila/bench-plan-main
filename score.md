@@ -5,8 +5,8 @@
 
 ## ðŸ’¡ Key Highlights
 
-* **ðŸ† Top Performers:** **fable5-max-claudecode** leads the benchmark at **100.0%**, followed by **opus4.8-max-claudecode** and **opus4.8-xhigh-claudecode** at **99.5%**, **fable5-high-claudecode** and **opus4.8-high-claudecode** at **99.0%**, and **fable5-extra-claudecode** at **98.5%**.
-* **âš¡ Cost Efficiency:** **grok4.3-reasoning-kilo** achieves a near-top score of **96.9%** at a very low cost of **$0.19** (37,900 tokens), while **minimaxm3-opencode** reaches **93.9%** for **$0.05** (48,002 tokens) and **qwen3.7plus-kilo** reaches **94.4%** for **$0.07** (44,200 tokens).
+* **ðŸ† Top Performers:** **fable5-max-claudecode** leads the benchmark at **100.0%**, followed by **opus4.8-max-claudecode** and **opus4.8-xhigh-claudecode** at **99.5%**, **fable5-high-claudecode** and **opus4.8-high-claudecode** at **99.0%**, **fable5-extra-claudecode** at **98.5%**, and **gpt5.6-terra-xhigh-codex** at **98.0%**.
+* **âš¡ Cost Efficiency:** **grok4.3-reasoning-kilo** achieves a near-top score of **96.9%** at a very low cost of **$0.19** (37,900 tokens), while **gpt5.6-terra-xhigh-codex** reaches **98.0%** with an inferred benchmark cost around **$0.30** and likely **$0.40 or less**, **minimaxm3-opencode** reaches **93.9%** for **$0.05** (48,002 tokens), and **qwen3.7plus-kilo** reaches **94.4%** for **$0.07** (44,200 tokens).
 * **ðŸ“‰ Self-Evaluation Gap:** There is a significant calibration gap in some models. For example, **gemini3flash-antigravity** has a self-evaluation gap of **32%** (Self-Score of 72.22% vs Actual of 40.40%).
 
 ---
@@ -23,6 +23,7 @@ The table below lists the performance of all evaluated models, sorted in descend
 | fable5-high-claudecode          | 99.0%  | gpt5.5-high        | 34kB |       |  74,700 |
 | opus4.8-high-claudecode         | 99.0%  | gpt5.5-high        | 37kB |       |  75,500 |
 | fable5-extra-claudecode         | 98.5%  | gpt5.5-high        | 48kB |       |  83,100 |
+| gpt5.6-terra-xhigh-codex        | 98.0%  | gpt5.5-high        | 25kB |       |         |
 | fable5-medium-claudecode        | 97.5%  | gpt5.5-high        | 21kB |       |  67,000 |
 | gpt5.4-xhigh-opencode           | 97.0%  | gpt5.4-xhigh-codex | 24kB | 0.79$ |  73,472 |
 | gpt5.5-xhigh-codex              | 97.0%  | gpt5.5-high        | 34kB |       |         |
@@ -87,5 +88,7 @@ Self-evaluation calibration measures a model's ability to accurately assess its 
 ## âš™ï¸ Metadata & References
 
 * **ðŸ’¸ Total Evaluation Cost:** `~$0.8` (for the `OPENCODE-GPT5.4-xhigh EVAL` run)
+* **GPT-5.6 Terra Pricing:** `$2.17` blended per 1M tokens.
+* **Cross-task Cost Reference:** `gpt5.4-xhigh` was `$5.65` on the referenced other task, while `gpt5.6-terra-xhigh` was `$2.13`; applying that ratio to this benchmark's `$0.79` `gpt5.4-xhigh-opencode` cost implies Terra xhigh is roughly `$0.30`, conservatively `$0.40` or less.
 * **ðŸ”— Leaderboard Reference:** [Artificial Analysis Coding Leaderboard](https://artificialanalysis.ai/models/capabilities/coding?models=gpt-5-4-mini%2Cgpt-5-4%2Cgpt-5-5%2Cclaude-sonnet-4-6-adaptive%2Cclaude-opus-4-7%2Cmistral-small-4%2Cdeepseek-v4-flash%2Cdeepseek-v4-pro%2Cminimax-m2-7%2Ckimi-k2-6%2Cmimo-v2-5-pro%2Cglm-5-1%2Cqwen3-6-plus%2Cclaude-opus-4-6-adaptive#coding-index)
 
