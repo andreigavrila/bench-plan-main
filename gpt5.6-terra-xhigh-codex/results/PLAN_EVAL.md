@@ -184,7 +184,7 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 | PRD-047 | Search by title or keywords | important | full | Section 4 task 1; Section 8 task 2 |  |
 | PRD-048 | Use poster grid with collection markers | important | full | Section 4 task 2; Section 8 task 2 |  |
 | PRD-049 | Auto-open Search when setting is enabled | detail | full | Section 8 task 1 |  |
-| PRD-050 | Keep Search non-AI in tone | important | partial | Section 8 task 2 separates Search as live catalog querying | The plan keeps Search technically separate from AI but does not specify non-AI copy, tone, or acceptance checks for that surface. |
+| PRD-050 | Keep Search non-AI in tone | important | partial | Section 8 task 2 separates Search as live catalog querying | The plan keeps Search technically separate from AI but does not explicitly specify non-AI copy, tone, or acceptance checks for that surface. |
 | PRD-051 | Preserve Show Detail narrative section order | important | full | Section 9 task 1 |  |
 | PRD-052 | Prioritize motion-rich header with graceful fallback | important | full | Section 9 task 1 |  |
 | PRD-053 | Surface year, runtime/seasons, and community score early | important | full | Section 9 task 1 |  |
@@ -212,7 +212,7 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 | PRD-075 | Treat concepts as taste ingredients, not genres | important | full | Section 5 task 5; Section 9 task 5 |  |
 | PRD-076 | Return bullet-only, 1-3 word, non-generic concepts | important | full | Section 5 task 5 |  |
 | PRD-077 | Order concepts by strongest aha and varied axes | important | full | Section 5 task 5 |  |
-| PRD-078 | Require concept selection and guide ingredient picking | important | partial | Section 8 task 4 and Section 9 task 5 require selected chips before recommendations | Selection gating is covered, but the plan only gestures at ingredient-chip language and lacks explicit empty-state or helper guidance for picking ingredients. |
+| PRD-078 | Require concept selection and guide ingredient picking | important | partial | Section 8 task 4 and Section 9 task 5 require selected chips before recommendations | Selection gating is covered, but the plan only gestures at ingredient-chip language and lacks explicit empty-state, explainer, or helper guidance for picking ingredients. |
 | PRD-079 | Return exactly five Explore Similar recommendations | important | full | Section 5 task 6; Section 9 task 5 |  |
 | PRD-080 | Support full Alchemy loop with chaining | important | full | Section 8 task 4 |  |
 | PRD-081 | Clear downstream results when inputs change | important | full | Section 8 task 4; Section 9 task 5 |  |
@@ -270,7 +270,7 @@ This is a very strong implementation plan with only narrow specification gaps. I
 
 #### Strength Clusters
 
-Coverage is strongest in Benchmark Runtime & Isolation, Collection Data & Persistence, Ask Chat, AI Voice/Quality, Settings & Export, and Person Detail. The plan is especially concrete around server-side source of truth, Supabase migrations, per-field timestamps, overlay merging, structured Ask output, recommendation resolution, and namespace-safe testing.
+Coverage is strongest in Benchmark Runtime & Isolation, Collection Data & Persistence, Ask Chat, Concepts/Alchemy, AI Voice/Quality, Settings & Export, and Person Detail. The plan is especially concrete around server-side source of truth, Supabase migrations, per-field timestamps, overlay merging, structured Ask output, recommendation resolution, concept pool sizing, and namespace-safe testing.
 
 #### Weakness Clusters
 
