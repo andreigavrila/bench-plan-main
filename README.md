@@ -14,7 +14,7 @@ While this benchmark has multiple flaws, including the process of evaluation whi
 
 For the first 8 runs, I ran the evaluator gpt-5.4-xhigh-codex on each model and also manually check a sub-set of requirements to validate the evaluator. Starting with the five Fable 5 runs, I switched the evaluator from gpt5.4-xhigh-codex to gpt5.5-high. I ran multiple comparison tests with both evaluators before switching to ensure the scores stayed consistent enough for the leaderboard to remain comparable.
 
-The `gpt5.6-terra-xhigh-codex`, `gpt5.6-terra-high-codex`, and `gpt5.6-luna-xhigh-codex` rows are integrated from their `results/PLAN_EVAL.md` files. After calibrating against the stricter `fable5-max-claudecode` 100% evaluation, Terra xhigh scores 98.0%, Terra high scores 97.5%, and Luna xhigh scores 99.5%. Luna xhigh used 57,000 tokens at a `$0.87` blended per-1M-token rate, for an estimated run cost of `~$0.05`; the Terra rows still use inferred costs in the ROI section because no direct bench cost was captured.
+The `gpt5.6-terra-xhigh-codex`, `gpt5.6-terra-high-codex`, and `gpt5.6-luna-xhigh-codex` rows are integrated from their `results/PLAN_EVAL.md` files. After calibrating against the stricter `fable5-max-claudecode` 100% evaluation, Terra xhigh scores 98.0%, Terra high scores 97.5%, and Luna xhigh scores 99.5%. Luna xhigh used 57,000 tokens and has an inferred run cost of `~$0.15`; the Terra rows still use inferred costs in the ROI section because no direct bench cost was captured.
 
 I plan to extend both the evaluation and the benchmark itself to make it more comprehensive and reliable but I think it is already useful as it is.
 
@@ -27,7 +27,7 @@ I plan to extend both the evaluation and the benchmark itself to make it more co
 | fable5-max-claudecode           | 100.0% | gpt5.5-high          | 51kB |       |  94,400 |
 | opus4.8-max-claudecode          | 99.5%  | gpt5.5-high          | 37kB |       |  95,700 |
 | opus4.8-xhigh-claudecode        | 99.5%  | gpt5.5-high          | 33kB |       |  85,700 |
-| gpt5.6-luna-xhigh-codex         | 99.5%  | gpt5.5-high          | 29kB | 0.05$ |  57,000 |
+| gpt5.6-luna-xhigh-codex         | 99.5%  | gpt5.5-high          | 29kB |       |  57,000 |
 | fable5-high-claudecode          | 99.0%  | gpt5.5-high          | 34kB |       |  74,700 |
 | opus4.8-high-claudecode         | 99.0%  | gpt5.5-high          | 37kB |       |  75,500 |
 | fable5-extra-claudecode         | 98.5%  | gpt5.5-high          | 48kB |       |  83,100 |
@@ -88,7 +88,7 @@ To accurately calculate Return on Investment (ROI), I infer missing cost-per-run
 * **Sonnet 5**: `$2.31`
 * **GPT-5.5 Codex rows without token counts**: xhigh uses `0.875 * Opus 4.8 xhigh/extra inferred run cost` (~`$2.07` per run), high uses `0.70 * gpt5.5-xhigh-codex inferred run cost` (~`$1.45` per run), and medium uses `0.38 * gpt5.5-xhigh-codex inferred run cost` (~`$0.79` per run), based on DeepSWE v1.1 cost positioning
 * **GPT-5.6 Terra**: `$2.17` blended per 1M tokens; xhigh uses an inferred benchmark cost of `~$0.30`, and high uses an inferred benchmark cost of `~$0.16`
-* **GPT-5.6 Luna xhigh**: `57,000` tokens at `$0.87` blended per 1M tokens, giving an estimated run cost of `~$0.05`
+* **GPT-5.6 Luna xhigh**: `57,000` tokens, with an inferred run cost of `~$0.15`
 * **GPT-5.4**: `$2.17`
 
 When token counts are available, the formula is `tokens * 1.54 / 55,896 * family_blended / 3.85`. When token counts are missing, I use the family-level estimate `family_blended * 1.54 / 3.85`, except for GPT-5.5 Codex rows where I use the requested DeepSWE-based extrapolation: xhigh is 87.5% of the inferred Opus 4.8 xhigh/extra run cost, high is 70% of the inferred GPT-5.5 xhigh run cost, and medium is 38% of the inferred GPT-5.5 xhigh run cost. For GPT-5.6 Terra xhigh and high, I use the cross-task ratios `2.13 / 5.65` and `1.13 / 5.65` against this benchmark's `$0.79` `gpt5.4-xhigh-opencode` cost, which gives `~$0.30` and `~$0.16`.
@@ -102,7 +102,7 @@ When token counts are available, the formula is `tokens * 1.54 / 55,896 * family
 *   **gpt5.5-high-codex**: `~$1.45` (0.70 * inferred `gpt5.5-xhigh-codex` cost of `$2.07`, per DeepSWE v1.1 extrapolation)
 *   **gpt5.5-xhigh-codex**: `~$2.07` (0.875 * inferred `opus4.8-xhigh-claudecode` cost of `$2.36`, per DeepSWE v1.1 extrapolation)
 *   **gpt5.5-medium-codex**: `~$0.79` (0.38 * inferred `gpt5.5-xhigh-codex` cost of `$2.07`, per DeepSWE v1.1 extrapolation)
-*   **gpt5.6-luna-xhigh-codex**: `~$0.05` (`57,000 * $0.87 / 1,000,000 = $0.04959`)
+*   **gpt5.6-luna-xhigh-codex**: `~$0.15` inferred
 *   **gpt5.6-terra-high-codex**: `~$0.16` inferred (`$0.79 * $1.13 / $5.65`)
 *   **gpt5.6-terra-xhigh-codex**: `~$0.30` inferred (`$0.79 * $2.13 / $5.65`; conservative ceiling `$0.40` or less)
 *   **gpt5.4-xhigh-codex**: `~$0.87` (2.17 * 1.54 / 3.85)
@@ -140,7 +140,7 @@ This is the main decision table. It only includes the most useful models that cl
 
 | Model                        | Score  | Est. Cost     | Smart Value Index | Use When |
 | ---------------------------- | ------ | ------------- | ----------------- | -------- |
-| **gpt5.6-luna-xhigh-codex**  | 99.5%  |     ~$0.05    |     984.2         | You want the best 99%+ value |
+| **gpt5.6-luna-xhigh-codex**  | 99.5%  |     ~$0.15    |     490.1         | You want the best 99%+ value |
 | **gpt5.6-terra-high-codex**  | 97.5%  |     $0.16     |     430.3         | You want the best Terra value above 95% |
 | **glm5.2-xhigh-kilo**        | 96.0%  |     $0.15     |     424.7         | You want the best non-GPT value above 95% |
 | **grok4.3-reasoning-kilo**   | 96.9%  |     $0.19     |     367.4         | You want a very cheap near-SOTA run |
@@ -159,11 +159,11 @@ The full table is the audit trail behind the shortlist. Models must score at lea
 
 | Model                        | Score      | Run Cost | Smart Value Index |
 | ---------------------------- | ---------- | ------------- | ----------------- |
-| **gpt5.6-luna-xhigh-codex**  | **99.5%**  |     $0.05     |     984.2         |
 | minimaxm3-opencode           | 93.9%      |     $0.05     |     777.4         |
 | qwen3.7plus-kilo             | 94.4%      |     $0.07     |     661.8         |
 | kimik2.7code-opencode        | 91.9%      |     $0.08     |     548.7         |
 | kimik2.6-opencode            | 89.9%      |     $0.08     |     502.5         |
+| **gpt5.6-luna-xhigh-codex**  | **99.5%**  |     $0.15     |     490.1         |
 | glm5.1-opencode              | 88.9%      |     $0.08     |     480.5         |
 | **gpt5.6-terra-high-codex**  | **97.5%**  |     $0.16     |     430.3         |
 | qwen3.6pro-opencode          | 87.4%      |     $0.08     |     448.9         |
@@ -202,6 +202,6 @@ The Smart Value Index is directly proportional. A model with an index of **400**
 
 GPT-5.6 Terra cost note: Terra uses the supplied `$2.17` blended per-1M rate. Its benchmark costs are inferred, not directly measured: on the referenced other task, `gpt5.4-xhigh` cost `$5.65`, `gpt5.6-terra-xhigh` cost `$2.13`, and `gpt5.6-terra-high` cost `$1.13`; applying those ratios to this benchmark's `$0.79` `gpt5.4-xhigh-opencode` cost gives `~$0.30` for Terra xhigh and `~$0.16` for Terra high.
 
-GPT-5.6 Luna xhigh cost note: Luna xhigh used `57,000` tokens at a `$0.87` blended per-1M-token rate, giving an estimated benchmark run cost of `~$0.05` (`$0.04959` before rounding).
+GPT-5.6 Luna xhigh cost note: Luna xhigh used `57,000` tokens and has an inferred benchmark run cost of `~$0.15`.
 
 Keep in mind that "value" in this context is highly opinionated: because we take the score to the **4th power**, the index is designed to heavily penalize cheap but incompetent models. It ensures that a 90% capable model is treated as exponentially superior to a 60% capable model, rather than just 1.5x better. Therefore, if Model A has an index of 400 and Model B has 100, Model A is delivering four times the amount of "SOTA capability bang-for-your-buck."
