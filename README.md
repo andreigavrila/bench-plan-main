@@ -14,8 +14,6 @@ While this benchmark has multiple flaws, including the process of evaluation whi
 
 For the first 8 runs, I ran the evaluator gpt-5.4-xhigh-codex on each model and also manually check a sub-set of requirements to validate the evaluator. Starting with the five Fable 5 runs, I switched the evaluator from gpt5.4-xhigh-codex to gpt5.5-high. I ran multiple comparison tests with both evaluators before switching to ensure the scores stayed consistent enough for the leaderboard to remain comparable.
 
-The `gpt5.6-terra-xhigh-codex`, `gpt5.6-terra-high-codex`, and `gpt5.6-luna-xhigh-codex` rows are integrated from their `results/PLAN_EVAL.md` files. After calibrating against the stricter `fable5-max-claudecode` 100% evaluation, Terra xhigh scores 98.0%, Terra high scores 97.5%, and Luna xhigh scores 99.5%. Luna xhigh used 57,000 tokens and has an inferred run cost of `~$0.15`; the Terra rows still use inferred costs in the ROI section because no direct bench cost was captured.
-
 I plan to extend both the evaluation and the benchmark itself to make it more comprehensive and reliable but I think it is already useful as it is.
 
 ## Scores
@@ -35,6 +33,7 @@ I plan to extend both the evaluation and the benchmark itself to make it more co
 | gpt5.6-terra-high-codex         | 97.5%  | gpt5.5-high          | 21kB |       |         |
 | fable5-medium-claudecode        | 97.5%  | gpt5.5-high          | 21kB |       |  67,000 |
 | gpt5.4-xhigh-opencode           | 97.0%  | gpt5.4-xhigh-codex   | 24kB | 0.79$ |  73,472 |
+| grok4.5-kilo                    | 97.0%  | gpt5.5-high          | 22kB | 0.14$ |  33,033 |
 | gpt5.5-xhigh-codex              | 97.0%  | gpt5.5-high          | 34kB |       |         |
 | grok4.3-reasoning-kilo          | 96.9%  | gpt5.4-xhigh-codex   | 18kB | 0.19$ |  37,900 |
 | glm5.2-xhigh-kilo               | 96.0%  | gpt5.4-xhigh-codex   | 47kB | 0.15$ |  55,620 |
@@ -103,6 +102,7 @@ When token counts are available, the formula is `tokens * 1.54 / 55,896 * family
 *   **gpt5.5-xhigh-codex**: `~$2.07` (0.875 * inferred `opus4.8-xhigh-claudecode` cost of `$2.36`, per DeepSWE v1.1 extrapolation)
 *   **gpt5.5-medium-codex**: `~$0.79` (0.38 * inferred `gpt5.5-xhigh-codex` cost of `$2.07`, per DeepSWE v1.1 extrapolation)
 *   **gpt5.6-luna-xhigh-codex**: `~$0.15` inferred
+*   **grok4.5-kilo**: `$0.14` measured
 *   **gpt5.6-terra-high-codex**: `~$0.16` inferred (`$0.79 * $1.13 / $5.65`)
 *   **gpt5.6-terra-xhigh-codex**: `~$0.30` inferred (`$0.79 * $2.13 / $5.65`; conservative ceiling `$0.40` or less)
 *   **gpt5.4-xhigh-codex**: `~$0.87` (2.17 * 1.54 / 3.85)
@@ -133,7 +133,7 @@ This is the main decision table. It only includes the most useful models that cl
 
 **Best picks:**
 * **Best value above 95%**: `gpt5.6-luna-xhigh-codex`
-* **Best cheap near-SOTA run**: `gpt5.6-luna-xhigh-codex`
+* **Best cheap near-SOTA run**: `grok4.5-kilo`
 * **Best GPT-family value**: `gpt5.6-luna-xhigh-codex`
 * **Best 99%+ value**: `gpt5.6-luna-xhigh-codex`
 * **Best absolute score**: `fable5-max-claudecode`
@@ -141,8 +141,9 @@ This is the main decision table. It only includes the most useful models that cl
 | Model                        | Score  | Est. Cost     | Smart Value Index | Use When |
 | ---------------------------- | ------ | ------------- | ----------------- | -------- |
 | **gpt5.6-luna-xhigh-codex**  | 99.5%  |     ~$0.15    |     490.1         | You want the best 99%+ value |
+| **grok4.5-kilo**             | 97.0%  |     $0.14     |     465.9         | You want the best measured cheap near-SOTA run |
 | **gpt5.6-terra-high-codex**  | 97.5%  |     $0.16     |     430.3         | You want the best Terra value above 95% |
-| **glm5.2-xhigh-kilo**        | 96.0%  |     $0.15     |     424.7         | You want the best non-GPT value above 95% |
+| **glm5.2-xhigh-kilo**        | 96.0%  |     $0.15     |     424.7         | You want a strong low-cost GLM run above 95% |
 | **grok4.3-reasoning-kilo**   | 96.9%  |     $0.19     |     367.4         | You want a very cheap near-SOTA run |
 | **gpt5.6-terra-xhigh-codex** | 98.0%  |     $0.30     |     263.5         | You want the top Terra score |
 | **gpt5.4-xhigh-opencode**    | 97.0%  |     $0.79     |     105.4         | You want the measured GPT-5.4 baseline |
@@ -165,9 +166,10 @@ The full table is the audit trail behind the shortlist. Models must score at lea
 | kimik2.6-opencode            | 89.9%      |     $0.08     |     502.5         |
 | **gpt5.6-luna-xhigh-codex**  | **99.5%**  |     $0.15     |     490.1         |
 | glm5.1-opencode              | 88.9%      |     $0.08     |     480.5         |
-| **gpt5.6-terra-high-codex**  | **97.5%**  |     $0.16     |     430.3         |
+| **grok4.5-kilo**             | **97.0%**  |     $0.14     |     465.9         |
 | qwen3.6pro-opencode          | 87.4%      |     $0.08     |     448.9         |
 | deepseekv4pro-kilo           | 93.4%      |     $0.12     |     447.7         |
+| **gpt5.6-terra-high-codex**  | **97.5%**  |     $0.16     |     430.3         |
 | **glm5.2-xhigh-kilo**        | **96.0%**  |     $0.15     |     424.7         |
 | **grok4.3-reasoning-kilo**   | **96.9%**  |     $0.19     |     367.4         |
 | deepseek3.2-kilo             | 86.6%      |     $0.11     |     351.5         |
