@@ -1,19 +1,6 @@
-﻿# ðŸ“Š Model Benchmarking & Evaluation Results
+# Raw Scores
 
-> [!NOTE]
-> This document summarizes the evaluation results of various language models. It details performance scores, evaluators, sizes, execution costs, generated tokens, and self-evaluation calibration statistics.
-
-## ðŸ’¡ Key Highlights
-
-* **ðŸ† Top Performers:** **fable5-max-claudecode** leads the benchmark at **100.0%**, followed by **opus4.8-max-claudecode**, **opus4.8-xhigh-claudecode**, **gpt5.6-luna-xhigh-codex**, and **kimik3-opencode** at **99.5%**, **fable5-high-claudecode** and **opus4.8-high-claudecode** at **99.0%**, and **fable5-extra-claudecode** at **98.5%**.
-* **âš¡ Cost Efficiency:** **gpt5.6-luna-xhigh-codex** reaches **99.5%** with an estimated benchmark cost around **$0.05**, **grok4.5-kilo** reaches **97.0%** with a measured benchmark cost of **$0.14**, **gpt5.6-terra-high-codex** reaches **97.5%** with an inferred benchmark cost around **$0.16**, and **gpt5.6-terra-xhigh-codex** reaches **98.0%** with an inferred benchmark cost around **$0.30**.
-* **ðŸ“‰ Self-Evaluation Gap:** There is a significant calibration gap in some models. For example, **gemini3flash-antigravity** has a self-evaluation gap of **32%** (Self-Score of 72.22% vs Actual of 40.40%).
-
----
-
-## ðŸ† Model Leaderboard
-
-The table below lists the performance of all evaluated models, sorted in descending order of their scores. The score column is separated from the evaluator so mixed-evaluator runs can be tracked without renaming the table each time.
+## Leaderboard
 
 | Model                           | Score  | Evaluator          | Size |  Cost |  Tokens |
 | ------------------------------- | :----: | ------------------ | ---: | ----: | ------: |
@@ -72,11 +59,7 @@ The table below lists the performance of all evaluated models, sorted in descend
 | gemini3flash-antigravity        | 40.4%  | gpt5.4-xhigh-codex |  7kB |       |         |
 | nemotron3super-kilo             | 27.8%  | gpt5.4-xhigh-codex |  2kB | 0.09$ |  58,000 |
 
----
-
-## ðŸ” Self-Evaluation Calibration
-
-Self-evaluation calibration measures a model's ability to accurately assess its own performance. The **Gap** represents the difference between the model's self-score and its actual benchmark score (`Self-Score - Actual`). A smaller gap indicates better self-calibration.
+## Self-Evaluation Scores
 
 | Model                    | Self-Score | Actual Score | Evaluator          | Gap  |
 | ------------------------ | :--------: | :----------: | ------------------ | :--: |
@@ -86,16 +69,3 @@ Self-evaluation calibration measures a model's ability to accurately assess its 
 | geai-gpt5.4-xhigh-kilo   |   91.9%    |    92.9%     | gpt5.4-xhigh-codex | -1%  |
 | glm5.1-claudecode        |   90.4%    |    86.9%     | gpt5.4-xhigh-codex | 3.5% |
 | gemini3flash-antigravity |   72.22%   |    40.40%    | gpt5.4-xhigh-codex | 32%  |
-
----
-
-## âš™ï¸ Metadata & References
-
-* **ðŸ’¸ Total Evaluation Cost:** `~$0.8` (for the `OPENCODE-GPT5.4-xhigh EVAL` run)
-* **GPT-5.6 Luna xhigh Cost:** `57,000` tokens at `$0.87` blended per 1M tokens, for an estimated benchmark run cost of `~$0.05`.
-* **Kimi K3 OpenCode Cost:** `43,195` tokens for a measured benchmark run cost of `$0.42`.
-* **Grok 4.5 Kilo Cost:** `33,033` tokens for a measured benchmark run cost of `$0.14`.
-* **GPT-5.6 Terra Pricing:** `$2.17` blended per 1M tokens.
-* **Cross-task Cost Reference:** `gpt5.4-xhigh` was `$5.65` on the referenced other task, while `gpt5.6-terra-xhigh` was `$2.13` and `gpt5.6-terra-high` was `$1.13`; applying those ratios to this benchmark's `$0.79` `gpt5.4-xhigh-opencode` cost implies Terra xhigh is roughly `$0.30` and Terra high is roughly `$0.16`.
-* **ðŸ”— Leaderboard Reference:** [Artificial Analysis Coding Leaderboard](https://artificialanalysis.ai/models/capabilities/coding?models=gpt-5-4-mini%2Cgpt-5-4%2Cgpt-5-5%2Cclaude-sonnet-4-6-adaptive%2Cclaude-opus-4-7%2Cmistral-small-4%2Cdeepseek-v4-flash%2Cdeepseek-v4-pro%2Cminimax-m2-7%2Ckimi-k2-6%2Cmimo-v2-5-pro%2Cglm-5-1%2Cqwen3-6-plus%2Cclaude-opus-4-6-adaptive#coding-index)
-

@@ -26,6 +26,7 @@ I plan to extend both the evaluation and the benchmark itself to make it more co
 | opus4.8-max-claudecode          | 99.5%  | gpt5.5-high          | 37kB |       |  95,700 |
 | opus4.8-xhigh-claudecode        | 99.5%  | gpt5.5-high          | 33kB |       |  85,700 |
 | gpt5.6-luna-xhigh-codex         | 99.5%  | gpt5.5-high          | 29kB |       |  57,000 |
+| kimik3-opencode                 | 99.5%  | gpt5.5-high          | 33kB | 0.42$ |  43,195 |
 | fable5-high-claudecode          | 99.0%  | gpt5.5-high          | 34kB |       |  74,700 |
 | opus4.8-high-claudecode         | 99.0%  | gpt5.5-high          | 37kB |       |  75,500 |
 | fable5-extra-claudecode         | 98.5%  | gpt5.5-high          | 48kB |       |  83,100 |
@@ -102,6 +103,7 @@ When token counts are available, the formula is `tokens * 1.54 / 55,896 * family
 *   **gpt5.5-xhigh-codex**: `~$2.07` (0.875 * inferred `opus4.8-xhigh-claudecode` cost of `$2.36`, per DeepSWE v1.1 extrapolation)
 *   **gpt5.5-medium-codex**: `~$0.79` (0.38 * inferred `gpt5.5-xhigh-codex` cost of `$2.07`, per DeepSWE v1.1 extrapolation)
 *   **gpt5.6-luna-xhigh-codex**: `~$0.15` inferred
+*   **kimik3-opencode**: `$0.42` measured
 *   **grok4.5-kilo**: `$0.14` measured
 *   **gpt5.6-terra-high-codex**: `~$0.16` inferred (`$0.79 * $1.13 / $5.65`)
 *   **gpt5.6-terra-xhigh-codex**: `~$0.30` inferred (`$0.79 * $2.13 / $5.65`; conservative ceiling `$0.40` or less)
@@ -146,6 +148,7 @@ This is the main decision table. It only includes the most useful models that cl
 | **glm5.2-xhigh-kilo**        | 96.0%  |     $0.15     |     424.7         | You want a strong low-cost GLM run above 95% |
 | **grok4.3-reasoning-kilo**   | 96.9%  |     $0.19     |     367.4         | You want a very cheap near-SOTA run |
 | **gpt5.6-terra-xhigh-codex** | 98.0%  |     $0.30     |     263.5         | You want the top Terra score |
+| **kimik3-opencode**           | 99.5%  |     $0.42     |     208.5         | You want a measured-cost 99.5% open-code run |
 | **gpt5.4-xhigh-opencode**    | 97.0%  |     $0.79     |     105.4         | You want the measured GPT-5.4 baseline |
 | **opus4.8-high-claudecode**  | 99.0%  |     $2.08     |     45.1          | You want the best Opus 99%+ value |
 | **gpt5.5-xhigh-codex**       | 97.0%  |     $2.07     |     41.7          | You want the strongest GPT-5.5 Codex option listed |
@@ -177,6 +180,7 @@ The full table is the audit trail behind the shortlist. Models must score at lea
 | qwen3.6maxpreview-kilo       | 90.9%      |     $0.16     |     325.1         |
 | **qwen3.7max-kilo**          | 94.9%      |     $0.22     |     300.4         |
 | **gpt5.6-terra-xhigh-codex** | **98.0%**  |     $0.30     |     263.5         |
+| **kimik3-opencode**          | **99.5%**  |     $0.42     |     208.5         |
 | mistral-medium3.5-opencode   | 90.9%      |     $0.43     |     142.2         |
 | **gpt5.4-xhigh-opencode**    | **97.0%**  |     $0.79     |     105.4         |
 | gpt5.5-medium-codex          | 89.9%      |     $0.79     |     77.8          |
