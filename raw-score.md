@@ -4,13 +4,13 @@
 
 | Model                           | Score  | Evaluator          | Size |  Cost |  Tokens |
 | ------------------------------- | :----: | ------------------ | ---: | ----: | ------: |
-| fable5-max-claudecode           | 100.0% | gpt5.5-high        | 51kB |       |  94,400 |
 | gpt5.6-sol-max-codex            | 100.0% | gpt5.5-high        | 62kB |       |         |
+| fable5-max-claudecode           | 99.5%  | gpt5.5-high        | 51kB |       |  94,400 |
 | opus4.8-max-claudecode          | 99.5%  | gpt5.5-high        | 37kB |       |  95,700 |
 | opus4.8-xhigh-claudecode        | 99.5%  | gpt5.5-high        | 33kB |       |  85,700 |
-| gpt5.6-luna-xhigh-codex         | 99.5%  | gpt5.5-high        | 29kB |       |  57,000 |
-| kimik3-opencode                 | 99.5%  | gpt5.5-high        | 33kB | 0.42$ |  43,195 |
 | gpt5.6-sol-xhigh-codex          | 99.5%  | gpt5.5-high        | 45kB |       |         |
+| gpt5.6-luna-xhigh-codex         | 99.0%  | gpt5.5-high        | 29kB |       |  57,000 |
+| kimik3-opencode                 | 99.0%  | gpt5.5-high        | 33kB | 0.42$ |  43,195 |
 | fable5-high-claudecode          | 99.0%  | gpt5.5-high        | 34kB |       |  74,700 |
 | opus4.8-high-claudecode         | 99.0%  | gpt5.5-high        | 37kB |       |  75,500 |
 | fable5-extra-claudecode         | 98.5%  | gpt5.5-high        | 48kB |       |  83,100 |
@@ -18,13 +18,12 @@
 | gpt5.6-terra-high-codex         | 97.5%  | gpt5.5-high        | 21kB |       |         |
 | fable5-medium-claudecode        | 97.5%  | gpt5.5-high        | 21kB |       |  67,000 |
 | gpt5.4-xhigh-opencode           | 97.0%  | gpt5.4-xhigh-codex | 24kB | 0.79$ |  73,472 |
-| grok4.5-kilo                    | 97.0%  | gpt5.5-high        | 22kB | 0.14$ |  33,033 |
 | gpt5.5-xhigh-codex              | 97.0%  | gpt5.5-high        | 34kB |       |         |
 | grok4.3-reasoning-kilo          | 96.9%  | gpt5.4-xhigh-codex | 18kB | 0.19$ |  37,900 |
+| grok4.5-kilo                    | 96.0%  | gpt5.5-high        | 22kB | 0.14$ |  33,033 |
 | glm5.2-xhigh-kilo               | 96.0%  | gpt5.4-xhigh-codex | 47kB | 0.15$ |  55,620 |
 | qwen3.7max-kilo                 | 94.9%  | gpt5.4-xhigh-codex | 34kB | 0.22$ |  47,203 |
 | qwen3.7plus-kilo                | 94.4%  | gpt5.4-xhigh-codex | 29kB | 0.07$ |  44,200 |
-| gemini3.5flash-high-antigravity | 94.4%  | gpt5.4-xhigh-codex | 35kB |       |         |
 | opus4.7-max-claude              | 94.4%  | gpt5.4-xhigh-codex | 35kB |       |         |
 | gpt5.5-high-codex               | 94.4%  | gpt5.4-xhigh-codex | 30kB |       |         |
 | opus4.6-xhigh-kilo              | 93.9%  | gpt5.4-xhigh-codex | 41kB | 1.54$ |  55,896 |
@@ -34,6 +33,7 @@
 | deepseekv4pro-kilo              | 93.4%  | gpt5.4-xhigh-codex | 27kB | 0.12$ |  42,400 |
 | gpt5.4-xhigh-kilo-geai          | 92.9%  | gpt5.4-xhigh-codex | 26kB |       |  62,613 |
 | kimik2.7code-opencode           | 91.9%  | gpt5.4-xhigh-codex | 31kB | 0.08$ |  44,130 |
+| gemini3.5flash-high-antigravity* | 91.4%  | gpt5.4-xhigh-codex | 35kB |       |         |
 | opus4.6-max-claudecode          | 90.9%  | gpt5.4-xhigh-codex | 35kB |       |         |
 | qwen3.6maxpreview-kilo          | 90.9%  | gpt5.4-xhigh-codex | 57kB | 0.16$ |  52,300 |
 | mistral-medium3.5-opencode      | 90.9%  | gpt5.4-xhigh-codex | 55kB | 0.43$ |  95,336 |
@@ -49,10 +49,10 @@
 | qwen3.6pro-kilo                 | 85.9%  | gpt5.4-xhigh-codex | 19kB | 0.11$ |  59,594 |
 | glm5.1-kilo                     | 83.3%  | gpt5.4-xhigh-codex | 49kB | 0.08$ |  46,328 |
 | hy3-preview-kilo                | 83.3%  | gpt5.4-xhigh-codex | 19kB |       |  38,600 |
-| gemini3.6flash-high-antigravity | 76.3%  | gpt5.6-sol-high    | 20kB |       |         |
 | mistralsmall4-opencode          | 75.8%  | gpt5.4-xhigh-codex | 16kB | 0.03$ |  38,078 |
 | kimik2.5-coda                   | 75.8%  | gpt5.4-xhigh-codex | 23kB | 0.40$ | 528,000 |
 | mimov2.5pro-opencode            | 74.6%  | gpt5.4-xhigh-codex | 23kB | 0.12$ |  41,180 |
+| gemini3.6flash-high-antigravity | 74.2%  | gpt5.6-sol-high    | 20kB |       |         |
 | minimax2.7-opencode             | 72.7%  | gpt5.4-xhigh-codex | 12kB | 0.03$ |  33,705 |
 | kimik2.5-opencode               | 70.7%  | gpt5.4-xhigh-codex | 58kB | 0.15$ |  47,796 |
 | minimax2.5-free-opencode        | 59.6%  | gpt5.4-xhigh-codex |  8kB |       |  32,668 |
@@ -61,6 +61,8 @@
 | gemini3.1pro-antigravity        | 45.6%  | gpt5.4-xhigh-codex |  7kB |       |         |
 | gemini3flash-antigravity        | 40.4%  | gpt5.4-xhigh-codex |  7kB |       |         |
 | nemotron3super-kilo             | 27.8%  | gpt5.4-xhigh-codex |  2kB | 0.09$ |  58,000 |
+
+*`gemini3.5flash-high-antigravity` is marked with `*` because its plan explicitly used the evaluator-only canonical requirement catalog and is therefore benchmark-contaminated. The Evaluator column records the original evaluator; scores for the eight cross-reviewed runs reflect the manual cross-review adjustments.*
 
 ## Self-Evaluation Scores
 
