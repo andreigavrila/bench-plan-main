@@ -137,7 +137,7 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 | ------ | ----------- | -------- | -------- | -------- | --- |
 | PRD-001 | Use Next.js latest stable runtime | critical | full | `1.1 Technology Stack` states `Next.js (latest stable)` |  |
 | PRD-002 | Use Supabase official client libraries | critical | full | `1.1 Technology Stack` states Supabase is accessed via official client libraries |  |
-| PRD-003 | Ship `.env.example` with required variables | critical | full | `10.1 Repository Deliverables` requires `.env.example` with variables and comments |  |
+| PRD-003 | Ship `.env.example` with required variables | critical | partial | `10.1 Repository Deliverables` requires `.env.example` with variables and comments | The plan promises the artifact but never enumerates the required environment-variable contract. |
 | PRD-004 | Ignore `.env*` secrets except example | important | full | `10.1 Repository Deliverables` requires `.gitignore` excluding `.env*` except `.env.example` |  |
 | PRD-005 | Configure build through env without code edits | critical | full | `10.1 Repository Deliverables` says build runs by filling environment variables without editing source |  |
 | PRD-006 | Keep secrets out of repo and server-only | critical | full | `10.1 Credential Handling` covers uncommitted secrets, anon browser key, server-only service role |  |
@@ -146,13 +146,13 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 | PRD-009 | Use one stable namespace per build | critical | full | `3.2 Namespace Isolation` states each build uses a single stable `namespace_id` |  |
 | PRD-010 | Isolate namespaces and scope destructive resets | critical | full | `3.2 Namespace Isolation` and `10.3 Destructive Testing Rules` scope reads, writes, and resets to namespace |  |
 | PRD-011 | Attach every user record to `user_id` | critical | full | `1.2 Core Architectural Principles` and table schemas scope user-owned records to `user_id` |  |
-| PRD-012 | Partition persisted data by namespace and user | critical | full | `1.2 Core Architectural Principles` states effective partition is `(namespace_id, user_id)` |  |
+| PRD-012 | Partition persisted data by namespace and user | critical | partial | `1.2 Core Architectural Principles` states effective partition is `(namespace_id, user_id)` | `cloud_settings.id` is a global primary key defaulting to `globalSettings`, so settings records can collide across namespace/user partitions. |
 | PRD-013 | Support documented dev auth injection, prod-gated | important | full | `3.1 Benchmark Mode Identity` specifies dev-only `X-User-Id`, selector, default user, and production gating |  |
 | PRD-014 | Real OAuth later needs no schema redesign | important | full | `1.2 Core Architectural Principles` and `13. Success Criteria` require OAuth migration without schema redesign |  |
 | PRD-015 | Keep backend as persisted source of truth | critical | full | `1.2 Core Architectural Principles` states backend is the single source of truth |  |
 | PRD-016 | Make client cache safe to discard | critical | full | `10.2 Data Ownership & Local Storage` says clearing local storage or reinstalling does not lose data |  |
 | PRD-017 | Avoid Docker requirement for cloud-agent compatibility | important | full | `1.1 Technology Stack` and `10.4 Cloud Agent Compatibility` say Docker is not required |  |
-| PRD-018 | Overlay saved user data on every show appearance | critical | full | `8. Cross-Cutting Rules` says the user's version takes precedence everywhere |  |
+| PRD-018 | Overlay saved user data on every show appearance | critical | partial | `8. Cross-Cutting Rules` says the user's version takes precedence everywhere | The plan states the principle but defines no reusable overlay assembler or join applied to every show surface. |
 | PRD-019 | Support visible statuses plus hidden `Next` | important | full | `2.1 shows` includes `my_status` with `next`; UI chips omit `Next` and `12. Open Questions` keeps it non-first-class |  |
 | PRD-020 | Map Interested/Excited chips to Later interest | critical | full | `4.5 My Relationship Controls` says Interested/Excited map to `Later + Interest` |  |
 | PRD-021 | Support free-form multi-tag personal tag library | important | partial | `2.1 shows` has `my_tags` array and `4.1 Filters` creates one filter per user tag | The plan stores and filters multiple tags, but it does not explicitly specify free-form tag creation/editing or a reusable personal tag library UX. |
@@ -162,10 +162,10 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 | PRD-025 | Removing status deletes show and all My Data | critical | full | `4.5 Removing from Collection` removes storage and clears status, interest, tags, rating, AI Scoop |  |
 | PRD-026 | Re-add preserves My Data and refreshes public data | critical | full | `4.5 Re-adding Same Show` preserves user data and refreshes public metadata |  |
 | PRD-027 | Track per-field My Data modification timestamps | critical | full | `2.1 shows` lists update timestamps for tags, score, status, interest, and scoop |  |
-| PRD-028 | Use timestamps for sorting, sync, freshness | important | full | `2.2 Merge Rules`, `2.3 Data Continuity`, and Scoop freshness use timestamps for conflict and freshness behavior |  |
+| PRD-028 | Use timestamps for sorting, sync, freshness | important | partial | `2.2 Merge Rules` and Scoop freshness use timestamps for conflict and freshness behavior | Sorting uses `created_at` rather than the My Data modification timestamps, so one required timestamp use is absent. |
 | PRD-029 | Persist Scoop only for saved shows, 4h freshness | critical | full | `4.5 Overview + Scoop` says 4-hour freshness and persistence only if show is in collection |  |
 | PRD-030 | Keep Ask and Alchemy state session-only | important | partial | `4.4 Data Persistence` says Alchemy results are session-only; Ask keeps short-term context | Ask chat history is not explicitly declared non-persistent or cleared when leaving/resetting Ask. |
-| PRD-031 | Resolve AI recommendations to real selectable shows | critical | full | `8. Cross-Cutting Rules` says every recommendation maps to a selectable real show |  |
+| PRD-031 | Resolve AI recommendations to real selectable shows | critical | partial | `6.5 Concepts → Recommendations Contract` requires real items with external IDs, and `8. Cross-Cutting Rules` promises selectable real shows | The plan defines the desired result but no catalog lookup, ID/title/media validation, resolver, or deterministic fallback mechanism. |
 | PRD-032 | Show collection and rating tile indicators | important | full | `4.1 Collection Home` tiles show in-collection and rating indicators |  |
 | PRD-033 | Sync libraries/settings consistently and merge duplicates | important | partial | `2.2 Merge Rules` and `cloud_settings` cover consistent sync; duplicate show constraint avoids duplicates per user namespace | The plan covers sync conflict rules and duplicate prevention, but not explicit duplicate detection and transparent merge of already duplicated records. |
 | PRD-034 | Preserve saved libraries across data-model upgrades | critical | full | `2.3 Data Continuity` says saved shows and user data migrate without loss |  |
@@ -237,51 +237,51 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 
 ### 3. Coverage Scores
 
-Critical:  (30 × 1.0 + 0 × 0.5) / 30 × 100 = 100.0%  (30 of 30 critical requirements)
-Important: (57 × 1.0 + 9 × 0.5) / 67 × 100 = 91.8%  (61.5 of 67 important requirements)
+Critical:  (26 × 1.0 + 4 × 0.5) / 30 × 100 = 93.3%  (28.0 of 30 critical requirements)
+Important: (56 × 1.0 + 10 × 0.5) / 67 × 100 = 91.0%  (61.0 of 67 important requirements)
 Detail:    (2 × 1.0 + 0 × 0.5) / 2 × 100 = 100.0%  (2 of 2 detail requirements)
-Overall:   94.4% (99 total requirements)
+Overall:   91.9% (99 total requirements)
 
 ### 4. Top Gaps
 
-1. PRD-073 (`important`) Retry malformed mention output once, then fallback
+1. PRD-012 (`critical`) Partition persisted data by namespace and user
 
-This matters because Ask depends on structured `showList` output to render selectable mentioned shows; without retry and fallback behavior, malformed model output can silently break a core discovery path.
+The global `globalSettings` primary key contradicts the stated namespace/user partition, so different users or benchmark runs cannot safely create their own default settings records.
 
-2. PRD-033 (`important`) Sync libraries/settings consistently and merge duplicates
+2. PRD-018 (`critical`) Overlay saved user data on every show appearance
 
-The plan's uniqueness constraint helps avoid future duplicate records, but the PRD asks for duplicate items to be detected and merged transparently; without that, sync/import edge cases can leave repeated library entries or split My Data.
+A principle alone does not create a universal overlay path; without a shared assembler or batch join, Search, mentions, recommendations, Alchemy, or person credits can show stale or missing My Data.
 
-3. PRD-030 (`important`) Keep Ask and Alchemy state session-only
+3. PRD-031 (`critical`) Resolve AI recommendations to real selectable shows
 
-The plan clearly handles Alchemy as session-only but leaves Ask persistence ambiguous, which can create privacy, stale-context, and expectation problems if chat history is accidentally stored.
+Valid-ID output instructions do not verify model output. Without catalog lookup and ID/title/media validation, hallucinated or mismatched recommendations can still become interactive.
 
-4. PRD-036 (`important`) Keep provider IDs persisted and detail fetches transient
+4. PRD-003 (`critical`) Ship `.env.example` with required variables
 
-The plan stores provider data but does not constrain it to provider IDs or identify transient detail fetches, risking bloated persisted records and stale public data.
+The plan names the file but not its required variables, leaving Supabase, namespace, identity, catalog, AI, and server-only configuration open to implementation guesswork.
 
-5. PRD-082 (`important`) Generate shared multi-show concepts with larger option pool
+5. PRD-073 (`important`) Retry malformed mention output once, then fallback
 
-Alchemy quality depends on giving users enough shared concept choices to steer the blend; the plan covers shared concepts but not the larger multi-show option pool.
+Ask depends on structured `showList` output to render selectable mentioned shows; without retry and fallback behavior, malformed model output can silently break a core discovery path.
 
 ### 5. Coverage Narrative
 
 #### Overall Posture
 
-This is a strong plan with minor but real gaps. It covers all critical requirements, most product flows, the infrastructure rider, the persistence model, and the AI voice system with enough specificity to guide implementation. The remaining issues are concentrated in reliability details, data-integrity edge cases, and navigation guarantees rather than fundamental architecture.
+This is a strong plan, but it does not fully cover all critical requirements. Four critical items remain partial: the environment contract, partition-safe settings identity, universal saved-data overlays, and real-show recommendation resolution. The broader product flows and AI voice system are well specified, but these gaps require implementation-level decisions rather than minor polish.
 
 #### Strength Clusters
 
-Coverage is strongest in Benchmark Runtime & Isolation, Show Detail & Relationship UX, AI Voice, Persona & Quality, Person Detail, and Settings & Export. The plan is especially concrete on Supabase/Next.js setup, namespace and user scoping, implicit save behaviors, detail-page ordering, Scoop states, concept recommendation contracts, and export.
+Coverage is strongest in Show Detail & Relationship UX, AI Voice, Persona & Quality, Person Detail, and Settings & Export. The plan is especially concrete on implicit save behavior, detail-page ordering, Scoop states, concept contracts, discovery-quality scoring, person analytics, and ZIP export.
 
 #### Weakness Clusters
 
-The weak spots cluster around operational edge contracts: Ask malformed-output handling, session-only persistence boundaries, transient catalog/detail storage, duplicate library merge behavior, and primary navigation persistence. A smaller product-detail gap is that tags are modeled but the free-form personal tag-library UX is not specified. These are mostly important-tier requirements that protect reliability and consistency after the happy path is built.
+The most consequential gaps cluster in infrastructure and data delivery: the environment interface is not enumerated, one settings key is globally collision-prone, saved overlays lack a universal assembly path, and AI recommendations lack a concrete resolver. Important-tier gaps remain around session lifetimes, duplicate reconciliation, transient provider/detail storage, persistent navigation, tag creation, timestamp-based sorting, and malformed Ask fallback.
 
 #### Risk Assessment
 
-If executed as-is, the most likely failure mode is an app that looks complete but has brittle edges around AI and data consistency. QA would likely notice malformed Ask responses failing to populate mentioned-show tiles, Ask history sticking around longer than intended, duplicate saved items not merging cleanly, or Find/Settings being reachable by route but not consistently present in the shell.
+If executed as-is, the most serious failures would be settings collisions across users/runs and inconsistent My Data across different show surfaces. QA could also see hallucinated or mismatched AI titles become interactive because the plan validates the desired output quality but never defines the catalog-resolution mechanism. Malformed Ask output and stale session/sync behavior remain secondary risks.
 
 #### Remediation Guidance
 
-The plan needs a small round of acceptance-criteria tightening rather than a new architecture. Add explicit AI parser retry/fallback criteria, state which Ask and Alchemy objects are session-only and when they clear, define persisted-versus-transient catalog fields, specify duplicate detection/merge behavior, spell out free-form tag entry/library behavior, and make persistent primary navigation entries part of the shell contract.
+The plan needs targeted architecture and contract work. Enumerate the environment interface, make settings identity partition-safe, introduce one overlay assembler used by every show surface, and define a catalog resolver that validates external ID, title, and media type before a recommendation becomes interactive. Then tighten Ask retry/session rules, timestamp sorting, duplicate reconciliation, transient storage, tag creation, and persistent navigation acceptance criteria.

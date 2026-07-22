@@ -153,7 +153,7 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 | PRD-001 | Use Next.js latest stable runtime | critical | partial | `1.1 Benchmark Runtime & Isolation`: "Next.js App Router (v14/v15 stable)". | The plan names older/ambiguous major versions instead of pinning the current latest stable runtime target. |
 | PRD-002 | Use Supabase official client libraries | critical | full | `1.1 Benchmark Runtime & Isolation`: `@supabase/supabase-js` and `@supabase/ssr`. |  |
 | PRD-003 | Ship `.env.example` with required variables | critical | full | `1.1 Benchmark Runtime & Isolation` and `6.1 Environment Setup`: create comprehensive `.env.example`. |  |
-| PRD-004 | Ignore `.env*` secrets except example | important | full | `1.1 Benchmark Runtime & Isolation`: configure `.gitignore` to block `.env*` secrets except example. |  |
+| PRD-004 | Ignore `.env*` secrets except example | important | partial | `1.1 Benchmark Runtime & Isolation` and `6.1 Environment Setup`: configure environment-file ignores. | The concrete plan lists only `.env`, `.env.local`, and `.env.production`; it does not specify the required `.env*` wildcard with an `.env.example` exception. |
 | PRD-005 | Configure build through env without code edits | critical | full | `1.1 Benchmark Runtime & Isolation` and `3. Directory Layout`: `env.ts` reads all config from `process.env`. |  |
 | PRD-006 | Keep secrets out of repo and server-only | critical | full | `1.1 Benchmark Runtime & Isolation`: service-role style credentials restricted to Server Actions and API Routes. |  |
 | PRD-007 | Provide app, test, reset command scripts | critical | full | `1.1 Benchmark Runtime & Isolation` and `6.1 Environment Setup`: `dev`, `test`, and `test:reset`. |  |
@@ -213,9 +213,9 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 | PRD-061 | Explore Similar uses CTA-first concept flow | important | full | `1.5 Show Detail & Relationship UX`: "Get Concepts" first, then chips, then unlock "Explore Shows". |  |
 | PRD-062 | Include streaming availability and person-linking credits | important | full | `1.5 Show Detail & Relationship UX`: fetch providers and cast/crew with person links. |  |
 | PRD-063 | Gate seasons to TV and financials to movies | important | full | `1.5 Show Detail & Relationship UX`: conditional rendering based on `showType`. |  |
-| PRD-064 | Keep primary actions early and page not overwhelming | important | full | `1.5 Show Detail & Relationship UX`: cluster interactive items in a top deck. |  |
+| PRD-064 | Keep primary actions early and page not overwhelming | important | partial | `1.5 Show Detail & Relationship UX`: cluster interactive items in a top deck. | Early actions are covered, but the plan does not define the long-tail/full-bleed density treatment needed to keep the large Detail page from feeling overwhelming. |
 | PRD-065 | Provide conversational Ask chat interface | important | full | `1.6 Ask Chat` and `6.6 Discover AI Services`: user/assistant bubbles plus text field. |  |
-| PRD-066 | Answer directly with confident, spoiler-safe recommendations | important | full | `1.6 Ask Chat`: prompt instructions demand spoiler-safe, friendly, direct, opinionated guidance. |  |
+| PRD-066 | Answer directly with confident, spoiler-safe recommendations | important | partial | `1.6 Ask Chat` and `5.2 Ask Mode Contract`: friendly, opinionated, spoiler-safe guidance. | The traceability row says “direct,” but the concrete Ask prompt/acceptance contract does not require the answer within the first 3-5 lines. |
 | PRD-067 | Show horizontal mentioned-shows strip from chat | important | full | `1.6 Ask Chat`: parse structured response into a poster carousel below the message. |  |
 | PRD-068 | Open Detail from mentions or Search fallback | important | full | `1.6 Ask Chat`: click poster to open Detail or fall back to Search. |  |
 | PRD-069 | Show six random starter prompts with refresh | important | full | `1.6 Ask Chat`: six prompts from a static pool of 80 plus refresh. |  |
@@ -225,7 +225,7 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 | PRD-073 | Retry malformed mention output once, then fallback | important | full | `5.2 Ask Mode Contract`: one retry on parse failure, then commentary-only fallback. |  |
 | PRD-074 | Redirect Ask back into TV/movie domain | important | full | `1.6 Ask Chat` and `5.1 System Prompt Wrapper`: refuse out-of-domain requests and redirect. |  |
 | PRD-075 | Treat concepts as taste ingredients, not genres | important | full | `1.7 Concepts, Explore Similar & Alchemy`: prompt focuses on vibes, pacing, themes, and structure. |  |
-| PRD-076 | Return bullet-only, 1-3 word, non-generic concepts | important | full | `1.7 Concepts, Explore Similar & Alchemy`: strict bullet-only, 1-3 word prompt validation. |  |
+| PRD-076 | Return bullet-only, 1-3 word, non-generic concepts | important | partial | `1.7 Concepts, Explore Similar & Alchemy`: strict bullet-only, 1-3 word prompt validation. | Format and length are specified, but the plan does not define concept-specific rejection of generic placeholders such as “good characters.” |
 | PRD-077 | Order concepts by strongest aha and varied axes | important | full | `1.7 Concepts, Explore Similar & Alchemy`: order by evocative strength across varied axes. |  |
 | PRD-078 | Require concept selection and guide ingredient picking | important | partial | `1.7 Concepts, Explore Similar & Alchemy`: require at least one selected concept before requesting recs. | It enforces selection, but does not plan the user guidance or empty-state copy around picking taste ingredients. |
 | PRD-079 | Return exactly five Explore Similar recommendations | important | full | `1.7 Concepts, Explore Similar & Alchemy`: constrain Explore Similar to exactly five shows. |  |
@@ -233,10 +233,10 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 | PRD-081 | Clear downstream results when inputs change | important | full | `1.7 Concepts, Explore Similar & Alchemy`: handlers wipe concept and recommendation arrays on input changes. |  |
 | PRD-082 | Generate shared multi-show concepts with larger option pool | important | full | `1.7 Concepts, Explore Similar & Alchemy`: request 10-15 common concepts for multi-show mode. |  |
 | PRD-083 | Cite selected concepts in concise recommendation reasons | important | full | `1.7 Concepts, Explore Similar & Alchemy`: reasons explicitly cite chosen concepts. |  |
-| PRD-084 | Deliver surprising but defensible taste-aligned recommendations | important | full | `1.7 Concepts, Explore Similar & Alchemy`: prompts calibrate for diversity while defending the picks. |  |
+| PRD-084 | Deliver surprising but defensible taste-aligned recommendations | important | partial | `1.7 Concepts, Explore Similar & Alchemy`: prompts calibrate for diversity while defending the picks. | “Calibrate prompts” is not a concrete surprise-without-betrayal generation rule or acceptance check. |
 | PRD-085 | Keep one consistent AI persona across surfaces | important | full | `1.8 AI Voice, Persona & Quality` and `5.1 System Prompt Wrapper`: central shared persona module. |  |
 | PRD-086 | Enforce shared AI guardrails across all surfaces | critical | full | `1.8 AI Voice, Persona & Quality`: TV/movie limits, spoiler safety, and honesty enforced centrally. |  |
-| PRD-087 | Make AI warm, joyful, and light in critique | important | full | `1.8 AI Voice, Persona & Quality`: warm critic-friend tone parameters and prompt language. |  |
+| PRD-087 | Make AI warm, joyful, and light in critique | important | partial | `1.8 AI Voice, Persona & Quality` and `5.1 System Prompt Wrapper`: critic-friend tone. | The shared prompt covers enthusiasm and honesty, but it does not explicitly preserve joy-forward warmth and light, non-mean critique. |
 | PRD-088 | Structure Scoop as personal taste mini-review | important | full | `1.8 AI Voice, Persona & Quality` and `5.3 AI Scoop Generation`: defined mini-review structure. |  |
 | PRD-089 | Keep Ask brisk and dialogue-like by default | important | full | `1.8 AI Voice, Persona & Quality`: Ask kept under three paragraphs unless the user asks for depth. |  |
 | PRD-090 | Feed AI the right surface-specific context inputs | important | full | `1.8 AI Voice, Persona & Quality`, `1.6 Ask Chat`, and `1.7 Concepts`: library, show, and concept context are passed per surface. |  |
@@ -254,14 +254,14 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 
 Overall score:
 
-`(88 × 1.0 + 11 × 0.5) / 99 × 100 = 94.4%`
+`(82 × 1.0 + 17 × 0.5) / 99 × 100 = 91.4%`
 
 Score by severity tier:
 
 `Critical:  (27 × 1.0 + 3 × 0.5) / 30 × 100 = 95.0%  (28.5 of 30 critical requirements)`
-`Important: (60 × 1.0 + 7 × 0.5) / 67 × 100 = 94.8%  (63.5 of 67 important requirements)`
+`Important: (54 × 1.0 + 13 × 0.5) / 67 × 100 = 90.3%  (60.5 of 67 important requirements)`
 `Detail:    (1 × 1.0 + 1 × 0.5) / 2 × 100 = 75.0%  (1.5 of 2 detail requirements)`
-`Overall:   94.4% (99 total requirements)`
+`Overall:   91.4% (99 total requirements)`
 
 ## 4. Top Gaps
 
@@ -284,7 +284,7 @@ Conflict timestamps alone do not prevent duplicate or split library records, and
 
 #### Overall Posture
 
-This is a strong but somewhat over-credited plan. It tracks almost every benchmark requirement and gives concrete implementation direction across persistence, UI structure, and AI surfaces, but several rows rely on broad traceability claims where the PRD asks for narrower behavioral contracts. The recomputed score is lower because those narrowed or incomplete behaviors should be treated as partial, not full.
+This is a strong but materially over-credited plan. It tracks almost every benchmark requirement and gives concrete implementation direction across persistence, UI structure, and AI surfaces, but several rows rely on broad traceability claims where the PRD asks for narrower behavioral contracts. The recomputed score is lower because those narrowed or incomplete behaviors should be treated as partial, not full. Separately, the plan explicitly references the evaluator-only canonical catalog, so the run is benchmark-contaminated; the 91.4% coverage score does not apply an additional contamination penalty.
 
 #### Strength Clusters
 
@@ -292,12 +292,12 @@ The plan is strongest in App Navigation & Discover Shell, Collection Home & Sear
 
 #### Weakness Clusters
 
-The gaps cluster around precision rather than missing screens. Infrastructure has a stale runtime target and lacks explicit documentation work for dev identity injection. Data and AI quality gaps center on edge-case contracts: external-ID-first recommendation resolution, timestamp-based `my*` merge semantics, duplicate handling, Scoop state transitions, concept-selection guidance, and rubric-based validation.
+The gaps cluster around precision rather than missing screens. Infrastructure has a stale runtime target, incomplete environment-ignore coverage, and lacks explicit documentation work for dev identity injection. Data, Detail UX, and AI quality gaps center on edge-case contracts: external-ID-first recommendation resolution, timestamp-based `my*` merge semantics, duplicate handling, Scoop states, anti-clutter treatment, direct-first Ask responses, non-generic concepts, surprise-without-betrayal, voice pillars, concept-selection guidance, and rubric-based validation.
 
 #### Risk Assessment
 
-If this plan were executed as-is, the first visible failure would likely be subtle behavioral drift rather than a missing page. A QA reviewer would catch stale runtime assumptions, AI recommendations that resolve unreliably, Scoop UI states that do not match the intended cached/open/generating flow, or sync/refresh paths that can blur catalog updates with user-owned edits. On the AI side, outputs might be formally well-structured but still feel flatter or less taste-aware than the PRD expects.
+If this plan were executed as-is, the first visible failure would likely be subtle behavioral drift rather than a missing page. A QA reviewer would catch stale runtime assumptions, unreliable recommendation resolution, incomplete Scoop states, a crowded Detail page, or sync paths that blur catalog updates with user-owned edits. On the AI side, outputs might be formally structured but still feel evasive, generic, insufficiently surprising, or harsher and flatter than the intended persona.
 
 #### Remediation Guidance
 
-The missing work is mostly specification tightening, not wholesale replanning. The plan needs updated runtime/version language, explicit documentation tasks for benchmark auth injection, sharper acceptance criteria for duplicate handling and timestamp-based user-field merges, and fuller UI state specs for Scoop and concept selection. It also needs a real validation strategy that scores voice, taste alignment, and integrity together rather than treating formatting as the whole quality bar.
+The missing work is mostly specification tightening, not wholesale replanning. The plan needs updated runtime/version language, the exact environment-ignore rule, explicit documentation tasks for benchmark auth injection, sharper duplicate/merge acceptance criteria, and fuller UI state and density specs. It also needs direct-first Ask, non-generic concept, surprise, warmth/light-critique, and rubric gates rather than treating formatting as the whole AI quality bar.

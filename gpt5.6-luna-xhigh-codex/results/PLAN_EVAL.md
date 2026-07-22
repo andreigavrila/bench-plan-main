@@ -216,7 +216,7 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 | PRD-079 | Return exactly five Explore Similar recommendations | important | full | Section 6 task 8; Section 10 task 5 |  |
 | PRD-080 | Support full Alchemy loop with chaining | important | full | Section 6 task 9; Section 9 task 4 |  |
 | PRD-081 | Clear downstream results when inputs change | important | full | Section 6 task 9; Section 9 task 4 |  |
-| PRD-082 | Generate shared multi-show concepts with larger option pool | important | full | Section 6 task 7 |  |
+| PRD-082 | Generate shared multi-show concepts with larger option pool | important | partial | Section 6 task 7 | Multi-show concepts are required to be shared, but the larger candidate pool is only optional (`may use`) rather than a committed behavior. |
 | PRD-083 | Cite selected concepts in concise recommendation reasons | important | full | Section 6 task 8 |  |
 | PRD-084 | Deliver surprising but defensible taste-aligned recommendations | important | full | Section 6 task 10; Section 12 test strategy task 6 |  |
 | PRD-085 | Keep one consistent AI persona across surfaces | important | full | Section 6 task 2 |  |
@@ -237,12 +237,12 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 
 ### 3. Coverage Scores
 
-score = (98 full × 1.0 + 1 partial × 0.5) / 99 total_count × 100 = 99.5%
+score = (97 full × 1.0 + 2 partial × 0.5) / 99 total_count × 100 = 99.0%
 
 Critical:  (30 full × 1.0 + 0 partial × 0.5) / 30 critical_total × 100 = 100.0%  (30 of 30 critical requirements)
-Important: (66 full × 1.0 + 1 partial × 0.5) / 67 important_total × 100 = 99.3%  (66.5 weighted of 67 important requirements)
+Important: (65 full × 1.0 + 2 partial × 0.5) / 67 important_total × 100 = 98.5%  (66.0 weighted of 67 important requirements)
 Detail:    (2 full × 1.0 + 0 partial × 0.5) / 2 detail_total × 100 = 100.0%  (2 of 2 detail requirements)
-Overall:   99.5% (99 total requirements)
+Overall:   99.0% (99 total requirements)
 
 ### 4. Top Gaps
 
@@ -250,11 +250,15 @@ Overall:   99.5% (99 total requirements)
 
    This matters because Ask can satisfy broad persona and safety rules while still feeling evasive or slow; users will notice first if recommendations do not answer the prompt quickly and decisively.
 
+2. PRD-082 | important | Generate shared multi-show concepts with larger option pool
+
+   This matters because treating the larger Alchemy pool as optional can leave multi-show discovery with too few shared concepts for meaningful user steering.
+
 ### 5. Coverage Narrative
 
 #### Overall Posture
 
-This is an extremely strong, execution-ready implementation plan with one narrow acceptance-criteria gap. It does not merely name the product surfaces; it gives concrete domain services, schema boundaries, UI flows, AI contracts, persistence rules, and verification gates for nearly every catalog requirement.
+This is an extremely strong, execution-ready implementation plan with two narrow acceptance-criteria gaps. It does not merely name the product surfaces; it gives concrete domain services, schema boundaries, UI flows, AI contracts, persistence rules, and verification gates for nearly every catalog requirement.
 
 #### Strength Clusters
 
@@ -262,12 +266,12 @@ Coverage is strongest in Benchmark Runtime & Isolation, Collection Data & Persis
 
 #### Weakness Clusters
 
-The single partial item is in Ask response-shape quality, not architecture or feature coverage. The plan covers the AI surface broadly, but it does not spell out the first-lines/direct-answer bar that makes Ask feel fast and confident.
+The two partial items are both AI contract details rather than architecture or feature gaps. Ask lacks the first-lines/direct-answer bar, and multi-show concept generation makes the larger option pool discretionary rather than required.
 
 #### Risk Assessment
 
-If executed as-is, the most likely failure mode is an Ask experience that is safe, on-brand, and technically valid, but occasionally slow to make a recommendation. QA or stakeholders would likely notice this as slightly evasive chat behavior rather than a missing screen or broken data flow.
+If executed as-is, the most likely failure mode is discovery that is safe and technically valid but slightly weaker in use: Ask may take too long to recommend, while Alchemy may expose too few shared concepts for useful steering.
 
 #### Remediation Guidance
 
-The remaining planning work is acceptance-criteria refinement. Add an explicit Ask response-shape check requiring a direct answer within the first few lines, confident picks, and list formatting for multi-recommendation answers, then carry that into the AI quality harness.
+The remaining planning work is acceptance-criteria refinement. Add an explicit Ask response-shape check requiring a direct answer within the first few lines, and make the larger multi-show concept pool mandatory with a concrete count or relative-size assertion.

@@ -147,7 +147,7 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 | PRD-010 | Isolate namespaces and scope destructive resets | critical | full | Section 2.1; Phase 7; Section 7.1 integration test |  |
 | PRD-011 | Attach every user record to `user_id` | critical | full | Section 2.1; Section 2.2 schema |  |
 | PRD-012 | Partition persisted data by namespace and user | critical | full | Section 2.1; composite constraints and indexes in Section 2.2 |  |
-| PRD-013 | Support documented dev auth injection, prod-gated | important | full | Section 2.1 Dev Identity Injection |  |
+| PRD-013 | Support documented dev auth injection, prod-gated | important | partial | Section 2.1 Dev Identity Injection | The plan describes a non-production identity mechanism but does not include the required operator/developer documentation or an explicit production rejection test. |
 | PRD-014 | Real OAuth later needs no schema redesign | important | full | Section 2.1 explicitly promises zero schema refactoring |  |
 | PRD-015 | Keep backend as persisted source of truth | critical | partial | Sections 1 and 2 use Supabase persistence for shows/settings | Server persistence is planned, but the source-of-truth boundary and prohibition on correctness-critical local state are not explicit. |
 | PRD-016 | Make client cache safe to discard | critical | missing | none | The plan never defines client caching as disposable or verifies recovery after clearing browser storage. |
@@ -210,20 +210,20 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 | PRD-073 | Retry malformed mention output once, then fallback | important | missing | none | Parser tests exist, but no one-retry strategy or unstructured-commentary fallback is planned for malformed AI output. |
 | PRD-074 | Redirect Ask back into TV/movie domain | important | missing | none | The AI plan does not state the domain-redirect rule or test out-of-domain prompts. |
 | PRD-075 | Treat concepts as taste ingredients, not genres | important | full | Section 4 opening and Concepts row |  |
-| PRD-076 | Return bullet-only, 1-3 word, non-generic concepts | important | full | Section 4.1 Concepts row |  |
+| PRD-076 | Return bullet-only, 1-3 word, non-generic concepts | important | partial | Section 4.1 Concepts row | The plan specifies short evocative concepts, but it does not require bullet-only output or explicitly reject generic placeholders. |
 | PRD-077 | Order concepts by strongest aha and varied axes | important | partial | Section 4.1 Concepts row covers varied format, tone, emotion, and craft axes | No ordering rule puts the strongest “aha” concepts first. |
 | PRD-078 | Require concept selection and guide ingredient picking | important | partial | Sections 4.1, 5.2, and 5.3 require concept selection | Selection and caps are covered, but ingredient-picking helper copy and the no-selection empty state are absent. |
 | PRD-079 | Return exactly five Explore Similar recommendations | important | full | Section 4.1 Concept Recommendations row |  |
 | PRD-080 | Support full Alchemy loop with chaining | important | full | Section 5.3 Alchemy Mode; Phase 6 |  |
 | PRD-081 | Clear downstream results when inputs change | important | missing | none | The plan does not define invalidation of concepts/results when source shows or selected concepts change. |
 | PRD-082 | Generate shared multi-show concepts with larger option pool | important | missing | none | Shared commonality is covered, but the larger multi-show concept pool is never specified. |
-| PRD-083 | Cite selected concepts in concise recommendation reasons | important | full | Section 4.1 Concept Recommendations row |  |
+| PRD-083 | Cite selected concepts in concise recommendation reasons | important | partial | Section 4.1 Concept Recommendations row | Reasons are described as concept-aligned, but the plan does not require each concise reason to explicitly name the selected concept or concepts. |
 | PRD-084 | Deliver surprising but defensible taste-aligned recommendations | important | missing | none | Taste alignment is tested, but the required “surprise without betrayal” criterion is not planned. |
 | PRD-085 | Keep one consistent AI persona across surfaces | important | full | Section 4 unified persona; Phase 5 |  |
 | PRD-086 | Enforce shared AI guardrails across all surfaces | critical | partial | Section 4 persona constraints; Phase 5 voice guardrails | Spoiler safety and voice are present, but the plan does not enumerate or test domain restriction, honest criticism, specificity, and actionable real-title behavior across every AI surface. |
 | PRD-087 | Make AI warm, joyful, and light in critique | important | full | Section 4 unified persona |  |
 | PRD-088 | Structure Scoop as personal taste mini-review | important | full | Section 4.1 Scoop row |  |
-| PRD-089 | Keep Ask brisk and dialogue-like by default | important | full | Section 4.1 Ask row |  |
+| PRD-089 | Keep Ask brisk and dialogue-like by default | important | partial | Section 4.1 Ask row | The plan describes friend-like dialogue and confident picks but does not constrain Ask to remain brisk by default or define its expected response length. |
 | PRD-090 | Feed AI the right surface-specific context inputs | important | full | Section 4.1 input-context matrix |  |
 | PRD-091 | Validate discovery with rubric and hard-fail integrity | important | partial | Phase 7; Section 7.2 | The threshold and real-show hard fail are present, but the plan does not explicitly score every rubric dimension, notably specificity and surprise. |
 | PRD-092 | Show person gallery, name, and bio | important | partial | Section 5.4 Person Detail header | Name and bio are covered, but only a single profile image is planned rather than an image gallery. |
@@ -237,12 +237,12 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 
 ### 3. Coverage Scores
 
-score = (62 full × 1.0 + 27 partial × 0.5) / 99 total_count × 100 = 76.3%
+score = (58 full × 1.0 + 31 partial × 0.5) / 99 total_count × 100 = 74.2%
 
 Critical:  (21 full × 1.0 + 7 partial × 0.5) / 30 critical_total × 100 = 81.7%  (24.5 of 30 critical requirements)
-Important: (40 full × 1.0 + 20 partial × 0.5) / 67 important_total × 100 = 74.6%  (50 of 67 important requirements)
+Important: (36 full × 1.0 + 24 partial × 0.5) / 67 important_total × 100 = 71.6%  (48 of 67 important requirements)
 Detail:    (1 full × 1.0 + 0 partial × 0.5) / 2 detail_total × 100 = 50.0%  (1 of 2 detail requirements)
-Overall:   76.3% (99 total requirements)
+Overall:   74.2% (99 total requirements)
 
 ### 4. Top Gaps
 
@@ -270,7 +270,7 @@ Overall:   76.3% (99 total requirements)
 
 #### Overall Posture
 
-The plan is structurally sound and implementation-oriented, but it is not yet comprehensive enough to execute without material interpretation. Its core schema, collection rules, page inventory, and principal AI flows are strong. The 76.3% score reflects a plan with a viable foundation and several important contract gaps rather than a plan missing the product’s central architecture.
+The plan is structurally sound and implementation-oriented, but it is not yet comprehensive enough to execute without material interpretation. Its core schema, collection rules, page inventory, and principal AI flows are strong. The 74.2% score reflects a plan with a viable foundation and several important contract gaps rather than a plan missing the product’s central architecture.
 
 #### Strength Clusters
 
@@ -278,7 +278,7 @@ Coverage is strongest in Collection Data & Persistence’s basic save/remove rul
 
 #### Weakness Clusters
 
-The most consequential gaps cluster in Benchmark Runtime & Isolation and the deeper durability requirements of Collection Data & Persistence: disposable caches, secret boundaries, command scripts, universal overlays, and upgrade continuity are not fully specified. A second cluster concerns behavioral acceptance details across Collection Home & Search, Ask Chat, and Concepts/Alchemy—empty states, non-AI Search tone, parser fallback, domain redirection, state invalidation, multi-show concept pool sizing, and recommendation surprise.
+The most consequential gaps cluster in Benchmark Runtime & Isolation and the deeper durability requirements of Collection Data & Persistence: disposable caches, secret boundaries, command scripts, universal overlays, and upgrade continuity are not fully specified. A second cluster concerns behavioral acceptance details across Collection Home & Search, Ask Chat, and Concepts/Alchemy—documented dev identity, empty states, non-AI Search tone, parser fallback, domain redirection, brisk Ask behavior, concept formatting/citations, state invalidation, multi-show concept pool sizing, and recommendation surprise.
 
 #### Risk Assessment
 
@@ -286,4 +286,4 @@ If implemented as written, the app would likely demo its happy paths successfull
 
 #### Remediation Guidance
 
-The plan needs targeted specification and acceptance-criteria work rather than a new architecture. Add explicit trust and source-of-truth boundaries, cache-clearing and migration-continuity tests, complete package-script deliverables, and one shared show-overlay path. Then tighten surface contracts with concrete empty/error states, AI retry/domain rules, Alchemy invalidation behavior, concept-pool sizing, Search tone, and complete quality-rubric checks.
+The plan needs targeted specification and acceptance-criteria work rather than a new architecture. Add explicit trust and source-of-truth boundaries, documented and production-tested dev identity, cache-clearing and migration-continuity tests, complete package-script deliverables, and one shared show-overlay path. Then tighten surface contracts with concrete empty/error states, AI retry/domain rules, brisk Ask limits, concept formatting/citation rules, Alchemy invalidation behavior, concept-pool sizing, Search tone, and complete quality-rubric checks.

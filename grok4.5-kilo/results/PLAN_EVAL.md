@@ -138,7 +138,7 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 | PRD-001 | Use Next.js latest stable runtime | critical | full | Section 1 Stack; Phase 0 task 1 |  |
 | PRD-002 | Use Supabase official client libraries | critical | full | Section 1 Stack; Section 3.1; Phase 0 task 4 |  |
 | PRD-003 | Ship `.env.example` with required variables | critical | full | Section 10; Phase 0 task 2 |  |
-| PRD-004 | Ignore `.env*` secrets except example | important | full | Section 10; Phase 0 task 2 |  |
+| PRD-004 | Ignore `.env*` secrets except example | important | partial | Section 10; Phase 0 task 2 | The plan says secrets must stay out of the repo but never specifies the required `.env*` ignore rule with an `.env.example` exception. |
 | PRD-005 | Configure build through env without code edits | critical | full | Section 10; Section 2.2; Phase 0 task 3 |  |
 | PRD-006 | Keep secrets out of repo and server-only | critical | full | Section 2.2; Section 9; Section 10 |  |
 | PRD-007 | Provide app, test, reset command scripts | critical | full | Phase 0 task 6; Section 11 scripts; Section 3.5 |  |
@@ -160,7 +160,7 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 | PRD-023 | Save shows from status, interest, rating, tagging | critical | full | Section 3.2 rule 2; Phase 2 UI |  |
 | PRD-024 | Default save to Later/Interested except rating-save Done | critical | full | Section 3.2 rule 3; Phase 2 UI |  |
 | PRD-025 | Removing status deletes show and all My Data | critical | full | Section 3.2 rule 5; Phase 2 UI |  |
-| PRD-026 | Re-add preserves My Data and refreshes public data | critical | full | Section 3.2 rule 9; modules `showMerge` and `conflictResolve` |  |
+| PRD-026 | Re-add preserves My Data and refreshes public data | critical | partial | Section 3.2 rule 9; modules `showMerge` and `conflictResolve` | Merge primitives are named, but the plan does not define an explicit re-add/upsert path that preserves all latest My Data while refreshing public fields. |
 | PRD-027 | Track per-field My Data modification timestamps | critical | full | Section 3.1 My Data fields; Section 3.2 rule 8 |  |
 | PRD-028 | Use timestamps for sorting, sync, freshness | important | full | Section 3.2 rule 8; modules `scoopFreshness` and `conflictResolve` |  |
 | PRD-029 | Persist Scoop only for saved shows, 4h freshness | critical | full | Section 3.3; Section 5 Scoop; Phase 4 Scoop |  |
@@ -237,12 +237,12 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 
 ### 3. Coverage Scores
 
-score = (93 full x 1.0 + 6 partial x 0.5) / 99 total_count x 100 = 97.0%
+score = (91 full x 1.0 + 8 partial x 0.5) / 99 total_count x 100 = 96.0%
 
-Critical:  (29 full x 1.0 + 1 partial x 0.5) / 30 critical_total x 100 = 98.3%  (29.5 weighted of 30 critical requirements)
-Important: (62 full x 1.0 + 5 partial x 0.5) / 67 important_total x 100 = 96.3%  (64.5 weighted of 67 important requirements)
+Critical:  (28 full x 1.0 + 2 partial x 0.5) / 30 critical_total x 100 = 96.7%  (29.0 weighted of 30 critical requirements)
+Important: (61 full x 1.0 + 6 partial x 0.5) / 67 important_total x 100 = 95.5%  (64.0 weighted of 67 important requirements)
 Detail:    (2 full x 1.0 + 0 partial x 0.5) / 2 detail_total x 100 = 100.0%  (2 of 2 detail requirements)
-Overall:   97.0% (99 total requirements)
+Overall:   96.0% (99 total requirements)
 
 ### 4. Top Gaps
 
@@ -250,21 +250,21 @@ Overall:   97.0% (99 total requirements)
 
    This matters because Ask mentions depend on a parser-compatible structured object; naming only the string encoding still leaves room for an implementation that cannot reliably render the mentioned-shows strip.
 
-2. PRD-033 | important | Sync libraries/settings consistently and merge duplicates
+2. PRD-026 | critical | Re-add preserves My Data and refreshes public data
+
+   This matters because an underspecified re-add path can overwrite or discard the user's latest status, tags, rating, interest, or Scoop while refreshing catalog data.
+
+3. PRD-004 | important | Ignore `.env*` secrets except example
+
+   This matters because generic secret-handling language does not guarantee that every local environment variant is excluded while the runnable example remains committed.
+
+4. PRD-033 | important | Sync libraries/settings consistently and merge duplicates
 
    This matters because timestamp conflict handling alone does not guarantee duplicate saved shows are detected and merged without user-visible drift across devices or runs.
 
-3. PRD-036 | important | Keep provider IDs persisted and detail fetches transient
+5. PRD-036 | important | Keep provider IDs persisted and detail fetches transient
 
    This matters because over-persisting transient detail payloads or storing full provider objects can create stale UI, schema churn, and unnecessary merge complexity.
-
-4. PRD-082 | important | Generate shared multi-show concepts with larger option pool
-
-   This matters because Alchemy needs enough shared concept options for users to steer blends; a single-show-sized pool can make the core discovery loop feel shallow.
-
-5. PRD-077 | important | Order concepts by strongest aha and varied axes
-
-   This matters because valid concepts can still be low-quality if they arrive as unordered synonyms rather than a ranked, varied set of taste ingredients.
 
 ### 5. Coverage Narrative
 
@@ -278,12 +278,12 @@ Coverage is strongest in Benchmark Runtime & Isolation, Show Detail & Relationsh
 
 #### Weakness Clusters
 
-The gaps cluster around exactness rather than missing product areas. The plan sometimes captures the intent of an AI or persistence requirement but misses a small required contract detail, such as the `commentary`/`showList` wrapper, multi-show concept pool sizing, duplicate merge behavior, or provider/transient storage boundary.
+The gaps cluster around exactness rather than missing product areas. The plan sometimes captures intent but misses required contracts, including the `commentary`/`showList` wrapper, the re-add path, `.env*` hygiene, duplicate reconciliation, multi-show pool sizing, and the provider/transient storage boundary.
 
 #### Risk Assessment
 
-If executed as-is, the most likely failure mode is a product that largely works but diverges in edge-case interoperability and quality-bar details. QA would probably catch this first in malformed Ask mention handling, Alchemy concepts that feel too limited or repetitive, duplicated library records after sync, or stale/provider-heavy persisted detail data.
+If executed as-is, the most likely failure mode is a product that largely works but diverges in edge-case integrity. QA would probably catch this first in malformed Ask mention handling, My Data lost or regressed during re-add, duplicated library records after sync, or stale/provider-heavy persisted detail data.
 
 #### Remediation Guidance
 
-The remaining planning work is targeted acceptance-criteria refinement. Add exact structured-output schemas for Ask, explicit duplicate-detection and merge semantics, a clear transient-vs-persisted catalog detail boundary, multi-show concept pool sizing, and concept ordering/diversity checks. No major architecture rewrite is needed.
+The remaining planning work is targeted acceptance-criteria refinement. Add exact Ask schemas, an explicit re-add/upsert contract, the `.env*`/`.env.example` ignore rule, duplicate reconciliation, a clear transient-storage boundary, and concept pool/ordering checks. No major architecture rewrite is needed.

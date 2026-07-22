@@ -57,9 +57,9 @@
 - PRD-044 | `important` | Support All, tag, genre, decade, score, media filters | `product_prd.md > 4.5 Filters (Ways to View the Collection)`
 - PRD-045 | `important` | Render poster, title, and My Data badges | `product_prd.md > 7.1 Collection Home`
 - PRD-046 | `detail` | Provide empty-library and empty-filter states | `product_prd.md > 7.1 Collection Home`
-- PRD-047 | `important` | Search by title or keywords | `product_prd.md > 7.2 Search (Find â†’ Search)`
-- PRD-048 | `important` | Use poster grid with collection markers | `product_prd.md > 7.2 Search (Find â†’ Search)`
-- PRD-049 | `detail` | Auto-open Search when setting is enabled | `product_prd.md > 7.2 Search (Find â†’ Search)`
+- PRD-047 | `important` | Search by title or keywords | `product_prd.md > 7.2 Search (Find → Search)`
+- PRD-048 | `important` | Use poster grid with collection markers | `product_prd.md > 7.2 Search (Find → Search)`
+- PRD-049 | `detail` | Auto-open Search when setting is enabled | `product_prd.md > 7.2 Search (Find → Search)`
 - PRD-050 | `important` | Keep Search non-AI in tone | `supporting_docs/ai_voice_personality.md > 1. Persona Summary`
 
 #### Show Detail & Relationship UX
@@ -81,13 +81,13 @@
 
 #### Ask Chat
 
-- PRD-065 | `important` | Provide conversational Ask chat interface | `product_prd.md > 7.3 Ask (Find â†’ Ask)`
+- PRD-065 | `important` | Provide conversational Ask chat interface | `product_prd.md > 7.3 Ask (Find → Ask)`
 - PRD-066 | `important` | Answer directly with confident, spoiler-safe recommendations | `supporting_docs/discovery_quality_bar.md > 2.2 Ask / Explore Search Chat`
-- PRD-067 | `important` | Show horizontal mentioned-shows strip from chat | `product_prd.md > 7.3 Ask (Find â†’ Ask)`
-- PRD-068 | `important` | Open Detail from mentions or Search fallback | `product_prd.md > 7.3 Ask (Find â†’ Ask)`
-- PRD-069 | `important` | Show six random starter prompts with refresh | `product_prd.md > 7.3 Ask (Find â†’ Ask)`
+- PRD-067 | `important` | Show horizontal mentioned-shows strip from chat | `product_prd.md > 7.3 Ask (Find → Ask)`
+- PRD-068 | `important` | Open Detail from mentions or Search fallback | `product_prd.md > 7.3 Ask (Find → Ask)`
+- PRD-069 | `important` | Show six random starter prompts with refresh | `product_prd.md > 7.3 Ask (Find → Ask)`
 - PRD-070 | `important` | Summarize older turns while preserving voice | `supporting_docs/ai_prompting_context.md > 4. Conversation Summarization (Chat Surfaces)`
-- PRD-071 | `important` | Seed Ask-about-show sessions with show handoff | `product_prd.md > 7.3 Ask (Find â†’ Ask)`
+- PRD-071 | `important` | Seed Ask-about-show sessions with show handoff | `product_prd.md > 7.3 Ask (Find → Ask)`
 - PRD-072 | `critical` | Emit `commentary` plus exact `showList` contract | `supporting_docs/ai_prompting_context.md > 3.2 Ask with Mentions (Structured "Mentioned Shows")`
 - PRD-073 | `important` | Retry malformed mention output once, then fallback | `supporting_docs/ai_prompting_context.md > 5. Guardrails & Fallbacks`
 - PRD-074 | `important` | Redirect Ask back into TV/movie domain | `supporting_docs/ai_prompting_context.md > 1. Shared Rules (All AI Surfaces)`
@@ -98,11 +98,11 @@
 - PRD-076 | `important` | Return bullet-only, 1-3 word, non-generic concepts | `supporting_docs/ai_prompting_context.md > 3.4 Concepts (Single-Show and Multi-Show)`
 - PRD-077 | `important` | Order concepts by strongest aha and varied axes | `supporting_docs/concept_system.md > 4. Generation Rules`
 - PRD-078 | `important` | Require concept selection and guide ingredient picking | `supporting_docs/concept_system.md > 5. Selection UX Rules`
-- PRD-079 | `important` | Return exactly five Explore Similar recommendations | `supporting_docs/concept_system.md > 6. Concepts â†’ Recommendations Contract`
-- PRD-080 | `important` | Support full Alchemy loop with chaining | `product_prd.md > 7.4 Alchemy (Find â†’ Alchemy)`
-- PRD-081 | `important` | Clear downstream results when inputs change | `product_prd.md > 7.4 Alchemy (Find â†’ Alchemy)`
+- PRD-079 | `important` | Return exactly five Explore Similar recommendations | `supporting_docs/concept_system.md > 6. Concepts → Recommendations Contract`
+- PRD-080 | `important` | Support full Alchemy loop with chaining | `product_prd.md > 7.4 Alchemy (Find → Alchemy)`
+- PRD-081 | `important` | Clear downstream results when inputs change | `product_prd.md > 7.4 Alchemy (Find → Alchemy)`
 - PRD-082 | `important` | Generate shared multi-show concepts with larger option pool | `supporting_docs/concept_system.md > 8. Notes`
-- PRD-083 | `important` | Cite selected concepts in concise recommendation reasons | `supporting_docs/concept_system.md > 6. Concepts â†’ Recommendations Contract`
+- PRD-083 | `important` | Cite selected concepts in concise recommendation reasons | `supporting_docs/concept_system.md > 6. Concepts → Recommendations Contract`
 - PRD-084 | `important` | Deliver surprising but defensible taste-aligned recommendations | `supporting_docs/discovery_quality_bar.md > 1.2 Taste Alignment`
 
 #### AI Voice, Persona & Quality
@@ -111,7 +111,7 @@
 - PRD-086 | `critical` | Enforce shared AI guardrails across all surfaces | `supporting_docs/ai_prompting_context.md > 1. Shared Rules (All AI Surfaces)`
 - PRD-087 | `important` | Make AI warm, joyful, and light in critique | `supporting_docs/ai_voice_personality.md > 2. Non-Negotiable Voice Pillars`
 - PRD-088 | `important` | Structure Scoop as personal taste mini-review | `supporting_docs/ai_voice_personality.md > 4.1 Scoop (Show Detail "The Scoop")`
-- PRD-089 | `important` | Keep Ask brisk and dialogue-like by default | `supporting_docs/ai_voice_personality.md > 4.2 Ask (Find â†’ Ask)`
+- PRD-089 | `important` | Keep Ask brisk and dialogue-like by default | `supporting_docs/ai_voice_personality.md > 4.2 Ask (Find → Ask)`
 - PRD-090 | `important` | Feed AI the right surface-specific context inputs | `supporting_docs/ai_prompting_context.md > 2. Shared Inputs (Typical)`
 - PRD-091 | `important` | Validate discovery with rubric and hard-fail integrity | `supporting_docs/discovery_quality_bar.md > 4. Scoring Rubric (Quick)`
 
@@ -146,7 +146,7 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 | PRD-009 | Use one stable namespace per build | critical | full | Phase 0.4: `NAMESPACE_ID` from env or generated per build |  |
 | PRD-010 | Isolate namespaces and scope destructive resets | critical | full | Phase 10.2: every query includes namespace and test reset is scoped |  |
 | PRD-011 | Attach every user record to `user_id` | critical | full | Phase 0.3 tables include `user_id`; Phase 1.3 repositories scope by user |  |
-| PRD-012 | Partition persisted data by namespace and user | critical | full | Phase 0.3 indexes/RLS and Phase 1.3 repository signatures |  |
+| PRD-012 | Partition persisted data by namespace and user | critical | partial | Phase 0.3 indexes/RLS and Phase 1.3 repository signatures | The schema carries scope columns but uses catalog ID and `globalSettings` as global primary keys, so identical records can collide across namespace/user partitions. |
 | PRD-013 | Support documented dev auth injection, prod-gated | important | partial | Phase 0.4: dev mode reads `DEV_USER_ID` or `X-User-Id`, gated from production | The plan covers injection and production gating but does not include a documentation task for the dev auth mechanism. |
 | PRD-014 | Real OAuth later needs no schema redesign | important | full | Phase 0.4: OAuth later requires auth wiring, not schema redesign |  |
 | PRD-015 | Keep backend as persisted source of truth | critical | full | Executive Summary and Phase 1.3 Supabase repositories for persisted data |  |
@@ -200,7 +200,7 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 | PRD-063 | Gate seasons to TV and financials to movies | important | full | Phase 6.2 SeasonsSection and BudgetRevenue gating |  |
 | PRD-064 | Keep primary actions early and page not overwhelming | important | full | Phase 6.2 narrative order clusters relationship, scoop, ask, and concepts before long-tail sections |  |
 | PRD-065 | Provide conversational Ask chat interface | important | full | Phase 5.3 AskMode chat UI |  |
-| PRD-066 | Answer directly with confident, spoiler-safe recommendations | important | full | Phase 9.1 Ask prompt: friendly dialogue, confident picks; shared rules spoiler-safe |  |
+| PRD-066 | Answer directly with confident, spoiler-safe recommendations | important | partial | Phase 9.1 Ask prompt: friendly dialogue, confident picks; shared rules spoiler-safe | The plan does not require Ask to answer directly within the first 3-5 lines. |
 | PRD-067 | Show horizontal mentioned-shows strip from chat | important | full | Phase 5.3 Mentioned Shows strip |  |
 | PRD-068 | Open Detail from mentions or Search fallback | important | full | Phase 5.3 resolved shows strip and unresolved fallback |  |
 | PRD-069 | Show six random starter prompts with refresh | important | full | Phase 5.3 welcome view with 6 random starter prompts and refresh |  |
@@ -241,24 +241,24 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 score = (full_count × 1.0 + partial_count × 0.5) / total_count × 100
 ```
 
-Critical:  (29 × 1.0 + 1 × 0.5) / 30 × 100 = 98.3%  (29.5 of 30 critical requirements)
-Important: (58 × 1.0 + 9 × 0.5) / 67 × 100 = 93.3%  (62.5 of 67 important requirements)
+Critical:  (28 × 1.0 + 2 × 0.5) / 30 × 100 = 96.7%  (29.0 of 30 critical requirements)
+Important: (57 × 1.0 + 10 × 0.5) / 67 × 100 = 92.5%  (62.0 of 67 important requirements)
 Detail:    (2 × 1.0 + 0 × 0.5) / 2 × 100 = 100.0%  (2.0 of 2 detail requirements)
-Overall:   94.9% (99 total requirements)
+Overall:   93.9% (99 total requirements)
 
 ### 4. Top Gaps
 
 1. PRD-002 (`critical`) - Use Supabase official client libraries
    The plan is clearly Supabase-based, but omitting the official-library constraint leaves room for a custom or indirect integration that could miss benchmark expectations around supported clients and auth behavior.
 
-2. PRD-013 (`important`) - Support documented dev auth injection, prod-gated
-   The mechanism and production gate are planned, but lack of explicit documentation could make benchmark setup ambiguous for another agent or evaluator running the project.
+2. PRD-012 (`critical`) - Partition persisted data by namespace and user
+   The global catalog-ID and `globalSettings` primary keys contradict the claimed namespace/user partition, preventing identical records from coexisting safely across users or benchmark runs.
 
 3. PRD-033 (`important`) - Sync libraries/settings consistently and merge duplicates
    The plan covers timestamp/version conflict resolution but not duplicate detection and transparent merge, so sync could still produce repeated library entries or inconsistent saved shows.
 
-4. PRD-054 (`important`) - Place status/interest controls in toolbar
-   The controls exist, but if implemented as a normal body section instead of toolbar actions, the detail page loses the intended frictionless relationship-update behavior.
+4. PRD-066 (`important`) - Answer directly with confident, spoiler-safe recommendations
+   The prompt is confident and spoiler-safe, but without a direct-answer acceptance criterion Ask can still feel evasive or slow before presenting its recommendations.
 
 5. PRD-091 (`important`) - Validate discovery with rubric and hard-fail integrity
    The plan mentions golden set validation but does not bind implementation to the rubric or the real-show integrity hard fail, making AI quality regression harder to catch.
@@ -267,20 +267,20 @@ Overall:   94.9% (99 total requirements)
 
 #### Overall Posture
 
-This is a strong, structurally complete plan with mostly minor-to-moderate gaps. It covers the main product flows, persistence model, benchmark isolation rules, AI surfaces, and user-facing pages in concrete implementation phases. The remaining issues are less about missing whole features and more about exact behavioral contracts that the PRD treats as important product safeguards.
+This is a strong, structurally complete plan with no missing catalog requirements, but it has two critical partials and several important contract gaps. It covers the main product flows, persistence model, AI surfaces, and user-facing pages in concrete implementation phases. The recalibrated score reflects both exactness issues and a real partition-key contradiction rather than missing whole features.
 
 #### Strength Clusters
 
-The plan is strongest in Benchmark Runtime & Isolation, Collection Data & Persistence, Ask Chat, Person Detail, and Settings & Export. It gives concrete tables, repositories, routes, scripts, auto-save rules, timestamp fields, AI parsing contracts, and export behavior. Show Detail is also well covered, especially the narrative order, Scoop behavior, Explore Similar flow, and media/person-related sections.
+The plan is strongest in Collection Data & Persistence's business rules, Show Detail & Relationship UX, Person Detail, and Settings & Export. It gives concrete repositories, routes, scripts, auto-save rules, timestamps, AI parsing contracts, and export behavior. Show Detail is especially thorough on narrative order, Scoop behavior, Explore Similar, and media/person sections.
 
 #### Weakness Clusters
 
-The partial items cluster around exactness rather than breadth. AI quality requirements are planned at a high level but sometimes miss the PRD's sharper wording around concepts as non-genre ingredients, surprise-without-betrayal, warm critique, and rubric-based validation. A smaller cluster appears in operational precision: official Supabase libraries, documented dev auth, duplicate merge handling, and toolbar placement.
+The partial items cluster in two places. Infrastructure and persistence have an implementation-level partition-key flaw plus smaller gaps around official clients, documented dev identity, and duplicate reconciliation. AI behavior is broad but misses several acceptance details, including direct-first Ask answers, concept semantics, surprise-without-betrayal, warm critique, and rubric-enforced quality.
 
 #### Risk Assessment
 
-If executed as-is, the most likely failure mode is a functionally complete app whose details drift from the benchmark's intended feel and repeatability. QA would probably notice that the core flows exist, but AI recommendations may not be consistently validated against the discovery quality bar, and a few UX or sync details could feel subtly off compared with the PRD.
+If executed as-is, the first severe risk is persistence collision when different users or namespaces save the same catalog item or create the default settings record. Beyond that, QA would see a functionally complete app whose Ask behavior and discovery quality can drift because several exact acceptance gates are absent.
 
 #### Remediation Guidance
 
-The plan needs targeted specification tightening, not a new architecture. Add explicit acceptance criteria for AI quality and concept semantics, document the benchmark identity-injection path, require official Supabase client libraries, define duplicate merge behavior, and pin status/interest controls to the detail toolbar. These additions would close the main gaps without changing the phase structure.
+The plan needs one focused schema correction plus targeted specification tightening. Make show and settings identities partition-safe, require official Supabase clients, document dev identity, define duplicate reconciliation, pin relationship controls to the toolbar, and add direct-answer and rubric-based AI acceptance checks. The phase structure itself can remain intact.

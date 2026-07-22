@@ -200,7 +200,7 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 | PRD-063 | Gate seasons to TV and financials to movies | important | full | Section 9.2 critical states and Section 9.1 Seasons/BudgetRevenue comments | |
 | PRD-064 | Keep primary actions early and page not overwhelming | important | full | Section 9.2 Busyness vs power: primary actions clustered early | |
 | PRD-065 | Provide conversational Ask chat interface | important | full | Section 9.1 AskMode includes ChatThread and Composer | |
-| PRD-066 | Answer directly with confident, spoiler-safe recommendations | important | full | Section 8.2 Ask mode: dialogue, confident favorites, spoiler-safe shared rules | |
+| PRD-066 | Answer directly with confident, spoiler-safe recommendations | important | partial | Section 8.2 Ask mode: dialogue, confident favorites, spoiler-safe shared rules | The plan covers confidence and spoiler safety, but it does not explicitly require Ask to answer directly within the first 3-5 lines. |
 | PRD-067 | Show horizontal mentioned-shows strip from chat | important | full | Section 9.1 MentionedShowsStrip; Section 8.4 structured mentions | |
 | PRD-068 | Open Detail from mentions or Search fallback | important | full | Section 8.4: resolved selectable Show, unresolved "Search for this" handoff | |
 | PRD-069 | Show six random starter prompts with refresh | important | full | Section 8.4: 6 random starter prompts, refreshable endpoint | |
@@ -239,22 +239,24 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 
 Overall score:
 
-score = (99 full × 1.0 + 0 partial × 0.5) / 99 total_count × 100 = 100%
+score = (98 full × 1.0 + 1 partial × 0.5) / 99 total_count × 100 = 99.5%
 
 Critical:  (30 full × 1.0 + 0 partial × 0.5) / 30 critical_total × 100 = 100%  (30 of 30 critical requirements)
-Important: (67 full × 1.0 + 0 partial × 0.5) / 67 important_total × 100 = 100%  (67 of 67 important requirements)
+Important: (66 full × 1.0 + 1 partial × 0.5) / 67 important_total × 100 = 99.3%  (66.5 of 67 important requirements)
 Detail:    (2 full × 1.0 + 0 partial × 0.5) / 2 detail_total × 100 = 100%  (2 of 2 detail requirements)
-Overall:   100% (99 total requirements)
+Overall:   99.5% (99 total requirements)
 
 ### 4. Top Gaps
 
-No material coverage gaps found. The plan explicitly addresses all catalog requirements with concrete architecture, data rules, UI sections, API contracts, or verification tasks.
+1. PRD-066 | important | Answer directly with confident, spoiler-safe recommendations
+
+   This matters because Ask can satisfy broad persona and safety rules while still feeling evasive; users need the recommendation to appear directly within the first few lines.
 
 ### 5. Coverage Narrative
 
 #### Overall Posture
 
-This is a strong, implementation-ready plan with unusually complete requirement coverage. It does not merely name the major product surfaces; it specifies persistence shape, namespace/user isolation, save semantics, AI contracts, UI composition, export behavior, and verification strategy.
+This is a strong, implementation-ready plan with unusually complete requirement coverage and one narrow Ask acceptance-criteria gap. It does not merely name the major product surfaces; it specifies persistence shape, namespace/user isolation, save semantics, AI contracts, UI composition, export behavior, and verification strategy.
 
 #### Strength Clusters
 
@@ -262,12 +264,12 @@ The strongest clusters are Benchmark Runtime & Isolation, Collection Data & Pers
 
 #### Weakness Clusters
 
-There are no functional clusters with missing or partial coverage against the catalog. The plan's only residual risk is execution quality: several AI quality requirements depend on prompt authoring and manual rubric validation, but the plan still explicitly schedules those contracts and gates.
+The only partial item is in Ask response-shape quality. The plan specifies the right persona, confidence, and spoiler rules but omits the direct-answer-within-3-5-lines acceptance condition.
 
 #### Risk Assessment
 
-If executed as written, the most likely failure mode would not be omitted scope; it would be drift between the ambitious AI/persona contracts and the eventual prompt/model behavior. A QA reviewer would notice this first in Ask, Scoop, or concept recommendations if outputs were technically valid but not warm, specific, surprising, or clearly taste-grounded.
+If executed as written, the most likely failure mode would not be omitted scope; it would be an Ask response that is safe and on-brand but takes too long to make its recommendation. A QA reviewer would notice this as slightly evasive chat behavior rather than a missing feature.
 
 #### Remediation Guidance
 
-No new plan sections are required for catalog coverage. The main planning work to preserve during implementation is converting the AI quality rubric, prompt content, and golden-scenario review into concrete acceptance checks early enough that the UI and backend do not ship with compliant plumbing but off-brand output.
+No new architecture is required. Add a concrete Ask acceptance check requiring a direct answer within the first 3-5 lines, then carry it into prompt tests and the AI quality harness.

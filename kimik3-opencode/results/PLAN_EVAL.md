@@ -200,7 +200,7 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 | PRD-063 | Gate seasons to TV and financials to movies | important | full | Section 10.5 |  |
 | PRD-064 | Keep primary actions early and page not overwhelming | important | partial | Section 10.5 preserves narrative order and early toolbar/AI actions | The plan puts primary actions early but does not explicitly plan the anti-clutter/full-bleed treatment that keeps the dense Detail page from feeling overwhelming. |
 | PRD-065 | Provide conversational Ask chat interface | important | full | Section 10.3 |  |
-| PRD-066 | Answer directly with confident, spoiler-safe recommendations | important | full | Sections 9.2.2 and 9.4 |  |
+| PRD-066 | Answer directly with confident, spoiler-safe recommendations | important | partial | Sections 9.2.2 and 9.4 | The plan covers confident, spoiler-safe recommendations but does not require Ask to answer directly within the first 3-5 lines. |
 | PRD-067 | Show horizontal mentioned-shows strip from chat | important | full | Section 10.3 |  |
 | PRD-068 | Open Detail from mentions or Search fallback | important | full | Sections 7.7 and 10.3 |  |
 | PRD-069 | Show six random starter prompts with refresh | important | full | Section 10.3 |  |
@@ -237,12 +237,12 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 
 ### 3. Coverage Scores
 
-score = (98 full x 1.0 + 1 partial x 0.5) / 99 total_count x 100 = 99.5%
+score = (97 full x 1.0 + 2 partial x 0.5) / 99 total_count x 100 = 99.0%
 
 Critical:  (30 full x 1.0 + 0 partial x 0.5) / 30 critical_total x 100 = 100.0%  (30 of 30 critical requirements)
-Important: (66 full x 1.0 + 1 partial x 0.5) / 67 important_total x 100 = 99.3%  (66.5 weighted of 67 important requirements)
+Important: (65 full x 1.0 + 2 partial x 0.5) / 67 important_total x 100 = 98.5%  (66.0 weighted of 67 important requirements)
 Detail:    (2 full x 1.0 + 0 partial x 0.5) / 2 detail_total x 100 = 100.0%  (2 of 2 detail requirements)
-Overall:   99.5% (99 total requirements)
+Overall:   99.0% (99 total requirements)
 
 ### 4. Top Gaps
 
@@ -250,11 +250,15 @@ Overall:   99.5% (99 total requirements)
 
    This matters because Show Detail is intentionally dense; without explicit busyness-management guidance, an implementation could include all required sections but still feel cluttered and harder to scan.
 
+2. PRD-066 | important | Answer directly with confident, spoiler-safe recommendations
+
+   This matters because an Ask response can be friendly and correct while still feeling evasive if it does not present the recommendation within the first few lines.
+
 ### 5. Coverage Narrative
 
 #### Overall Posture
 
-This is an exceptionally complete implementation plan. It covers the benchmark runtime, Supabase persistence, namespace and user isolation, data rules, UI flows, AI surface contracts, and verification strategy with concrete implementation sections. The only material gap is a narrow UX-quality nuance around managing Show Detail density.
+This is an exceptionally complete implementation plan. It covers the benchmark runtime, Supabase persistence, namespace and user isolation, data rules, UI flows, AI surface contracts, and verification strategy with concrete implementation sections. Its two gaps are narrow UX and response-shape acceptance details.
 
 #### Strength Clusters
 
@@ -262,12 +266,12 @@ The plan is strongest in Benchmark Runtime & Isolation, Collection Data & Persis
 
 #### Weakness Clusters
 
-The gap is not architectural or data-related. It clusters in Show Detail & Relationship UX, specifically the difference between preserving the required section order and explicitly specifying how the dense page remains powerful without feeling overwhelming.
+The gaps are not architectural or data-related. One concerns explicit density treatment on Show Detail; the other is the missing direct-answer-within-3-5-lines bar for Ask.
 
 #### Risk Assessment
 
-If executed as-is, the most likely failure is a Show Detail page that is functionally correct but visually too busy. QA would probably find every required control and section present, but stakeholders might still flag the page as crowded because the plan does not lock in the full-bleed/anti-clutter treatment described in the detail-page spec.
+If executed as-is, the most likely failures are a Show Detail page that is functionally correct but visually too busy and an Ask experience that is on-brand but occasionally slow to make a recommendation.
 
 #### Remediation Guidance
 
-The remaining planning work is acceptance-criteria refinement, not new architecture. Add explicit layout guidance for Show Detail density: primary actions clustered early, long-tail sections visually separated down-page, and review criteria that the page scans cleanly while retaining its full power.
+The remaining planning work is acceptance-criteria refinement, not new architecture. Add explicit layout guidance for Show Detail density and require Ask to answer directly within the first 3-5 lines before expanding.

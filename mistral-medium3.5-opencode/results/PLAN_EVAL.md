@@ -190,8 +190,8 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 | PRD-036 | Keep provider IDs persisted and detail fetches transient | important | partial | 2.2 stores `providerData`; 6.4 fetches credits/recommendations/providers | Provider IDs are persisted, but transient-only handling for detail fetches is not specified. |
 | PRD-037 | Merge catalog fields safely and maintain timestamps | critical | full | 2.3 Data Merge Rules exactly covers non-empty catalog merge and timestamped My fields |  |
 | PRD-038 | Provide filters panel and main screen destinations | important | full | 3.1 and 3.2 include FiltersPanel, Home, Find, Detail, Person, Settings |  |
-| PRD-039 | Keep Find/Discover in persistent primary navigation | important | full | 3.2 component hierarchy includes Navigation with Find/Discover pages |  |
-| PRD-040 | Keep Settings in persistent primary navigation | important | full | 3.2 component hierarchy includes SettingsPage under main app shell |  |
+| PRD-039 | Keep Find/Discover in persistent primary navigation | important | partial | 3.1 and 3.2 include the Find/Discover destination under `MainLayout` | The plan does not specify a persistent primary-navigation entry for Find/Discover. |
+| PRD-040 | Keep Settings in persistent primary navigation | important | partial | 3.1 and 3.2 include `SettingsPage` under `MainLayout` | The Settings destination exists, but the plan does not specify it as a persistent primary-navigation entry. |
 | PRD-041 | Offer Search, Ask, Alchemy discover modes | important | full | 3.1 Find selector and sections 4.2, 4.3, 4.4 |  |
 | PRD-042 | Show only library items matching active filters | important | full | 4.1: "Group by status and apply active filters" |  |
 | PRD-043 | Group home into Active, Excited, Interested, Others | important | full | 4.1 StatusGroups list Active, Excited, Interested, Other |  |
@@ -233,7 +233,7 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 | PRD-079 | Return exactly five Explore Similar recommendations | important | full | 4.5 Explore Similar displays 5 AI recommendations |  |
 | PRD-080 | Support full Alchemy loop with chaining | important | full | 4.4 full flow includes "More Alchemy!" chaining |  |
 | PRD-081 | Clear downstream results when inputs change | important | full | 4.4 UX Rules: changing shows clears concepts/results |  |
-| PRD-082 | Generate shared multi-show concepts with larger option pool | important | missing | none | The plan uses the same default of 8 concepts and does not specify a larger multi-show option pool. |
+| PRD-082 | Generate shared multi-show concepts with larger option pool | important | partial | 4.4 and 4.8.3 require concepts shared across multiple input shows | Shared multi-show concepts are covered, but the plan uses the same default of 8 and does not specify a larger multi-show option pool. |
 | PRD-083 | Cite selected concepts in concise recommendation reasons | important | full | 4.4 displays reasons tied to selected concepts; 4.8.4 reasons reflect concepts |  |
 | PRD-084 | Deliver surprising but defensible taste-aligned recommendations | important | partial | 4.8.4: bias recent but allow classics/hidden gems; reasons reflect concepts | It covers taste alignment but not explicit surprise-without-betrayal quality criteria. |
 | PRD-085 | Keep one consistent AI persona across surfaces | important | full | 18 Summary: "One consistent AI persona across Scoop, Ask, Alchemy, and Explore Similar" |  |
@@ -255,9 +255,9 @@ Total: 99 requirements (30 critical, 67 important, 2 detail) across 10 functiona
 ## 3. Coverage Scores
 
 Critical:  (26 full × 1.0 + 4 partial × 0.5) / 30 × 100 = 93.3%  (28 of 30 critical requirements)
-Important: (55 full × 1.0 + 10 partial × 0.5) / 67 × 100 = 89.6%  (60 of 67 important requirements)
+Important: (53 full × 1.0 + 13 partial × 0.5) / 67 × 100 = 88.8%  (59.5 of 67 important requirements)
 Detail:    (2 full × 1.0 + 0 partial × 0.5) / 2 × 100 = 100.0%  (2 of 2 detail requirements)
-Overall:   90.9% (99 total requirements)
+Overall:   90.4% (99 total requirements; 81 full, 17 partial, 1 missing)
 
 ## 4. Top Gaps
 
@@ -279,7 +279,7 @@ Coverage is strongest in Benchmark Runtime & Isolation, Collection Home & Search
 
 #### Weakness Clusters
 
-The partial and missing items cluster around cross-cutting guarantees rather than visible screens. Data isolation is weakened by settings schemas that do not consistently include `user_id`. AI quality is covered as tone and structure, but not as enforceable guardrails and rubric-based validation. A few storage details, such as session-only AI data and local/UI settings persistence, are implied rather than specified.
+The partial and missing items cluster around cross-cutting guarantees and exact interaction contracts. Data isolation is weakened by settings schemas that do not consistently include `user_id`. AI quality is covered as tone and structure, but not as enforceable guardrails and rubric-based validation. Persistent Find/Discover and Settings navigation entries are implied by route placement rather than specified, and multi-show concepts lack the required larger option pool. A few storage details, such as session-only AI data and local/UI settings persistence, are also implied rather than specified.
 
 #### Risk Assessment
 
