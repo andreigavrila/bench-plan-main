@@ -16,6 +16,8 @@ For the first 8 runs, I ran the evaluator gpt-5.4-xhigh-codex on each model and 
 
 I plan to extend both the evaluation and the benchmark itself to make it more comprehensive and reliable but I think it is already useful as it is.
 
+The `gemini3.6flash-high-antigravity` run was evaluated with `gpt5.6-sol-high`. Cost and token usage were not available for this run.
+
 ## Scores
 
 ### Performance Rankings (by Score)
@@ -67,6 +69,7 @@ I plan to extend both the evaluation and the benchmark itself to make it more co
 | qwen3.6pro-kilo                 | 85.9%  | gpt5.4-xhigh-codex   | 19kB | 0.11$ |  59,594 |
 | glm5.1-kilo                     | 83.3%  | gpt5.4-xhigh-codex   | 49kB | 0.08$ |  46,328 |
 | hy3-preview-kilo                | 83.3%  | gpt5.4-xhigh-codex   | 19kB |       |  38,600 |
+| gemini3.6flash-high-antigravity | 76.3%  | gpt5.6-sol-high      | 20kB |       |         |
 | mistralsmall4-opencode          | 75.8%  | gpt5.4-xhigh-codex   | 16kB | 0.03$ |  38,078 |
 | kimik2.5-coda                   | 75.8%  | gpt5.4-xhigh-codex   | 23kB | 0.40$ | 528,000 |
 | mimov2.5pro-opencode            | 74.6%  | gpt5.4-xhigh-codex   | 23kB | 0.12$ |  41,180 |
@@ -119,7 +122,7 @@ When token counts are available, the formula is `tokens * 1.54 / 55,896 * family
 *   **sonnet5-high-claudecode**: `~$1.52` (91,700 tokens * 1.54 / 55,896 * 2.31 / 3.85)
 *   **sonnet5-max-claudecode**: `~$2.23` (134,900 tokens * 1.54 / 55,896 * 2.31 / 3.85)
 
-Models without known or inferred cost data, including `gpt5.6-sol-max-codex`, `gpt5.6-sol-xhigh-codex`, `sonnet4.6-antigravity`, `gemini3.5flash-high-antigravity`, `gemini3.1pro-antigravity`, `gemini3flash-antigravity`, and `glm5.1-claudecode`, are omitted from the value rankings until a cost basis is available.
+Models without known or inferred cost data, including `gpt5.6-sol-max-codex`, `gpt5.6-sol-xhigh-codex`, `sonnet4.6-antigravity`, `gemini3.6flash-high-antigravity`, `gemini3.5flash-high-antigravity`, `gemini3.1pro-antigravity`, `gemini3flash-antigravity`, and `glm5.1-claudecode`, are omitted from the value rankings until a cost basis is available.
 
 #### Smart ROI Index Formula
 A naive `Score / Cost` formula is heavily flawed because LLM performance does not scale linearly (a 5% jump from 90%->95% is drastically harder than 60%->65%). To fix this, the following formula calculates a **Smart Value Index**:

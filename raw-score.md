@@ -49,6 +49,7 @@
 | qwen3.6pro-kilo                 | 85.9%  | gpt5.4-xhigh-codex | 19kB | 0.11$ |  59,594 |
 | glm5.1-kilo                     | 83.3%  | gpt5.4-xhigh-codex | 49kB | 0.08$ |  46,328 |
 | hy3-preview-kilo                | 83.3%  | gpt5.4-xhigh-codex | 19kB |       |  38,600 |
+| gemini3.6flash-high-antigravity | 76.3%  | gpt5.6-sol-high    | 20kB |       |         |
 | mistralsmall4-opencode          | 75.8%  | gpt5.4-xhigh-codex | 16kB | 0.03$ |  38,078 |
 | kimik2.5-coda                   | 75.8%  | gpt5.4-xhigh-codex | 23kB | 0.40$ | 528,000 |
 | mimov2.5pro-opencode            | 74.6%  | gpt5.4-xhigh-codex | 23kB | 0.12$ |  41,180 |
