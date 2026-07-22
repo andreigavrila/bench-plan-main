@@ -42,16 +42,16 @@ The `gemini3.6flash-high-antigravity` run was evaluated with `gpt5.6-sol-high`. 
 | grok4.3-reasoning-kilo          | 96.9%  | gpt5.4-xhigh-codex   | 18kB | 0.19$ |  37,900 |
 | grok4.5-kilo                    | 96.0%  | gpt5.5-high          | 22kB | 0.14$ |  33,033 |
 | glm5.2-xhigh-kilo               | 96.0%  | gpt5.4-xhigh-codex   | 47kB | 0.15$ |  55,620 |
-| qwen3.7max-kilo                 | 94.9%  | gpt5.4-xhigh-codex   | 34kB | 0.22$ |  47,203 |
-| qwen3.7plus-kilo                | 94.4%  | gpt5.4-xhigh-codex   | 29kB | 0.07$ |  44,200 |
 | opus4.7-max-claude              | 94.4%  | gpt5.4-xhigh-codex   | 35kB |       |         |
 | gpt5.5-high-codex               | 94.4%  | gpt5.4-xhigh-codex   | 30kB |       |         |
+| qwen3.7max-kilo                 | 93.9%  | gpt5.4-xhigh-codex   | 34kB | 0.22$ |  47,203 |
 | opus4.6-xhigh-kilo              | 93.9%  | gpt5.4-xhigh-codex   | 41kB | 1.54$ |  55,896 |
 | minimaxm3-opencode              | 93.9%  | gpt5.4-xhigh-codex   | 43kB | 0.05$ |  48,002 |
 | sonnet5-high-claudecode         | 93.4%  | gpt5.5-high          | 36kB |       |  91,700 |
 | fable5-low-claudecode           | 93.4%  | gpt5.5-high          | 13kB |       |  63,600 |
 | deepseekv4pro-kilo              | 93.4%  | gpt5.4-xhigh-codex   | 27kB | 0.12$ |  42,400 |
 | gpt5.4-xhigh-kilo-geai          | 92.9%  | gpt5.4-xhigh-codex   | 26kB |       |  62,613 |
+| qwen3.7plus-kilo                | 91.9%  | gpt5.4-xhigh-codex   | 29kB | 0.07$ |  44,200 |
 | kimik2.7code-opencode           | 91.9%  | gpt5.4-xhigh-codex   | 31kB | 0.08$ |  44,130 |
 | gemini3.5flash-high-antigravity* | 91.4%  | gpt5.4-xhigh-codex   | 35kB |       |         |
 | opus4.6-max-claudecode          | 90.9%  | gpt5.4-xhigh-codex   | 35kB |       |         |
@@ -82,9 +82,32 @@ The `gemini3.6flash-high-antigravity` run was evaluated with `gpt5.6-sol-high`. 
 | gemini3flash-antigravity        | 40.4%  | gpt5.4-xhigh-codex   |  7kB |       |         |
 | nemotron3super-kilo             | 27.8%  | gpt5.4-xhigh-codex   |  2kB | 0.09$ |  58,000 |
 
-*`gemini3.5flash-high-antigravity` is marked with `*` because its plan explicitly used the evaluator-only canonical requirement catalog and is therefore benchmark-contaminated. The Evaluator column records the original evaluator; scores for the eight cross-reviewed runs reflect the manual cross-review adjustments.*
+*`gemini3.5flash-high-antigravity` is marked with `*` because its plan explicitly used the evaluator-only canonical requirement catalog and is therefore benchmark-contaminated. The Evaluator column records the original evaluator; scores for the ten cross-reviewed runs reflect the manual cross-review adjustments.*
 
 *(Note: The table above contains raw run metadata and therefore missing cost data for some models; inferred costs are handled only in the ROI section below.)*
+
+### Qwen 3.7 Cross-Review Adjustments
+
+Both Qwen evaluations contained all 99 requirements with valid arithmetic and no evaluator-contamination indicators. A fresh review against the fixed five-anchor pool found no overly strict rows, but it found semantic over-credit where broad claims were not backed by implementable contracts.
+
+| Model | Published | Reviewed | Delta | Reviewed coverage |
+| ----- | --------: | -------: | ----: | ----------------- |
+| qwen3.7max-kilo | 94.9% | **93.9%** | -1.0 | 87 full, 12 partial, 0 missing |
+| qwen3.7plus-kilo | 94.4% | **91.9%** | -2.5 | 84 full, 14 partial, 1 missing |
+
+**qwen3.7max-kilo:**
+
+- `PRD-012` changed from `full` to `partial`: global show/settings primary keys contradict the claimed namespace/user partition.
+- `PRD-066` changed from `full` to `partial`: Ask lacks the direct-answer-within-3-5-lines acceptance criterion.
+- Its extraction section also has 13 mojibake citation arrows; this is a format issue, not another score deduction.
+
+**qwen3.7plus-kilo:**
+
+- `PRD-003` changed from `full` to `partial`: `.env.example` is promised without an explicit variable contract.
+- `PRD-012` changed from `full` to `partial`: the global `globalSettings` primary key conflicts across partitions.
+- `PRD-018` changed from `full` to `partial`: no universal overlay mechanism backs the cross-cutting principle.
+- `PRD-028` changed from `full` to `partial`: modification timestamps do not drive sorting.
+- `PRD-031` changed from `full` to `partial`: no concrete catalog recommendation resolver or validation/fallback path is planned.
 
 ### Smart ROI Analysis (Using Measured & Inferred Costs)
 
@@ -171,7 +194,7 @@ The full table is the audit trail behind the shortlist. Models must score at lea
 | Model                        | Score      | Run Cost | Smart Value Index |
 | ---------------------------- | ---------- | ------------- | ----------------- |
 | minimaxm3-opencode           | 93.9%      |     $0.05     |     777.4         |
-| qwen3.7plus-kilo             | 94.4%      |     $0.07     |     661.8         |
+| qwen3.7plus-kilo             | 91.9%      |     $0.07     |     594.4         |
 | kimik2.7code-opencode        | 91.9%      |     $0.08     |     548.7         |
 | kimik2.6-opencode            | 89.9%      |     $0.08     |     502.5         |
 | glm5.1-opencode              | 88.9%      |     $0.08     |     480.5         |
@@ -185,7 +208,7 @@ The full table is the audit trail behind the shortlist. Models must score at lea
 | deepseek3.2-kilo             | 86.6%      |     $0.11     |     351.5         |
 | qwen3.6pro-kilo              | 85.9%      |     $0.11     |     340.3         |
 | qwen3.6maxpreview-kilo       | 90.9%      |     $0.16     |     325.1         |
-| **qwen3.7max-kilo**          | 94.9%      |     $0.22     |     300.4         |
+| qwen3.7max-kilo              | 93.9%      |     $0.22     |     287.9         |
 | **gpt5.6-terra-xhigh-codex** | **98.0%**  |     $0.30     |     263.5         |
 | **kimik3-opencode**          | **99.0%**  |     $0.42     |     204.4         |
 | mistral-medium3.5-opencode   | 90.9%      |     $0.43     |     142.2         |
