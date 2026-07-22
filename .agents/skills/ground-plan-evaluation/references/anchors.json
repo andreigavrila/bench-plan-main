@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "anchors": [
+    {
+      "id": "gpt5.6-sol-max-codex",
+      "results_path": "gpt5.6-sol-max-codex/results",
+      "role": "coverage ceiling with collision-safe catalog identity and explicit acceptance gates",
+      "reviewed_score": 100.0,
+      "coverage_overrides": {}
+    },
+    {
+      "id": "opus4.8-max-claudecode",
+      "results_path": "opus4.8-max-claudecode/results",
+      "role": "near-ceiling anchor with a legitimate duplicate-reconciliation partial",
+      "reviewed_score": 99.5,
+      "coverage_overrides": {}
+    },
+    {
+      "id": "gpt5.6-luna-xhigh-codex",
+      "results_path": "gpt5.6-luna-xhigh-codex/results",
+      "role": "strong anchor for subtle explicitness and mandatory-versus-optional wording",
+      "reviewed_score": 99.0,
+      "coverage_overrides": {
+        "PRD-082": "partial"
+      }
+    },
+    {
+      "id": "grok4.5-kilo",
+      "results_path": "grok4.5-kilo/results",
+      "role": "mid-high anchor with several concrete contract and persistence partials",
+      "reviewed_score": 96.0,
+      "coverage_overrides": {
+        "PRD-004": "partial",
+        "PRD-026": "partial"
+      }
+    },
+    {
+      "id": "gemini3.6flash-high-antigravity",
+      "results_path": "gemini3.6flash-high-antigravity/results",
+      "role": "lower-coverage anchor that distinguishes genuine partial and missing behavior",
+      "reviewed_score": 74.2,
+      "coverage_overrides": {
+        "PRD-013": "partial",
+        "PRD-076": "partial",
+        "PRD-083": "partial",
+        "PRD-089": "partial"
+      }
+    }
+  ]
+}

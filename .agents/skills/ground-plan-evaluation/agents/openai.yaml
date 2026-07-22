@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ground Plan Evaluation"
+  short_description: "Cross-check plan evaluations against fixed anchors"
+  default_prompt: "Use $ground-plan-evaluation to cross-review this plan evaluation against the fixed benchmark anchors."
