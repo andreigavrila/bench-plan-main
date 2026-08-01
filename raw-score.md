@@ -5,10 +5,12 @@
 | Model                            | Score  | Evaluator          | Size |  Cost |  Tokens |
 | -------------------------------- | :----: | ------------------ | ---: | ----: | ------: |
 | gpt5.6-sol-max-codex             | 100.0% | gpt5.5-high        | 62kB |       |         |
+| gpt5.6-sol-high-opencode         | 100.0% | gpt5.5-high        | 45kB |       |         |
 | fable5-max-claudecode            | 99.5%  | gpt5.5-high        | 51kB |       |  94,400 |
 | opus4.8-max-claudecode           | 99.5%  | gpt5.5-high        | 37kB |       |  95,700 |
 | opus4.8-xhigh-claudecode         | 99.5%  | gpt5.5-high        | 33kB |       |  85,700 |
 | gpt5.6-sol-xhigh-codex           | 99.5%  | gpt5.5-high        | 45kB |       |         |
+| gpt5.6-sol-high-codex            | 99.5%  | gpt5.5-high        | 25kB |       |         |
 | gpt5.6-luna-xhigh-codex          | 99.0%  | gpt5.5-high        | 29kB |       |  57,000 |
 | kimik3-opencode                  | 99.0%  | gpt5.5-high        | 33kB | 0.42$ |  43,195 |
 | fable5-high-claudecode           | 99.0%  | gpt5.5-high        | 34kB |       |  74,700 |
