@@ -1,0 +1,35 @@
+Model	Family	Context Window	AA Intelligence Index	AA Coding Index	AA Benchmark Cost	BlendedUSD/1M Tokens	AA Cost Per Task	AA TotalResponse (s)
+Claude Opus 5 (max)	Anthropic		61	78	3835.51		2.34	101.34
+Claude Fable 5 (with fallback)	Anthropic	1M	60	76	5630.52	$7.70	3.15	167.86
+Claude Opus 5 (xhigh)	Anthropic		60	77	2910		1.8	43.47
+GPT-5.6 Sol (max)	OpenAI	1M	59	77	2824.18	$4.35	1.86	201.46
+Claude Opus 5 (high)	Anthropic		59	77	1973.77		1.23	25.41
+GPT-5.6 Sol (xhigh)	OpenAI	1M	58	78	1542.52	$4.35	1.17	49.71
+Kimi K3	Kimi		57	76	2690.8		0.86	42.3
+GPT-5.6 Sol (high)	OpenAI	1M	56	77	955.55	$4.35	0.77	13.85
+Claude Opus 4.8 (max)	Anthropic	1M	56	74	3752.55	$3.85	2.03	24.57
+Claude Opus 5 (medium)	Anthropic		56	74	1974		0.72	16.04
+GPT-5.6 Terra (max)	OpenAI	1M	55	77	1115	$2.17	0.73	142.75
+GPT-5.5 (xhigh)	OpenAI	922k	55	75	2630.04	$4.35	1.17	107.19
+Grok 4.5 (high)	Grok	500k	54	72	600.92	$1.35	0.44	19.39
+GPT-5.6 Sol (medium)	OpenAI	1M	54	76	593.04	$4.35	0.51	11.96
+Claude Sonnet 5 (max)	Anthropic	1M	53	72	4010.12	$1.54	1.72	205.24
+GPT-5.5 (high)	OpenAI	922k	53	72	1654.59	$4.35	0.8	30.98
+GPT-5.6 Terra (xhigh)	OpenAI	1M	52	71	740.21	$2.17	0.43	31.06
+GPT-5.4 (xhigh)	OpenAI	1.05M	51	71	2131.77	$2.17	1.11	118.17
+GPT-5.6 Luna (max)	OpenAI	1M	51	71	190.87	$0.87	0.07	102.41
+GLM-5.2 (max)	GLM	1M	51	69	820.38	$0.90	0.69	14.41
+Claude Opus 5 (low)	Anthropic		51	67	556		0.43	12.89
+GPT-5.5 (medium)	OpenAI	922k	50	72	869.91	$4.35	0.5	  
+Gemini 3.5 Flash	Google	1M	50	70	1040.88	$1.31	0.69	28.9
+GPT-5.6 Sol (low)	OpenAI	1M	49	70	353.49	$4.35	0.31	9.66
+GPT-5.6 Luna (xhigh)	OpenAI	1M	49	69	106.08	$0.87	0.04	27.81
+GPT-5.6 Terra (high)	OpenAI	1M	49	67	495.77	$2.17	0.3	6.18
+Gemini 3.1 Pro Preview	Google	1M	46	69	815.11	$1.74	0.34	30.04
+GPT-5.6 Luna (high)	OpenAI	1M	46	63	61.13	$0.87	0.03	6.79
+Qwen3.7 Max	Qwen	1M	46	66	1631.35	$1.43	1.28	17.43
+GPT-5.6 Terra (medium)	OpenAI	1M	46	65	240.23	$2.17	0.16	5.47
+MiniMax-M3	MiniMax	1M	44	59	203.86	$0.22	0.14	27.27
+DeepSeek V4 Pro (max)	DeepSeek	1M	44	59	176.34	$0.18	0.05	84.06
+Kimi K2.6	Kimi	256k	44	62	851.63	$0.70	0.36	118.14
+Kimi K2.7 Code	Kimi	256k	42	61	524.56	$0.70	0.22	64.33
