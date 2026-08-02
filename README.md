@@ -67,6 +67,7 @@ The `gemini3.6flash-high-antigravity` run was evaluated with `gpt5.6-sol-high`. 
 | sonnet5-max-claudecode           | 88.4%  | gpt5.5-high          | 47kB |       | 134,900 |
 | qwen3.6pro-opencode              | 87.4%  | gpt5.4-xhigh-codex   | 22kB | 0.08$ |  39,716 |
 | glm5.1-claudecode                | 86.9%  | gpt5.4-xhigh-codex   | 30kB |       |         |
+| deepseekv4-flash                 | 86.9%  | gpt5.5-high          | 10kB | 0.01$ |  32,183 |
 | deepseek3.2-kilo                 | 86.6%  | gpt5.4-xhigh-codex   | 25kB | 0.11$ |  45,249 |
 | qwen3.6pro-kilo                  | 85.9%  | gpt5.4-xhigh-codex   | 19kB | 0.11$ |  59,594 |
 | glm5.1-kilo                      | 83.3%  | gpt5.4-xhigh-codex   | 49kB | 0.08$ |  46,328 |
@@ -172,6 +173,7 @@ The full table is the audit trail behind the shortlist. Models must score at lea
 
 | Model                        | Score      | Run Cost | Smart Value Index |
 | ---------------------------- | ---------- | ------------- | ----------------- |
+| deepseekv4-flash             | 86.9%      |     $0.01     |     950.4         |
 | minimaxm3-opencode           | 93.9%      |     $0.05     |     777.4         |
 | qwen3.7plus-kilo             | 91.9%      |     $0.07     |     594.4         |
 | kimik2.7code-opencode        | 91.9%      |     $0.08     |     548.7         |
